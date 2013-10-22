@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+	
+	{% if user.is_authenticated %}
+	<h2>add comment!</h2>
+	<form action="/events/add_comment/{{event.id}}/" method="POST">{% csrf_token %}
+		<ul>
+			{{form.as_ul}}
+		</ul>
+		<input type="submit" name="submit" value="Post Comment"> 
+	</form>
+	{% else %}
+	<p>You must be logged in to add a comment!<p>
+	{% endif %}
+	
+	
+
+{% endblock %}

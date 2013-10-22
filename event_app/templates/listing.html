@@ -1,0 +1,42 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+
+{% block resources %}
+<link href="{% static "event_app/css/style.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+   <div class="mainevent_image">{{event.image_location}}</div>
+   <div class="mainevent_title">{{event.name}}</div>
+   <div class="mainevent_description">{{event.description}}</div>
+   <p>{{ event.going }} people are going to this event</p>
+
+   {% if user.is_authenticated %}
+	<h2>add comment!</h2>
+	<form action="/events/add_comment/{{event.id}}/" method="POST">{% csrf_token %}
+		<ul>
+			{{form.as_ul}}
+		</ul>
+		<input type="submit" name="submit" value="Post Comment"> 
+	</form>
+	{% else %}
+	<p>You must be logged in to add a comment!<p>
+	{% endif %}
+
+   <form action="/events/going_to/{{event.id}}/" method="POST">{% csrf_token %}
+		<input type="submit" name="submit" value="I am going!"> 
+	</form>
+
+	<h2>Comments</h2>
+   {% for c in event.comment_set.all %}
+		<p>{{ c.username }} : {{ c.body }}</p>
+   {% endfor %}
+
+   <h2>Going</h2>
+	{% for c in event.going_set.all %}
+		<p>{{ c.username }}</p>
+		<img src="{% static c.profile.user_avatar %}" style=" height: 40px; ">
+   {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+/* set the background-color to red
+.navbar-inner
+{ 
+   background-image: none;
+	background-color: #2E2E2E;
+}   
+
+.navbar .nav > li > a {
+	text-shadow : none;
+}
+
+.navbar .brand 
+{
+  color: white;
+  text-shadow : none;
+}
+*/
+
+.carousel-caption {
+	background: black;
+	
+}

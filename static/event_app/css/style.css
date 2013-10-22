@@ -1,0 +1,25 @@
+.event_listing {
+    min-height: 100px;
+    margin-top: 10px;
+    background-color: #E6E6E6;
+}
+
+.event_title {
+    margin-left: 110px;
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+.event_description {
+    margin-left: 110px;
+    margin-top: 10px;
+    
+}
+
+.event_image {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    
+}

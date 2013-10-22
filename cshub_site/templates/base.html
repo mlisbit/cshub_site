@@ -1,0 +1,97 @@
+{% load staticfiles %}
+{% load tags %}
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Bootflat Template</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+      <!-- Bootstrap -->
+      <link href="{% static "bootflat-master/bootstrap/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+      <link href="{% static "bootflat-master/css/font-awesome.min.css" %}" rel="stylesheet" media="screen">
+      <link href="{% static "bootflat-master/css/bootflat.css" %}" rel=" stylesheet" media="screen">
+      <link href="{% static "bootflat-master/css/bootflat-extensions.css" %}" rel="stylesheet" media="screen">
+      <link href="{% static "bootflat-master/css/bootflat-square.css" %}" rel="stylesheet" media="screen">
+
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+      <![endif]-->
+    </head>
+
+    <body>
+      <nav class="navbar-square navbar-inverse .navbar-fixed-top" role="navigation">
+        <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">CSHUB</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                  <li class="{% active request "^/$" %}"><a href="/">Home</a></li>
+                  <li class="{% active request "^/events" %}"><a href="/events">Events</a></li>
+                  <li><a href="/events">Members</a></li>
+                  <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                  
+                  <li class="divider-vertical"></li>
+                  
+                  <li class="dropdown">
+                  {% if not user.is_authenticated %}
+                    
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <div class="form-group" style="padding: 10px;">
+                          {% if form.errors %}
+                            <p class="error">Sorry, that's not a valid username or password</p>
+                          {% endif %}
+                          <form action="/accounts/auth/" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="username" value="" id="username" class="form-control" placeholder="username" autocomplete="off">
+                            <input type="password" name="password" value="" id="password" class="form-control" style="margin-top: 5px" placeholder="password" autocomplete="off">
+                            <button type="submit" class="btn pull-right btn-success" style="width:100%; margin-top: 5px; margin-bottom: 10px;" value="login">Login</button>
+                          </form>
+                        </div>
+                        <li class="divider"></li>
+                        <li><a href="#">Search for user</a></li>
+                        <li><a href="#">Register</a></li>
+                        <li><a href="#">Forgot password?</a></li>
+                      </ul>
+                    
+                  {% else %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static user.profile.user_avatar %}" alt="Smiley face" width="40" class="pull-left" style="margin-top:-9px; margin-right: 10px; overflow: hidden; height: 40px; ">{{user}}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">My Events</a></li>
+                      <li><a href="/accounts/profile/">Edit profile</a></li>
+                      <li class="divider"></li>
+                      <li><a href="/accounts/logout/">Log out</a></li>
+                    </ul>
+                  {% endif %}
+                </li>
+                  
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div>
+            </nav>
+
+            <div class="container">
+              {%block content%}{%endblock%} 
+              <p>your username is {{user}}</p>
+              {% if user.is_authenticated %}Thanks for logging in!{% else %}Please log in.{% endif %}
+            </div> <!-- /container -->
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="//code.jquery.com/jquery.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
+    </body>
+</html>

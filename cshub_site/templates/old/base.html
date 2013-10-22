@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="{% static "global/css/reset.css" %}" rel="stylesheet" type="text/css">
+	<link href="{% static "main_app/css/style.css" %}" rel="stylesheet" type="text/css">
+   <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
+   {% block resources %}{% endblock %}
+</head>
+<body>
+	<div id="nav-backdrop"></div>
+    <div id="nav-container">
+        <div id="nav-img-logo"></div>
+        <div id="nav-text-logo"><h1>CS HUB</h1></div>
+        <div id="nav-links">
+        <ul>
+            <li><a href="#">Sign in</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Overview</a></li>
+        </ul>
+        </div>
+    </div>
+    
+    <div id="content">
+        {%block content%}{%endblock%}
+    </div>
+</body>
+</html>

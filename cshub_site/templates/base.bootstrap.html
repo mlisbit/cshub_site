@@ -1,0 +1,98 @@
+{% load staticfiles %}
+{% load tags%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CSHUB, from York</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="{% static "main_app/css/bootstrap.css" %}" rel="stylesheet">
+    
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="{% static "main_app/css/bootstrap-responsive.css" %}" rel="stylesheet">
+    <link href="{% static "main_app/css/custom.css" %}" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top navbar-custom">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">CSHUB</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-right">
+              <li class="dropdown pull-right">
+              {% if not user.is_authenticated %}
+                {% if form.errors %}
+                <p class="error">Sorry, that's not a valid username or password</p>
+                {% endif %}
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <form class="navbar-form pull-left" style="padding: 10px;" action="/accounts/auth/" method="POST">
+                      {% csrf_token %}
+                      <input type="text" class="span2" placeholder="username" name="username" value="" id="username">
+                       <input type="password" class="span2" placeholder="password" name="password" value="" id="password">
+                      <button type="submit" class="btn pull-right btn-success" style="width:100%;" value="login">Login</button>
+                  </form>
+                  <li class="divider"></li>
+                  <li><a href="#">Search for user</a></li>
+                  <li><a href="#">Register</a></li>
+                  <li><a href="#">Forgot password?</a></li>
+                </ul>
+              
+              {% else %}
+                
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static user.profile.user_avatar %}" alt="Smiley face" width="40" class="pull-left" style="margin-top:-9px; margin-right: 10px; overflow: hidden; height: 40px; ">{{user}}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">My Events</a></li>
+                  <li><a href="#">Edit profile</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/accounts/logout/">Log out</a></li>
+                </ul>
+
+              {% endif %}
+              </li> 
+              
+            </ul>
+            <ul class="nav">
+              <li class="{% active request "^/$" %}"><a href="/">Home</a></li>
+              <li class="{% active request "^/events" %}"><a href="/events">Events</a></li>
+              <li><a href="/events">Members</a></li>
+              <li><a href="#contact">Contact</a></li>
+              
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div> <!--main nav-->
+    <div class="container">
+
+      {%block content%}{%endblock%} 
+      <p>your username is {{user}}</p>
+      {% if user.is_authenticated %}Thanks for logging in!{% else %}Please log in.{% endif %}
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{% static "main_app/js/bootstrap.js" %}"></script>
+    
+
+  </body>
+</html>

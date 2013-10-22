@@ -1,0 +1,17 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+
+{% block resources %}
+<link href="{% static "event_app/css/style.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+{% for x in Events %}
+		<div class="event_listing">
+         <div class="event_image">{{x.image_location}}</div>
+         <div class="event_title"><a href="/events/get/{{ x.id }}/">{{x.name}}</a></div>
+         <div class="event_description">{{x.description}}</div>
+         <p>{{ x.going }} people are going to this event</p>
+     	</div>
+{% endfor %}
+{% endblock %}

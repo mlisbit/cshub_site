@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h1>Profile</h1>
+
+	{% for field in form %}
+		{{field.error}}
+	{%endfor%}
+	{{uname}} <br>
+	{{name}} {{last}}<br>
+	{{email}} <br>
+	
+	{%if form.user_avatar%}
+		<p><img src="../../static/{{thumbnail}}" width="200"></p>
+
+		{%endif%}
+	<form action='/accounts/profile/' method="post" enctype="multipart/form-data"> {% csrf_token %} 
+		{{form.as_ul}}
+		
+		
+		<input type="submit" value="update" >
+	</form>
+
+{% endblock %}
