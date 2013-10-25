@@ -6,12 +6,21 @@
 {% endblock %}
 
 {% block content %}
-{% for x in Events %}
-		<div class="event_listing">
-         <div class="event_image">{{x.image_location}}</div>
-         <div class="event_title"><a href="/events/get/{{ x.id }}/">{{x.name}}</a></div>
-         <div class="event_description">{{x.description}}</div>
-         <p>{{ x.going }} people are going to this event</p>
-     	</div>
-{% endfor %}
+<br>
+		<div class="container">
+			{% for x in Events %}
+  			<div class="col-md-3">
+    		<div class="thumbnail">
+      		<img src="{% static "imgs/thumb.png" %}" alt="...">
+      		<div class="caption">
+        			<h3>{{x.name}}</h3>
+        			<p>{{ x.going }} people are going to this event</p>
+        			<p>{{x.description}}</p>
+        				<a href="/events/get/{{ x.id }}/" class="btn btn-success" style="width: 100%">Check it out</a> 
+      		</div>
+    		</div>
+  			</div>
+  		{% endfor %}
+		</div> <!-- container -->
+
 {% endblock %}
