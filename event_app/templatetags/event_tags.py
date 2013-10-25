@@ -1,4 +1,5 @@
 from django import template
+from django.contrib.auth.models import User
 
 register = template.Library()
 
@@ -14,3 +15,11 @@ def number_going(username):
 @register.filter(name='to_string')
 def number_going(thing):
    return str(thing)
+
+@register.filter(name='get_profile_pic')
+def get_profile_pic(user_string):
+	try:
+		u = User.objects.get(username=user_string)
+	except:
+		return str("imgs/thumb.png")
+	return str(u.profile.user_avatar)

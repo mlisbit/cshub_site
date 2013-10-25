@@ -52,12 +52,12 @@
 		{% if event.comment_set.all %}
 			{% for c in event.comment_set.all %}
 			<div class="media">
-  			<a class="pull-left" href="#">
-    			<img class="media-object" style="width: 64px; height: 64px;"src="{% static "imgs/thumb.png" %}" alt="userprofile_image">
-  			</a>
-  			<div class="media-body">
-    			<h4 class="media-heading">{{ c.username }}</h4>
-    			{{ c.body }}
+  				<div class="thumbnail pull-left">
+    				<img class="media-object" style="width: 50px; height: 50px;"src="/static/{{ c.username|get_profile_pic }}" alt="userprofile_image">
+  				</div>
+  				<div class="media-body">
+    				<h4 class="media-heading">{{ c.username }}</h4>
+    				{{ c.body }}
   				</div>
 			</div>
    		{% endfor %}
@@ -79,9 +79,9 @@
    		{% if event.going_set.all %}
 				{% for c in event.going_set.all %}
 					<div class="media">
-	  				<a class="pull-left" href="#">
-	    				<img class="media-object" style="width: 64px; height: 64px;"src="{% static "imgs/thumb.png" %}" alt="userprofile_image">
-	  				</a>
+	  				<div class="thumbnail pull-left">
+	    				<img class="media-object" style="width: 50px; height: 50px;"src="/static/{{ c.username|get_profile_pic }}" alt="userprofile_image">
+	  				</div>
 	  				<div class="media-body">
 	    			<h4 class="media-heading">{{ c }}</h4>
 	    			{{ c.body }}
@@ -92,6 +92,7 @@
 				<p> Currently no ones confirmed their attendance </p>
 	   	{% endif %}
 			<!-- i am going button! -->
+			{% if user.is_authenticated %}
 	   	<form action="/events/going_to/{{event.id}}/" method="POST">{% csrf_token %}
 	   		{% if not request.user.username|get_user_entry in event.going_set.all|to_string %}
 					<input class="btn btn-info" type="submit" name="submit" value="I am going!" style="margin-top: 5px;"> 
@@ -99,6 +100,7 @@
 					<input class="btn btn-danger" type="submit" name="submit" value="I changed my mind" style="margin-top: 5px;"> 
 				{% endif %}
 			</form>
+			{% endif %}
    	</div>
 	</div>
 	<br>
