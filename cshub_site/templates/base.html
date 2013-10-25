@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Bootflat Template</title>
+
+      <title>CSHUB</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
       <!-- Bootstrap -->
@@ -18,9 +19,32 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
       <![endif]-->
+      <style>
+        html, body {
+            height: 100%;
+        }
+        footer {
+            padding: 17px 0 18px 0;
+            width: 100%;
+        }
+        .wrapper {
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            margin: 0 auto -63px;
+        }
+        .push {
+            height: 63px;
+        }
+        .bottombar {
+            width: 100%;
+            background-color: #000;
+        }
+      </style>
     </head>
 
     <body>
+      <div class="wrapper">
       <nav class="navbar-square navbar-inverse .navbar-fixed-top" role="navigation">
         <div class="container">
               <!-- Brand and toggle get grouped for better mobile display -->
@@ -83,15 +107,24 @@
               </div><!-- /.navbar-collapse -->
             </div>
             </nav>
-
+           
             <div class="container">
               {%block content%}{%endblock%} 
-              <p>your username is {{user}}</p>
-              {% if user.is_authenticated %}Thanks for logging in!{% else %}Please log in.{% endif %}
             </div> <!-- /container -->
+          
+      </div> <!--wrapper-->
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="//code.jquery.com/jquery.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
+      
     </body>
+    <div class="push"></div>
+    <div class="bottombar">
+      <div class="container">
+        <footer>
+          <p>Site Designed by Maciej Lis</p>
+        </footer>
+      </div> <!-- conatiner -->
+    </div>
 </html>

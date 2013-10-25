@@ -19,6 +19,8 @@ from django.contrib.auth.models import User
 
 def home(request):
 	c= {}
+	c['users'] = User.objects.all()
+	c['total_users'] = User.objects.all().__len__
 	c.update(csrf(request))
 	return render_to_response('home.html', c, context_instance=RequestContext(request))
 	username = request.POST.get('username', '')
