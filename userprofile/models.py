@@ -5,8 +5,7 @@ from time import time
 # models.BooleanField() is a checkbox 
 
 def get_upload_file_name(instance, filename):
-	
-	return "user_avatars/%s_%s" % (str(time()).replace('.','_'), filename)
+	return "user_uploads/user_imgs/%s_%s" % (str(time()).replace('.','_'), filename)
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)

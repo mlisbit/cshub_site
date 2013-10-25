@@ -28,7 +28,7 @@ def user_profile(request):
 
 	u = User.objects.get(username=user.username) # Get the first user in the system
 
-	args['uname'] = u.username
+	args['uname'] = u.username 
 	args['name'] = u.first_name
 	args['last'] = u.last_name
 	args['email'] = u.email

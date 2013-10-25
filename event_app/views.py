@@ -15,7 +15,9 @@ from django.core.context_processors import csrf
 from django.utils import timezone 
 
 def listings(request):
-	return render_to_response('listings.html', {'Events': Event.objects.all()}, context_instance=RequestContext(request))
+	args = {}
+	args['Events'] = Event.objects.all()
+	return render_to_response('listings.html', args , context_instance=RequestContext(request))
 
 def listing(request, event_id=1):
 
