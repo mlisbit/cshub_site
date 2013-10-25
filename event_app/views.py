@@ -38,9 +38,12 @@ def going_to(request, event_id):
 		if f.is_valid():
 			#check if the user is already in the db of people going.
 			isGoing = False
+
 			for i in Going.objects.all():
 				if request.user.username == i.username:
+					Going.objects.all().filter(username=i.username).delete()
 					isGoing = True
+					print "boo"
 
 			if not isGoing:
 				c = f.save(commit=False)

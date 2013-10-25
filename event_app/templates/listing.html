@@ -1,7 +1,10 @@
 {% extends "base.html"%}
 {% load staticfiles %}
-
+{% load event_tags %}
 {% block resources %}
+
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+<link href="{% static "pure/forms/css/forms.css" %}" rel="stylesheet" type="text/css">
 <link href="{% static "event_app/css/style.css" %}" rel="stylesheet" type="text/css">
 {% endblock %}
 
@@ -21,59 +24,82 @@
 	{% endif %}
 
 	<div class="container">
-		<center><h1 class="mainevent_title">{{event.name}}</h1></center>
+		<center><h1>{{event.name}}</h1></center>
 	</div>
 	<div class="container">
-		<div class="col-md-2">
-			<div class="mainevent_image">{{event.image_location}}</div>
+		<div class="col-md-2 event-side-pane">
 			<div class="thumbnail">
-				<img src="{% static "imgs/thumb.png" %}" alt="...">
+				<img src="/static/{{event.event_img}}" alt="...">
 			</div>
+			<p><span class="badge badge-inverse pull-right">{{ event.going_set.all|get_count }}</span> Going: </p>
+			<p><span class="badge badge-warning pull-right">{{ event.comment_set.all|get_count }}</span> Comments:</p>
 		</div>
 		<div class="col-md-10"> 
+			<h2>Description: </h2>
 			<p class="mainevent_description">{{event.description}} </p>
-			<p>{{ event.going }} people are going to this event</p>
+			<h2>When: </h2>
+			<p class="mainevent_description">{{event.when}} </p>
+			<h2>Where: </h2>
+			<p class="mainevent_description">{{event.location}} </p>
 		</div>
 	</div>
-	<center><h3>Comments</h3></center>
+
+	<!-- comments list -->
+	
 	<div class="container">
-		{% for c in event.comment_set.all %}
-		<div class="media">
-  		<a class="pull-left" href="#">
-    		<img class="media-object" style="width: 64px; height: 64px;"src="{% static "imgs/thumb.png" %}" alt="userprofile_image">
-  		</a>
-  		<div class="media-body">
-    		<h4 class="media-heading">{{ c.username }}</h4>
-    		{{ c.body }}
-  			</div>
-		</div>
-   	{% endfor %}
-	</div>
-	<div class="container">
-		{% if user.is_authenticated %}
-		<h2>add comment!</h2>
-		<form action="/events/add_comment/{{event.id}}/" method="POST">{% csrf_token %}
-			<ul> {{form.as_ul}} </ul>
-			<input type="submit" name="submit" value="Post Comment"> 
-		</form>
-		<form action="/events/going_to/{{event.id}}/" method="POST">{% csrf_token %}
-			<input type="submit" name="submit" value="I am going!"> 
-		</form>
-		{% endif %}
-	</div> <!-- comment box -->
-	<center><h3>Going</h3></center>
-   <div class="container">
-		{% for c in event.going_set.all %}
+		<div class="col-md-8">
+		<center><h3>Comments</h3></center>
+		{% if event.comment_set.all %}
+			{% for c in event.comment_set.all %}
 			<div class="media">
   			<a class="pull-left" href="#">
     			<img class="media-object" style="width: 64px; height: 64px;"src="{% static "imgs/thumb.png" %}" alt="userprofile_image">
   			</a>
   			<div class="media-body">
-    		<h4 class="media-heading">{{ c }}</h4>
-    		{{ c.body }}
-  			</div>
+    			<h4 class="media-heading">{{ c.username }}</h4>
+    			{{ c.body }}
+  				</div>
 			</div>
-   	{% endfor %}
+   		{% endfor %}
+   	{% else %}
+   		<p> Currently no comments D: </p>
+   	{% endif %}
+   	<!-- form field -->
+   	{% if user.is_authenticated %}
+			<form action="/events/add_comment/{{event.id}}/" method="POST" class="pure-form" style="margin-top: 10px;">{% csrf_token %}
+				{% for field in form %}
+					{{ field }}
+				{% endfor %}
+				<input class="btn btn-info" type="submit" name="submit" value="Post Comment"> 
+			</form>
+		{% endif %}
+   	</div> <!-- column 1 -->
+   	<div class="col-md-4">
+   		<center><h3>Going</h3></center>
+   		{% if event.going_set.all %}
+				{% for c in event.going_set.all %}
+					<div class="media">
+	  				<a class="pull-left" href="#">
+	    				<img class="media-object" style="width: 64px; height: 64px;"src="{% static "imgs/thumb.png" %}" alt="userprofile_image">
+	  				</a>
+	  				<div class="media-body">
+	    			<h4 class="media-heading">{{ c }}</h4>
+	    			{{ c.body }}
+	  				</div>
+					</div>
+	   			{% endfor %}
+	   	{% else %}
+				<p> Currently no ones confirmed their attendance </p>
+	   	{% endif %}
+			<!-- i am going button! -->
+	   	<form action="/events/going_to/{{event.id}}/" method="POST">{% csrf_token %}
+	   		{% if not request.user.username|get_user_entry in event.going_set.all|to_string %}
+					<input class="btn btn-info" type="submit" name="submit" value="I am going!" style="margin-top: 5px;"> 
+				{% else %}
+					<input class="btn btn-danger" type="submit" name="submit" value="I changed my mind" style="margin-top: 5px;"> 
+				{% endif %}
+			</form>
+   	</div>
 	</div>
 	<br>
 {% endblock %}

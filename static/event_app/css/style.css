@@ -1,25 +1,16 @@
-.event_listing {
-    min-height: 100px;
-    margin-top: 10px;
-    background-color: #E6E6E6;
-}
-
-.event_title {
-    margin-left: 110px;
-    padding-top: 10px;
+.comment_form {
+    width: 100%;
+    height: 35px;
+    margin-bottom: 5px;
     font-size: 20px;
 }
 
-.event_description {
-    margin-left: 110px;
-    margin-top: 10px;
-    
+.pure-form {
+    font-size: 20px;
 }
 
-.event_image {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background-color: #ccc;
-    
+.event-side-pane {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background-color: #F2F2F2;
 }
