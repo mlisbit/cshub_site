@@ -1,0 +1,29 @@
+.name_header {
+	font-size: 30px;
+}
+
+.username_header {
+	font-size: 20px;
+}
+
+.contact_container, .student_container, .social_container, .additional_container, .upload_container{
+	background-color: #E6E6E6;
+	border-radius: 5px;
+	border: solid 1px white;
+}
+
+.social_container input[type="text"]{
+	width: 100%;
+}
+
+.student_container input[type="text"]{
+	width: 100%;
+}
+
+.contact_container input[type="text"]{
+	width: 100%;
+}
+
+.student_container textarea{
+	width: 100%;
+}
