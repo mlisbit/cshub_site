@@ -27,3 +27,7 @@
 .student_container textarea{
 	width: 100%;
 }
+
+.hacky-fix input[type="file"] {
+	display: block;
+}

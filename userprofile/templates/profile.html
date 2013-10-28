@@ -92,11 +92,11 @@
 			<center> <h1>Upload Profile Picture</h1> </center>
 			<form class="pure-form pure-form-stacked" action='/accounts/profile/' method="post" enctype="multipart/form-data"> {% csrf_token %} 
 				<fieldset>
-				{% for field in form %}
-					{% if field.id_for_label == "id_user_avatar" %}
-						{{ field }}
-					{% endif %}
-				{% endfor %}
+						{% for field in form %}
+							{% if field.id_for_label == "id_user_avatar" %}
+							{{ field }}
+							{% endif %}
+						{% endfor %}
 				<input class="btn btn-primary pull-right" type="submit" value="update" >
 			</fieldset>
 			</form>
@@ -106,7 +106,7 @@
 	<div class="container">
 		
 	</div>
-	
+	<!--
 	<div class="container">
 		<div class="form_container col-md-6">
 			<form action='/accounts/profile/' method="post" enctype="multipart/form-data"> {% csrf_token %} 
@@ -123,5 +123,5 @@
 			</form>
 		</div>
 	</div>
-
+	-->
 {% endblock %}
