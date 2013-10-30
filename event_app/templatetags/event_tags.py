@@ -7,7 +7,6 @@ register = template.Library()
 def number_going(array_of):
    return len(array_of)
 
-
 @register.filter(name='get_user_entry')
 def number_going(username):
    return str("<Going: "+username+">")

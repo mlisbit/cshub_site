@@ -31,3 +31,18 @@
 .hacky-fix input[type="file"] {
 	display: block;
 }
+
+.thumbnail.right-caption > img {
+    float: left;
+    margin-right: 9px;
+    display: inline-block;
+}
+
+.thumbnail.right-caption {
+    float: left;
+}
+
+.thumbnail.right-caption > .caption {
+    padding: 4px;
+    display: inline-block;
+}

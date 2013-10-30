@@ -4,6 +4,7 @@ from django.core.context_processors import csrf
 from forms import UserProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from models import Positions
 from django.template import RequestContext
 
 # Create your views here.
@@ -36,3 +37,21 @@ def user_profile(request):
 	args['form'] = form
 
 	return render_to_response('profile.html', args, context_instance=RequestContext(request))
+
+def view_members(request):
+	args = {}
+	args.update(csrf(request))
+
+	args['positions'] = Positions.objects.all()
+	args['admin'] = User.objects.get(username='admin').profile.club_position.all()
+	args['members'] = User.objects.all()
+	return render_to_response('members.html', args, context_instance=RequestContext(request))
+
+def view_member(request):
+	args = {}
+	args.update(csrf(request))
+	u = User.objects.get(username='admin') # Get the first user in the system
+	args['member'] = u
+	args['positions'] = Positions.objects.all()
+
+	return render_to_response('member.html', args, context_instance=RequestContext(request))

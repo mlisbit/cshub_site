@@ -7,6 +7,22 @@ from time import time
 def get_upload_file_name(instance, filename):
 	return "user_uploads/user_imgs/%s_%s" % (str(time()).replace('.','_'), filename)
 
+class Positions(models.Model):
+	title = models.CharField(max_length=200)
+
+	def __unicode__(self):
+		return self.title
+	class Meta:	
+		ordering = ('title',)
+
+class Clubs(models.Model):
+	club_name = models.CharField(max_length=50)
+
+	def __unicode__(self):
+		return self.club_name
+	class Meta:	
+		ordering = ('club_name',)
+
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	phone_number = models.CharField(max_length=200, blank=True, null=True)
@@ -22,8 +38,13 @@ class UserProfile(models.Model):
 
 	school = models.CharField(max_length=200, blank=True, null=True)
 	student_number = models.CharField(max_length=200, blank=True, null=True)
-	
-	user_avatar = models.FileField(upload_to=get_upload_file_name)
+	public_email = models.CharField(max_length=200, blank=True, null=True)
+	publish = models.BooleanField()
+
+	#joined_clubs = models.ManyToManyField(Clubs, blank=True, null=True)
+	club_position = models.ManyToManyField(Positions, blank=True, null=True)
+
+	user_avatar = models.FileField(upload_to=get_upload_file_name, blank=True, null=True)
 
 	def __unicode__(self):
 		user = str(self.user)

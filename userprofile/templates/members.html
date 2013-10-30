@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load profile_tags %}
+
+{% block resources %}
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+	<link href="{% static "pure/forms/css/forms.css" %}" rel="stylesheet" type="text/css">
+	<link href="{% static "userprofile/css/style.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% for i in members %}
+		<div class="thumbnail right-caption col-md-6">
+			{% if i.profile.user_avatar %}
+				<img src="../../static/{{ i.profile.user_avatar }}" width="120px" height="160px">
+			{% else %}
+				<img src="http://placehold.it/120x160" alt="">
+			{% endif %}
+  			<div class="caption">
+    			<h3>{{ i.username }}</h3>
+    			<p>{{ i.username|get_positions|clean_positions }}</p>
+    			<p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a></p>
+ 	 		</div>
+		</div>
+		{% endfor %}
+
+	</div>
+{% endblock %}

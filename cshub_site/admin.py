@@ -4,7 +4,7 @@ from cshub_site.models import Notification
 from event_app.models import Event, Comment, Going
 from django.contrib.auth.models import User
 
-from userprofile.models import UserProfile
+from userprofile.models import UserProfile, Positions
 
 '''
 from django.contrib.auth.admin import UserAdmin
@@ -23,10 +23,16 @@ class UserProfile(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserProfile)
 '''
+
+class PositionsAdmin(admin.ModelAdmin):
+	filter_horizontal = ('club_position', )
+
 #custom app db registrations
 #=======================================
-admin.site.register(UserProfile)
+admin.site.register(UserProfile, PositionsAdmin)
 admin.site.register(Event)
 admin.site.register(Comment)
 admin.site.register(Going)
+admin.site.register(Positions)
 admin.site.register(Notification)
+
