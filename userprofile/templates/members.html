@@ -9,18 +9,28 @@
 {% endblock %}
 
 {% block content %}
+<br>
 	<div class="container">
 		{% for i in members %}
-		<div class="thumbnail right-caption col-md-6">
+		<div class="thumbnail right-caption col-md-6 member-thumb">
 			{% if i.profile.user_avatar %}
-				<img src="../../static/{{ i.profile.user_avatar }}" width="120px" height="160px">
+				<img src="../../static/{{ i.profile.user_avatar }}" width="120px" style="min-height:50px;height:160px;">
 			{% else %}
 				<img src="http://placehold.it/120x160" alt="">
 			{% endif %}
-  			<div class="caption">
+  			<div class="caption member-caption">
+  				{% if i.first_name %}
+  					<h1 style="font-size: 22px;">{{ i.first_name }} {{ i.last_name }}</h1>
+  				{% else %}
+					<h1 style="font-size: 22px;">Fake Name</h1>
+  				{% endif %}
     			<h3>{{ i.username }}</h3>
-    			<p>{{ i.username|get_positions|clean_positions }}</p>
-    			<p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a></p>
+    			<div class="badge-zone">
+    			{% for badge in i.username|get_positions|clean_positions %}
+					<span class="badge badge-warning pull-right" style="margin-right: 2px; margin-bottom: 2px;">{{ badge }}</span>
+    			{% endfor %}
+    			</div>
+    			<p><a href="#" class="btn btn-info" style="position: absolute; bottom: 4px; right: 4px;">View Profile</a></p>
  	 		</div>
 		</div>
 		{% endfor %}

@@ -46,3 +46,11 @@
     padding: 4px;
     display: inline-block;
 }
+
+.member-thumb {
+	min-width: 300px;
+}
+
+.badge-zone {
+	position: absolute;
+}

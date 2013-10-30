@@ -24,7 +24,7 @@ class Clubs(models.Model):
 		ordering = ('club_name',)
 
 class UserProfile(models.Model):
-	user = models.OneToOneField(User)
+	user = models.OneToOneField(User) 
 	phone_number = models.CharField(max_length=200, blank=True, null=True)
 	
 	major = models.CharField(max_length=200, blank=True, null=True)
