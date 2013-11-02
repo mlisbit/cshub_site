@@ -47,7 +47,7 @@ def view_members(request):
 	args['members'] = User.objects.all()
 	return render_to_response('members.html', args, context_instance=RequestContext(request))
 
-def view_member(request):
+def admin_member(request):
 	args = {}
 	args.update(csrf(request))
 	u = User.objects.get(username='admin') # Get the first user in the system
@@ -55,3 +55,12 @@ def view_member(request):
 	args['positions'] = Positions.objects.all()
 
 	return render_to_response('member.html', args, context_instance=RequestContext(request))
+
+def view_member(request, username='mlisbit'):
+	args = {}
+	args.update(csrf(request))
+
+	args['user'] = User.objects.get(username=username)
+	args['profile'] = User.objects.get(username=username).profile
+
+	return render_to_response('view_profile.html', args, context_instance=RequestContext(request))

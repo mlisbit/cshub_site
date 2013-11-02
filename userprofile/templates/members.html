@@ -3,8 +3,6 @@
 {% load profile_tags %}
 
 {% block resources %}
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
-	<link href="{% static "pure/forms/css/forms.css" %}" rel="stylesheet" type="text/css">
 	<link href="{% static "userprofile/css/style.css" %}" rel="stylesheet" type="text/css">
 {% endblock %}
 
@@ -12,7 +10,7 @@
 <br>
 	<div class="container">
 		{% for i in members %}
-		<div class="thumbnail right-caption col-md-6 member-thumb">
+		<div class="thumbnail right-caption col-md-6 member-thumb" style="min-width: 400px;">
 			{% if i.profile.user_avatar %}
 				<img src="../../static/{{ i.profile.user_avatar }}" width="120px" style="min-height:50px;height:160px;">
 			{% else %}
@@ -30,7 +28,8 @@
 					<span class="badge badge-warning pull-right" style="margin-right: 2px; margin-bottom: 2px;">{{ badge }}</span>
     			{% endfor %}
     			</div>
-    			<p><a href="#" class="btn btn-info" style="position: absolute; bottom: 4px; right: 4px;">View Profile</a></p>
+    			<a href="/accounts/user/{{ i.username }}/" class="btn btn-info" style="position: absolute; bottom: 4px; right: 4px;">View Profile</a> 
+    			<!-- <p><a href="#" class="btn btn-info" >View Profile</a></p> -->
  	 		</div>
 		</div>
 		{% endfor %}

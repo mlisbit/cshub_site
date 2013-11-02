@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load profile_tags %}
+
+{% block resources %}
+	<!-- <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+	<link href="{% static "pure/forms/css/forms.css" %}" rel="stylesheet" type="text/css"> -->
+	<link href="{% static "userprofile/css/style.css" %}" rel="stylesheet" type="text/css">
+	<link href="{% static "icons/webicons_mod.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container" style="background: #FAFAFA; border-radius: 5px;">
+	<div class="col-md-12">
+		<div class="profile-main-pane">
+		<div class="left" >
+			<img src="/../../static/{{ user.profile.user_avatar }}" class="img-rounded" width="120px" height="120px">
+		</div>
+		<div class="right">
+			<h2>{{ user.first_name }} {{ user.last_name }}</h2>
+			<h3>{{ user }} </h3> 
+			<h4>{{ user.profile.major }}</h4>
+			
+		</div>
+		<span class="clear"></span>
+		</div>
+	</div>
+</div>
+<br>
+
+<div class="container">
+	<div class="col-md-4 ">
+		<div class="social-icons">
+			<h5>Social</h5>
+			<a href="#" class="webicon github large">github</a>
+			<a href="#" class="webicon linkedin large">linkedin</a>
+			<a href="#" class="webicon twitter large">twitter</a>
+			<br><br>
+			<h5>Badges</h5>
+			{% for badge in user|get_positions|clean_positions %}
+				<span class="badge badge-warning" style="margin-right: 2px; margin-bottom: 2px;">{{ badge }}</span>
+	    	{% endfor %}
+		</div>
+	</div>
+	<div class="col-md-8 ">
+		<div class="social-icons">
+			<h3>About</h3>
+			{{ user.profile.user_description }}
+		</div>
+	</div>
+</div>
+	
+{% endblock %}

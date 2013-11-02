@@ -49,8 +49,47 @@
 
 .member-thumb {
 	min-width: 300px;
+	border: solid 2px white;
+	background: #FAFAFA;
 }
 
 .badge-zone {
 	position: absolute;
 }
+
+.profile-main-pane {
+	
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-left: -20px;
+	border-radius: 5px;
+	background: #FAFAFA;
+}
+
+.profile-main-pane .right {
+	float: left; 
+	margin-left: 10px; 
+	display: inline-block;
+	margin-top: -15px;
+}
+
+.profile-main-pane .right h3{
+	margin-top: -10px;
+}
+.profile-main-pane .right h4{
+	margin-top: 25px;
+}
+
+.profile-main-pane .left {
+	float: left; 
+	display: inline-block;
+}
+.social-icons {
+	padding: 10px;
+	border-radius: 5px;
+	background: #FAFAFA;
+}
+.social-icons h3{
+	margin-top: 0px;
+}
+span.clear { clear: left; display: block; }
