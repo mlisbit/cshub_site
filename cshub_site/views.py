@@ -88,4 +88,9 @@ def register_user(request):
 def register_success(request):
 	return render_to_response('register_success.html')
 
-	
+def view_contact(request):
+	args = {}
+	args.update(csrf(request))
+
+	#args['form'] = form;
+	return render_to_response('contact.html', args, context_instance=RequestContext(request))

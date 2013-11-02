@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     
     url(r'^$', 'cshub_site.views.home'), 
     
+    url(r'^contact/$', 'cshub_site.views.view_contact'), 
     #user authentication
     url(r'^accounts/login/$', 'cshub_site.views.login'),
     url(r'^accounts/auth/$', 'cshub_site.views.auth_view'), 
@@ -40,7 +41,5 @@ urlpatterns = patterns('',
     url(r'^accounts/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', {'post_reset_redirect' : '/accounts/done/'}),
     url(r'^accounts/done/$', 'django.contrib.auth.views.password_reset_complete'),
     
-
-    #django-registration package
 )
 

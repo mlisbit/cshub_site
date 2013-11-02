@@ -56,7 +56,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">CSHUB</a>
+                <a class="navbar-brand" href="/">CSHUB</a>
               </div>
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -64,7 +64,7 @@
                   <li class="{% active request "^/$" %}"><a href="/">Home</a></li>
                   <li class="{% active request "^/events" %}"><a href="/events">Events</a></li>
                   <li class="{% active request "^/accounts" %}"><a href="/accounts/list">Members</a></li>
-                  <li><a href="#contact">Contact</a></li>
+                  <li class="{% active request "^/contact" %}"><a href="/contact">Contact</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -88,9 +88,9 @@
                           </form>
                         </div>
                         <li class="divider"></li>
-                        <li><a href="#">Search for user</a></li>
-                        <li><a href="#">Register</a></li>
-                        <li><a href="#">Forgot password?</a></li>
+                        <li><a href="/accounts/list/">Search for user</a></li>
+                        <li><a href="/accounts/register/">Register</a></li>
+                        <li><a href="/accounts/reset/">Forgot password?</a></li>
                       </ul>
                     
                   {% else %}

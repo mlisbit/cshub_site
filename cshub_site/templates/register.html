@@ -1,10 +1,48 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+{% load tags %}
+
+{% block resources %}
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+	<link href="{% static "pure/forms/css/forms.css" %}" rel="stylesheet" type="text/css">
+	<link href="{% static "userprofile/css/style.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
 
 {% block content %}
-	<h2>Registration</h2>
-	<form action="/accounts/register/" method="POST">{% csrf_token %}
-		{{form.as_ul}}
-		<input type="submit" value="Register">
-	</form>
+	<div class="container">
+		<div class="col-md-8">
+			<h1>What does CSHUB give me?</h1>
+			<ul>
+				<li>We host seminars, hackathons, general meetings, and tutorials</li>
+				<li>We constantly update our events page, feel free to join</li>
+			</ul>
+			<h1>Why register?</h1>
+			<ul>
+				<li>Bragging rights to your friends</li>
+				<li>A personalized profile page</li>
+				<li>The ability to comment on events</li>
+				<li>The ability to confirm your attendance on events</li>
+				<li>Keep up to date information for administration purposes</li>
+				<ul style="margin-top: 0px;">
+					<li>your student number is required by the school</li>
+				</ul>
+				<li>Link to you social networks to build up your connections</li>
+
+			</ul>
+		</div>
+		<div class="col-md-4">
+			<h1>Registration</h1>
+			<form class="pure-form pure-form-stacked registration-form" action="/accounts/register/" method="POST">{% csrf_token %}
+				<fieldset>
+					{% for field in form %}
+						{{ field.label }}
+						{{ field }}
+					{% endfor %}
+					<input class="btn btn-info"type="submit" value="Register">
+				</fieldset>
+			</form>
+		</div>
+	</div>
 	
-{% endblock %}
+	
+{% endblock %} 

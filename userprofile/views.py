@@ -60,7 +60,7 @@ def view_member(request, username='mlisbit'):
 	args = {}
 	args.update(csrf(request))
 
-	args['user'] = User.objects.get(username=username)
+	args['member'] = User.objects.get(username=username)
 	args['profile'] = User.objects.get(username=username).profile
 
 	return render_to_response('view_profile.html', args, context_instance=RequestContext(request))

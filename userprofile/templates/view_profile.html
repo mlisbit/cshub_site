@@ -15,12 +15,12 @@
 	<div class="col-md-12">
 		<div class="profile-main-pane">
 		<div class="left" >
-			<img src="/../../static/{{ user.profile.user_avatar }}" class="img-rounded" width="120px" height="120px">
+			<img src="/../../static/{{ member.profile.user_avatar }}" class="img-rounded" width="120px" height="120px">
 		</div>
 		<div class="right">
-			<h2>{{ user.first_name }} {{ user.last_name }}</h2>
-			<h3>{{ user }} </h3> 
-			<h4>{{ user.profile.major }}</h4>
+			<h2>{{ member.first_name }} {{ member.last_name }}</h2>
+			<h3>{{ member }} </h3> 
+			<h4>{{ member.profile.major }}</h4>
 			
 		</div>
 		<span class="clear"></span>
@@ -38,7 +38,7 @@
 			<a href="#" class="webicon twitter large">twitter</a>
 			<br><br>
 			<h5>Badges</h5>
-			{% for badge in user|get_positions|clean_positions %}
+			{% for badge in member|get_positions|clean_positions %}
 				<span class="badge badge-warning" style="margin-right: 2px; margin-bottom: 2px;">{{ badge }}</span>
 	    	{% endfor %}
 		</div>
@@ -46,7 +46,7 @@
 	<div class="col-md-8 ">
 		<div class="social-icons">
 			<h3>About</h3>
-			{{ user.profile.user_description }}
+			{{ member.profile.user_description }}
 		</div>
 	</div>
 </div>
