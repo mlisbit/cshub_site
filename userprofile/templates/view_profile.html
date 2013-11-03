@@ -33,9 +33,15 @@
 	<div class="col-md-4 ">
 		<div class="social-icons">
 			<h5>Social</h5>
-			<a href="#" class="webicon github large">github</a>
-			<a href="#" class="webicon linkedin large">linkedin</a>
-			<a href="#" class="webicon twitter large">twitter</a>
+			{% if member.profile.github_link %}
+				<a href="#" class="webicon github large">github</a>
+			{% endif %}
+			{% if member.profile.linkedin_link %}
+				<a href="#" class="webicon linkedin large">linkedin</a>
+			{% endif %}
+			{% if member.profile.twitter_link %}
+				<a href="#" class="webicon twitter large">twitter</a>
+			{% endif %}
 			<br><br>
 			<h5>Badges</h5>
 			{% for badge in member|get_positions|clean_positions %}

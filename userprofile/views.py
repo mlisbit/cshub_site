@@ -17,7 +17,7 @@ def user_profile(request):
 		#succesful profil update view
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/accounts/loggedin')
+			return HttpResponseRedirect('/accounts/profile')
 
 	else:
 		user = request.user

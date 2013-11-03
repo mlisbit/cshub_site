@@ -11,7 +11,7 @@ from django.core.context_processors import csrf
 from django.template import RequestContext
 #registration imports
 from forms import MyRegistrationForm, ContactForm
-from models import OfficeHours
+from models import OfficeHours, Notification
 
 from django.core.mail import send_mail
 
@@ -21,11 +21,12 @@ from django.contrib.auth.views import password_reset
 from django.contrib.auth.models import User
 
 def home(request):
-	c= {}
-	c['users'] = User.objects.all()
-	c['total_users'] = User.objects.all().__len__
-	c.update(csrf(request))
-	return render_to_response('home.html', c, context_instance=RequestContext(request))
+	args= {}
+	args['users'] = User.objects.all()
+	args['total_users'] = User.objects.all().__len__
+	args['notifications'] = Notification.objects.all()
+	args.update(csrf(request))
+	return render_to_response('home.html', args, context_instance=RequestContext(request))
 	username = request.POST.get('username', '')
 	password = request.POST.get('password', '')
 	user = auth.authenticate(username=username, password=password)
@@ -37,9 +38,9 @@ def home(request):
 		return HttpResponseRedirect('/accounts/invalid/')
 
 def login(request):
-	c= {}
-	c.update(csrf(request))
-	return render_to_response('login.html', c, context_instance=RequestContext(request))
+	args= {}
+	args.update(csrf(request))
+	return render_to_response('login.html', args, context_instance=RequestContext(request))
 	username = request.POST.get('username', '')
 	password = request.POST.get('password', '')
 	user = auth.authenticate(username=username, password=password)

@@ -86,6 +86,10 @@
 						<span>Github</span>
 						{{ field }} 
 					{% endif %}
+					{% if field.id_for_label == "id_facebook_link" %}
+						<span>Facebook</span>
+						{{ field }} 
+					{% endif %}
 				</div>
 				{% endfor %}
 				<input class="btn btn-primary pull-right" type="submit" value="update" >

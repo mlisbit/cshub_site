@@ -5,15 +5,22 @@
 
 .contact-form input[type='text'] {
 	width: 100%;
+	font-size: 15px;
 }
 
 .contact-form textarea{
 	width: 100%;
 	max-width: 100%;
+	font-size: 15px;
 }
 
 .contact-form button{
 	margin-top: 10px;
 	width: 100%;
 	max-width: 100%;
+}
+
+.school-logo {
+	width: 100%;
+	margin-top: 10px;
 }

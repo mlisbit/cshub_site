@@ -14,18 +14,22 @@
 
 .social_container input[type="text"]{
 	width: 100%;
+	font-size: 15px;
 }
 
 .student_container input[type="text"]{
 	width: 100%;
+	font-size: 15px;
 }
 
 .contact_container input[type="text"]{
 	width: 100%;
+	font-size: 15px;
 }
 
 .student_container textarea{
 	width: 100%;
+	font-size: 15px;
 }
 
 .hacky-fix input[type="file"] {
