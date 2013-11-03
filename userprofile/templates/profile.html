@@ -40,10 +40,11 @@
 					{% if field.id_for_label == "id_phone_number" %}
 						{{ field.label }}
 						{{ field }}
-					{% endif %}
-					{% if field.id_for_label == "id_student_number" %}
+					{% elif field.id_for_label == "id_student_number" %}
 						{{ field.label }}
 						{{ field }}
+					{% else %}
+						<div style="display: none;">{{ field }}</div>
 					{% endif %}
 				{% endfor %}
 				<input class="btn btn-primary pull-right" type="submit" value="update" >
@@ -59,12 +60,14 @@
 					{% if field.id_for_label == "id_major" %}
 						<span>Major</span>
 						{{ field }}
-					{% endif %}
-					{% if field.id_for_label == "id_user_description" %}
+					{% elif field.id_for_label == "id_user_description" %}
 						{{ field.label }} 
 						{{ field }}
+					{% else %}
+						<div style="display: none;">{{ field }}</div>
 					{% endif %}
 				{% endfor %}
+
 				<input class="btn btn-primary pull-right" type="submit" value="update" >
 			</fieldset>
 			</form>
@@ -78,18 +81,17 @@
 					{% if field.id_for_label == "id_linkedin_link" %}
 						<span>Linked in</span>
 						{{ field }}
-					{% endif %}
-					{% if field.id_for_label == "id_twitter_link" %}
+					{% elif field.id_for_label == "id_twitter_link" %}
 						<span>Twitter</span>
 						{{ field }}
-					{% endif %}
-					{% if field.id_for_label == "id_github_link" %}
+					{% elif field.id_for_label == "id_github_link" %}
 						<span>Github</span>
 						{{ field }} 
-					{% endif %}
-					{% if field.id_for_label == "id_facebook_link" %}
+					{% elif field.id_for_label == "id_facebook_link" %}
 						<span>Facebook</span>
 						{{ field }} 
+					{% else %}
+						<div style="display: none;">{{ field }}</div>
 					{% endif %}
 				</div>
 				{% endfor %}

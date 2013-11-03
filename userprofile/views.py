@@ -16,6 +16,7 @@ def user_profile(request):
 
 		#succesful profil update view
 		if form.is_valid():
+			originalform = UserProfileForm(instance = request.user.profile)
 			form.save()
 			return HttpResponseRedirect('/accounts/profile')
 
