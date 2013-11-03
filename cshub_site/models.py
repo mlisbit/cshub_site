@@ -2,10 +2,17 @@ from django.db import models
 
 # Create your models here.
 
+COLOR_CHOICES = (
+    ('danger', 'red'),
+    ('warning', 'orange'),
+    ('info', 'blue'),
+    ('success', 'green'),
+)
+
 class Notification(models.Model):
 	title = models.CharField(max_length=200)
 	description = models.TextField()
-	color = models.CharField(max_length=200)
+	color = models.CharField(max_length=200, choices=COLOR_CHOICES, default=1)
 
 class OfficeHours(models.Model):
 	monday = models.CharField(max_length=200)
