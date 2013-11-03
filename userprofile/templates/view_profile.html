@@ -42,6 +42,9 @@
 			{% if member.profile.twitter_link %}
 				<a href="#" class="webicon twitter large">twitter</a>
 			{% endif %}
+			{% if member.profile.facebook_link %}
+				<a href="#" class="webicon facebook large">facebook</a>
+			{% endif %}
 			<br><br>
 			<h5>Badges</h5>
 			{% for badge in member|get_positions|clean_positions %}

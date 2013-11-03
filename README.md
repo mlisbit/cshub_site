@@ -4,13 +4,15 @@ CSHub Club Site
 ## Description
 Upcoming site for the York University Computing Students Hub. Social-networking-type site. Can be used for any club really. 
 
-## Built using
+## Libraries used
 * Django 1.5.1
 * Python 2.7.3
 * [Bootflat](http://github.com/flathemes/bootflat)
 * [PureCSS](http://purecss.io/)
 * [webicons](github.com/adamfairhead/webicons)
 * JQuery
+* South
+* Google Maps
 
 ## User Abilites
 #### General members

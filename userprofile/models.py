@@ -32,9 +32,11 @@ class UserProfile(models.Model):
 	notes = models.TextField(blank=True, null=True)
 
 	events_attended = models.IntegerField(blank=True, null=True)
+
 	twitter_link = models.CharField(max_length=200, blank=True, null=True)
 	linkedin_link = models.CharField(max_length=200, blank=True, null=True)
 	github_link = models.CharField(max_length=200, blank=True, null=True)
+	facebook_link = models.CharField(max_length=200, blank=True, null=True)
 
 	school = models.CharField(max_length=200, blank=True, null=True)
 	student_number = models.CharField(max_length=200, blank=True, null=True)

@@ -11,7 +11,7 @@
 	<div class="container">
 		<div class="left" style="float: left; margin-right: 20px;">
 			{%if form.user_avatar%}
-			<p><img src="../../static/{{thumbnail}}" width="100px" class="img-rounded"></p>
+			<p><img src="../../static/{{thumbnail}}" width="150px" class="img-rounded"></p>
 			{%endif%}
 		</div>
 		<div class="right" style="float: left; margin-top: 20px;" >
@@ -33,6 +33,7 @@
 	<div class="container">
 		<div class="contact_container col-md-4">
 			<center> <h1>Private Information</h1> </center>
+			<center><p style="color: red;">this is information will not be made public, and is only accessible by admins.</p></center>
 			<form class="pure-form pure-form-stacked" action='/accounts/profile/' method="post" enctype="multipart/form-data" class="pure-form"> {% csrf_token %} 
 				<fieldset>
 				{% for field in form %}

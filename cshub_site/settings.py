@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'cshub_site',
     'event_app',
     'userprofile',
+    'south',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
