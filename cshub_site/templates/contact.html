@@ -2,9 +2,75 @@
 {% load staticfiles %}
 {% load tags %}
 
+
+{% block resources %}
+   <style>
+      #map-canvas {
+        height: 400px;
+        margin: 0px;
+        padding: 0px;
+      }
+   </style>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+   <script>
+		var map;
+		var myLatlng = new google.maps.LatLng(43.774627, -79.498493);
+		function initialize() {
+		  	var mapOptions = {
+		  		scrollwheel: false,
+		    	zoom: 15,
+		    	center: myLatlng,
+		    	disableDefaultUI: true,
+		    	mapTypeId: google.maps.MapTypeId.ROADMAP
+		  	};
+		  	google.maps.event.addDomListener(window, 'resize', function() {
+    			map.setCenter(myLatlng);
+			});
+		  	map = new google.maps.Map(document.getElementById('map-canvas'),
+		      mapOptions);
+
+		  	var marker = new google.maps.Marker({
+      		position: myLatlng,
+      		map: map,
+      		title: 'York University CSHub'
+  			});
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+	<link href="{% static "pure/forms/css/forms.css" %}" rel="stylesheet" type="text/css">
+	<link href="{% static "main_app/css/style.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block content %}
-<br>
-<div class="container">
 	
-</div>
+	<div class="container">
+		<div class="col-md-4">
+			<center><h1>Office Hours for this week</h1>									</center>
+			<center><strong>Monday:</strong> 		{{ office_hours.monday }} 		</center> 
+			<center><strong>Tuesday:</strong>	 	{{ office_hours.tuesday }} 	</center> 
+			<center><strong>Wednesday:</strong> 	{{ office_hours.wednesday }} 	</center> 
+			<center><strong>Thursday:</strong> 		{{ office_hours.thursday }} 	</center> 
+			<center><strong>Friday:</strong> 		{{ office_hours.friday }} 		</center> 
+			<center><strong>Saturday:</strong> 		{{ office_hours.saturday }} 	</center> 
+			<center><strong>Sunday:</strong>			{{ office_hours.sunday }} 		</center> 
+			<p>Feel free to drop by with any questions you may have; these hours are updated weekly so you can count on us being there.</p>
+		</div> <!-- hours of operation -->
+		<div class="col-md-4">
+			<center><h1>We love mail!</h1></center>
+			<form action="/contact/" class="pure-form pure-form-stacked contact-form" method="POST">{% csrf_token %}
+				{% for field in contact_form %}
+					{{ field.label }}
+					{{ field }}
+				{% endfor %}
+    			
+	    		<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+		
+	</div>
+	<br>
+	<div id="map-canvas"></div>
+    
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from cshub_site.models import Notification
+from cshub_site.models import Notification, OfficeHours
 
 from event_app.models import Event, Comment, Going
 from django.contrib.auth.models import User
@@ -33,6 +33,7 @@ admin.site.register(UserProfile, PositionsAdmin)
 admin.site.register(Event)
 admin.site.register(Comment)
 admin.site.register(Going)
+admin.site.register(OfficeHours)
 admin.site.register(Positions)
 admin.site.register(Notification)
 

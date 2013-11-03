@@ -21,3 +21,8 @@ class MyRegistrationForm(UserCreationForm):
 			user.save()
 
 		return user
+
+class ContactForm(forms.Form):
+	title = forms.CharField(max_length=20)
+	email = forms.CharField(widget = forms.Textarea)
+	text = forms.CharField(max_length=20)

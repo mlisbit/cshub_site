@@ -1,0 +1,19 @@
+#map-canvas {
+	margin-top: 10px;
+	border-top: solid 2px #ccc;
+}
+
+.contact-form input[type='text'] {
+	width: 100%;
+}
+
+.contact-form textarea{
+	width: 100%;
+	max-width: 100%;
+}
+
+.contact-form button{
+	margin-top: 10px;
+	width: 100%;
+	max-width: 100%;
+}

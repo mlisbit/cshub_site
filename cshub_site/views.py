@@ -10,7 +10,10 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.template import RequestContext
 #registration imports
-from forms import MyRegistrationForm
+from forms import MyRegistrationForm, ContactForm
+from models import OfficeHours
+
+from django.core.mail import send_mail
 
 #password reset
 from django.contrib.auth.views import password_reset
@@ -91,6 +94,33 @@ def register_success(request):
 def view_contact(request):
 	args = {}
 	args.update(csrf(request))
+	success = False
+	email = ""
+	title = ""
+	text = ""
 
+	if request.method == "POST":
+		contact_form = ContactForm(request.POST)
+
+		if contact_form.is_valid():
+			success = True
+			email = contact_form.cleaned_data['email']
+			title = contact_form.cleaned_data['title']
+			text = contact_form.cleaned_data['text']
+
+			send_mail(title, text, email, ['to@example.com'], fail_silently=True)
+	else:
+		contact_form = ContactForm()
+
+	args['office_hours'] = OfficeHours.objects.get(id=1);
+	args['contact_form'] = contact_form
+	args['email'] = email
+	args['title'] = title
+	args['text'] = text
+	args['success'] = success
 	#args['form'] = form;
 	return render_to_response('contact.html', args, context_instance=RequestContext(request))
+
+def contact(request):
+	pass
+
