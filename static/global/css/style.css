@@ -1,0 +1,48 @@
+html, body {
+    height: 100%;
+    background: #FAFAFA;
+}
+footer {
+    padding: 17px 0 18px 0;
+    width: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -63px;
+}
+
+.push {
+    height: 63px;
+}
+
+.bottombar {
+    width: 100%;
+    background-color: #2E2E2E;
+    color: #d4d4d4;
+}
+
+.bottombar h6{
+    font-size: 18px;
+    padding: 0px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.additional-links {
+    list-style: none;
+    margin-bottom: 10px;
+
+}
+.additional-links li,ul{
+    list-style-type: none;
+    list-style-position:inside;
+    margin:0;
+    padding:0; 
+}
+
+.additional-links a{
+    color: #ccc;
+}
