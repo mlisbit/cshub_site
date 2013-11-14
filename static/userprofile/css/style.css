@@ -53,8 +53,9 @@
 
 .member-thumb {
 	min-width: 300px;
-	border: solid 2px white;
-	background: #FAFAFA;
+	border: solid 2px #FAFAFA;
+	padding-bottom: -20px;
+	background: #F2F2F2;
 }
 
 .badge-zone {
@@ -65,9 +66,10 @@
 	
 	padding-top: 10px;
 	padding-bottom: 10px;
+	padding-left: 10px;
 	margin-left: -20px;
 	border-radius: 5px;
-	background: #FAFAFA;
+	background: #F2F2F2;
 }
 
 .profile-main-pane .right {
@@ -91,7 +93,7 @@
 .social-icons {
 	padding: 10px;
 	border-radius: 5px;
-	background: #FAFAFA;
+	background: #F2F2F2;
 }
 .social-icons h3{
 	margin-top: 0px;
@@ -112,4 +114,19 @@ span.clear { clear: left; display: block; }
 .registration-form input[type="submit"]{
 	width: 100%;
 	margin-top: 10px;
+}
+
+.crop {
+	width:120px;
+    min-height:50px;
+    height:160px;
+    overflow: hidden;
+    background: #ccc;
+    float: left;
+}
+
+.crop img {
+	margin-left: -30px;
+	margin-top: 0px;
+	float: left;
 }

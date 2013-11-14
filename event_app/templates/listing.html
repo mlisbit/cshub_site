@@ -27,14 +27,14 @@
 		<center><h1>{{event.name}}</h1></center>
 	</div>
 	<div class="container">
-		<div class="col-md-2 event-side-pane">
-			<div class="thumbnail">
-				<img src="/static/{{event.event_img}}" alt="...">
+		<div class="col-sm-4 col-md-4 event-side-pane">
+			<div>
+				<img src="/static/{{event.event_img}}" alt="..." width="100%">
 			</div>
 			<p><span class="badge badge-inverse pull-right">{{ event.going_set.all|get_count }}</span> Going: </p>
 			<p><span class="badge badge-warning pull-right">{{ event.comment_set.all|get_count }}</span> Comments:</p>
 		</div>
-		<div class="col-md-10"> 
+		<div class="col-sm-8 col-md-8"> 
 			<h2>Description: </h2>
 			<p class="mainevent_description">{{event.description}} </p>
 			<h2>When: </h2>

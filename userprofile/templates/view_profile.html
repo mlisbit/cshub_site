@@ -15,7 +15,11 @@
 	<div class="col-md-12">
 		<div class="profile-main-pane">
 		<div class="left" >
-			<img src="/../../static/{{ member.profile.user_avatar }}" class="img-rounded" width="120px" height="120px">
+			{% if member.profile.user_avatar %}
+				<img src="/../../static/{{ member.profile.user_avatar }}" class="img-rounded" width="120px" height="120px">
+			{% else %}
+				<img src="{% static "user_uploads/user_imgs/default.png" %}" class="img-rounded" width="120px" height="120px">
+			{% endif %}
 		</div>
 		<div class="right">
 			<h2>{{ member.first_name }} {{ member.last_name }}</h2>

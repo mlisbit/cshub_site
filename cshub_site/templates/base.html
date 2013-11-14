@@ -13,7 +13,9 @@
       <link href="{% static "bootflat-master/css/bootflat.css" %}" rel=" stylesheet" media="screen">
       <link href="{% static "bootflat-master/css/bootflat-extensions.css" %}" rel="stylesheet" media="screen">
       <link href="{% static "bootflat-master/css/bootflat-square.css" %}" rel="stylesheet" media="screen">
+      
       {%block resources%}{%endblock%} 
+      <link href="{% static "global/css/style.css" %}" rel="stylesheet" type="text/css">
 
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
@@ -21,26 +23,7 @@
         <script src="js/respond.min.js"></script>
       <![endif]-->
       <style>
-        html, body {
-            height: 100%;
-        }
-        footer {
-            padding: 17px 0 18px 0;
-            width: 100%;
-        }
-        .wrapper {
-            min-height: 100%;
-            height: auto !important;
-            height: 100%;
-            margin: 0 auto -63px;
-        }
-        .push {
-            height: 63px;
-        }
-        .bottombar {
-            width: 100%;
-            background-color: #000;
-        }
+        
       </style>
     </head>
 
@@ -94,9 +77,13 @@
                       </ul>
                     
                   {% else %}
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static user.profile.user_avatar %}" alt="Smiley face" width="40" class="pull-left" style="margin-top:-9px; margin-right: 10px; overflow: hidden; height: 40px; ">{{user}}<b class="caret"></b></a>
+                  {% if user.profile.user_avatar %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static user.profile.user_avatar %}" alt="user image" width="40" class="pull-left" style="margin-top:-9px; margin-right: 10px; overflow: hidden; height: 40px; ">{{user}}
+                  {% else %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static "user_uploads/user_imgs/default.png" %}" alt="user image" width="40" class="pull-left" style="margin-top:-9px; margin-right: 10px; overflow: hidden; height: 40px; ">{{user}}
+                  {% endif %}
+                    <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                      <li><a href="#">My Events</a></li>
                       <li><a href="/accounts/profile/">Edit profile</a></li>
                       <li class="divider"></li>
                       <li><a href="/accounts/logout/">Log out</a></li>
@@ -125,9 +112,32 @@
     <div class="push"></div>
     <div class="bottombar">
       <div class="container">
-        <footer>
-          <p>Site Designed by Maciej Lis</p>
-        </footer>
+        <br><br>
+        <div class="col-md-4">
+        <p>Site Designed by Maciej Lis</p>
+        </div>
+        <div class="col-md-4">
+          <ul class="additional-links">
+            <li><a href="#">FAQ</a> </li>
+            <li><a href="#">About this site</a> </li>
+          </ul>
+          <h6>Sponsors</h6>
+          <ul class="additional-links">
+            <li><a href="#">Lassonde School of Engineering</a></li>
+            <li><a href="#">York University</a></li>
+          </ul>
+          <br>
+        </div>
+        <div class="col-md-4">
+          <div class="github-footer"></div>
+          <div class="twitter-footer"></div>
+          <div class="facebook-footer"></div>
+          
+          <img src="{% static "icons/github-footer.png" %}" alt="github" width="120px">
+          <img src="{% static "icons/twitter-footer.png" %}" alt="twitter" width="100px">
+          <img src="{% static "icons/facebook-footer.png" %}" alt="twitter" width="60px">
+        </div>
+          
       </div> <!-- conatiner -->
     </div>
 </html>

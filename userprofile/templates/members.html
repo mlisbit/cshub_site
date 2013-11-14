@@ -11,11 +11,13 @@
 	<div class="container">
 		{% for i in members %}
 		<div class="thumbnail right-caption col-md-6 member-thumb" style="min-width: 400px;">
-			{% if i.profile.user_avatar %}
-				<img src="../../static/{{ i.profile.user_avatar }}" width="120px" style="min-height:50px;height:160px;">
-			{% else %}
-				<img src="http://placehold.it/120x160" alt="">
-			{% endif %}
+			<div class="crop">
+				{% if i.profile.user_avatar %}
+					<img src="../../static/{{ i.profile.user_avatar }}" width="190px">
+				{% else %}
+					<img src="{% static "user_uploads/user_imgs/default.png" %}" width="190px">
+				{% endif %}
+			</div>
   			<div class="caption member-caption">
   				{% if i.first_name %}
   					<h1 style="font-size: 22px;">{{ i.first_name }} {{ i.last_name }}</h1>

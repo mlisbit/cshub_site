@@ -113,7 +113,10 @@ def view_contact(request):
 	else:
 		contact_form = ContactForm()
 
-	args['office_hours'] = OfficeHours.objects.get(id=1);
+	try:
+		args['office_hours'] = OfficeHours.objects.get(id=1);
+	except: 
+		pass
 	args['contact_form'] = contact_form
 	args['email'] = email
 	args['title'] = title

@@ -3,6 +3,7 @@ import json
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+main_path = '/home/bite/projects/cshub-site/cshub_site/'
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -26,7 +27,7 @@ if DEBUG:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/bite/cshub/cshub_site/storage.db',                      # Or path to database file if using sqlite3.
+        'NAME': main_path+'cshub_site/storage.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -64,7 +65,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = '/home/bite/cshub/cshub_site/static/'
+MEDIA_ROOT = main_path+'cshub_site/static/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -83,7 +84,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    '/home/bite/cshub/cshub_site/static',
+    main_path+'cshub_site/static',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -124,8 +125,8 @@ ROOT_URLCONF = 'cshub_site.urls'
 WSGI_APPLICATION = 'cshub_site.wsgi.application'
 
 TEMPLATE_DIRS = (
-    '/home/bite/cshub/cshub_site/registration_app/templates',
-    '/home/bite/cshub/cshub_site/event_app/templates',
+    main_path+'cshub_site/registration_app/templates',
+    main_path+'cshub_site/event_app/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
