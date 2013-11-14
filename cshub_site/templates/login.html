@@ -1,18 +1,24 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
+{% block resources %}
+	<link href="{% static "pure/forms/css/forms.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
 
 {% block content %}
+	<div class="container">
 	{% if form.errors %}
 		<p class="error">Sorry, that's not a valid username or password</p>
 	{% endif %}
 
-	<form action="/accounts/auth/" method="POST">
+	<form action="/accounts/auth/" class="pure-form pure-form-stacked" method="POST">
 		{% csrf_token %}
 		<label for="username">User name:</label>
 		<input type="text" name="username" value="" id="username"> 
 		<label for="password">Password:</label>
 		<input type="password" name="password" value="" id="password">
 
-		<input type="submit" value="login">
+		<input type="submit" class="btn btn-info" value="login">
 	</form>
+</div>
 {% endblock %}

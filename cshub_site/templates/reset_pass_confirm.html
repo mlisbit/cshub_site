@@ -2,6 +2,7 @@
 {% block title %}Setting New password{% endblock %}
 
 {% block content %}
+<div class="container">
     {% if validlink %}
         <p>Please enter your new password twice.<br />
            So we can verify you typed it in correctly.</p>
@@ -32,4 +33,5 @@
         possibly because it has already been used. <br />
         Please request a new password reset.</p>
     {% endif %}
+</div>
 {% endblock %}
