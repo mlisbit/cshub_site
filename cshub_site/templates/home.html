@@ -2,8 +2,11 @@
 {% load staticfiles %}
 {% load tags %}
 
+{% block resources %}
+  <link href="{% static "main_app/css/style.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block content %}
-{% load staticfiles %}
 <div class="container">
 <div id="myCarousel" class="carousel slide">
   <ol class="carousel-indicators">
@@ -28,38 +31,60 @@
   <a class="carousel-control right" href="#myCarousel" data-slide="next" style="background-image: none;">&rsaquo;</a>
 </div>
 </div> <!-- container -->
-<br>
+<br><br>
 <div class="container">
   <div class="col-md-4">
-    <center><img src="{% static "icons/minimal-outline-icons/png/64px/09-user.png" %}" alt=""></center>
+    <div class="main-icon">
+    <center><img src="{% static "icons/circle-icons/circle-icons/full-color/png/128px/contacts.png" %}" alt=""></center>
+    <div class="expand">
+      <br>
+      <center><a href="/accounts/register"><p>register</p></a></center>
+      <center><a href="/accounts/list"><p>view members</p></a></center>
+    </div>
+  </div>
     <center><h3>Join the {{ total_users }} total users</h3></center>
     <p>We are always looking for new members! You don't have to be a Computer Science or Engineering major, heck you can be any major your little heart desires! If you're interested in learning more about programming/computing, this is the club for you!</p>
       <div class="btn-group-vertical" style="width: 100%">
-        <a href="/accounts/register/" class="btn btn-large btn-success" style="margin-bottom: 5px">Register</a>
-        <a href="/accounts/list/" class="btn btn-large btn-default">Current Members</a>
       </div> <!-- btn-group-vertical -->
+    <div class="">
+
+    </div>
   </div>
   <div class="col-md-4">
-    <center><img src="{% static "icons/minimal-outline-icons/png/64px/01-megaphone.png" %}" alt=""></center>
+    <div class="main-icon">
+      <center><img src="{% static "icons/circle-icons/circle-icons/full-color/png/128px/megaphone.png" %}" alt="get social"></center>
+      <div class="expand">
+        <br>
+        <center><a href="http://www.facebook.com/thecshub"><p>facebook</p></a></center>
+        <center><a href="http://www.twitter.com/thecshub"><p>twitter</p></a></center>
+      </div>
+    </div>
     <center><h3>get social!</h3></center>
-    <p>Join events, make new friends, and learn something new. Sign up and join our member only events, or browse some events outside of York University! </p>
+    <p>
+      Join events, make new friends, and learn something new. Sign up and join our member only events, or browse some events outside of York University!
+      Browse member profiles and connect with them to make connections that will last a life time. Spread the word on Facebook and Twitter. 
+    </p>
     <div class="btn-group-vertical" style="width: 100%">
-        <a href="#" class="btn btn-large btn-primary" style="margin-bottom: 5px">Facebook</a>
-        <a href="#" class="btn btn-large btn-info">Twitter</a>
       </div> <!-- btn-group-vertical -->
   </div>
   <div class="col-md-4">
-    <center><img src="{% static "icons/minimal-outline-icons/png/64px/10-code.png" %}" alt=""></center>
+    <div class="main-icon">
+    <center><img src="{% static "icons/circle-icons/circle-icons/full-color/png/128px/dev.png" %}" alt=""></center>
+    <div class="expand">
+      <br>
+      <center><a href="http://www.github.com/mlisbit/cshub_site"><p>github</p></a></center>
+      <center><a href="/contact"><p>send us an email</p></a></center>
+    </div>
+    </div>
     <center><h3>Help us out</h3></center>
     <p>Feel like you have something to contribute? We are always looking for help developing the site, and tutors. Have graphic design experience? great! we need that too.</p>
     <div class="btn-group-vertical" style="width: 100%">
-        <a href="#" class="btn btn-large btn-base" style="margin-bottom: 5px">Email us</a>
-        <a href="#" class="btn btn-large btn-default" style="margin-bottom: 5px">Github</a>
     </div> <!-- btn-group-vertical -->
   </div> <!-- collumn -->
 </div> <!-- container -->
 <br>
-<div class="container">
+<div class="container" style="border-top: solid 2px #ccc;">
+  <br>
   <div class="col-md-12">
     <center>
       <h1>Who are we?</h1>
@@ -69,12 +94,17 @@
         <p>We are a relatively new club, just starting September 2013, so we're not entirely sure ourselves! But what we have planned so far is pretty cool; meetups, free food, tutorial sessions for classes, programming tutorials, seminars.</p>
       <br>
       <h2>That's great! is there any way I can get involved?</h2>
-        <p>Hell yeah! We need a lot of help! sign up for a goddamn account punk!</p>
+        <p>
+            Yeah! Whether you only want to attend the events, or help out in organization, and planning for the club - 
+            there's a spot for you. Your first step is to sign up for an account, this confirms your position in the club, and will allow us to
+            easily reach out and contact you. Next step: contact us. 
+        </p>
   </center>
   </div>
+
 </div>
-<br>
-<br>
+<br><br><br>
+
 <div class="container">
   <!-- <center> <h1 style="color: #006666">Notifications</h1> </center> -->
 

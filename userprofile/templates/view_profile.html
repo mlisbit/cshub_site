@@ -16,7 +16,7 @@
 		<div class="profile-main-pane">
 		<div class="left" >
 			{% if member.profile.user_avatar %}
-				<img src="/../../static/{{ member.profile.user_avatar }}" class="img-rounded" width="120px" height="120px">
+				<img src="/../../static/{{ member.profile.user_avatar }}" class="img-rounded" height="150px">
 			{% else %}
 				<img src="{% static "user_uploads/user_imgs/default.png" %}" class="img-rounded" width="120px" height="120px">
 			{% endif %}

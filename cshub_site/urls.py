@@ -23,6 +23,8 @@ urlpatterns = patterns('',
     url(r'^$', 'cshub_site.views.home'), 
     
     url(r'^contact/$', 'cshub_site.views.view_contact'), 
+    url(r'^faq/$', 'cshub_site.views.faq_view'), 
+    url(r'^about-site/$', 'cshub_site.views.about_site'), 
     #user authentication
     url(r'^accounts/login/$', 'cshub_site.views.login'),
     url(r'^accounts/auth/$', 'cshub_site.views.auth_view'), 

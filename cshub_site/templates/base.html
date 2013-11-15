@@ -78,11 +78,20 @@
                     
                   {% else %}
                   {% if user.profile.user_avatar %}
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static user.profile.user_avatar %}" alt="user image" width="40" class="pull-left" style="margin-top:-9px; margin-right: 10px; overflow: hidden; height: 40px; ">{{user}}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <div style="float: left; margin-top:-9px; margin-right: 10px; overflow: hidden; height: 40px; ">
+                        <img src="{% static user.profile.user_avatar %}" alt="user image" width="40" class="pull-left">
+                      </div>
+                      {{user}}
+                      <b class="caret"></b>
+                    </a>
+                    
                   {% else %}
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static "user_uploads/user_imgs/default.png" %}" alt="user image" width="40" class="pull-left" style="margin-top:-9px; margin-right: 10px; overflow: hidden; height: 40px; ">{{user}}
-                  {% endif %}
-                    <b class="caret"></b></a>
+                      <b class="caret"></b>
+                      {{user}}
+                    </a>
+                  {% endif %}   
                     <ul class="dropdown-menu">
                       <li><a href="/accounts/profile/">Edit profile</a></li>
                       <li class="divider"></li>
@@ -101,40 +110,45 @@
         
           
       </div> <!--wrapper-->
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="//code.jquery.com/jquery.js"></script>
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
-      <script>
-        var result = $(".wrapper").height();
-      </script>
-    </body>
+    
     <div class="push"></div>
     <div class="bottombar">
       <div class="container">
         <br><br>
         <div class="col-md-4">
-        <p>Site Designed by Maciej Lis</p>
+        <p>Site built and designed by <a href="https://twitter.com/mlisbit">Maciej Lis</a></p>
         </div>
         <div class="col-md-4">
           <ul class="additional-links">
-            <li><a href="#">FAQ</a> </li>
-            <li><a href="#">About this site</a> </li>
+            <li><a href="/faq">FAQ</a> </li>
+            <li><a href="/about-site">About this site</a> </li>
           </ul>
           <h6>Sponsors</h6>
           <ul class="additional-links">
-            <li><a href="#">Lassonde School of Engineering</a></li>
-            <li><a href="#">York University</a></li>
+            <li><a href="http://lassonde.yorku.ca/">Lassonde School of Engineering</a></li>
+            <li><a href="http://yorku.ca/">York University</a></li>
           </ul>
           <br>
         </div>
         <div class="col-md-4">
-          <a href="#"><div class="github-footer"></div></a>
-          <a href="#"><div class="twitter-footer"></div></a>
-          <a href="#"><div class="facebook-footer"></div></a>
+          <a href="http://www.github.com/mlisbit/cshub_site"><div class="github-footer"></div></a>
+          <a href="http://www.twitter.com/thecshub"><div class="twitter-footer"></div></a>
+          <a href="http://www.facebook.com/thecshub"><div class="facebook-footer"></div></a>
           
         </div>
           
       </div> <!-- conatiner -->
     </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
+
+    <script>
+      $('.main-icon').click(function() {
+          $(this).find('.expand').slideToggle("fast");
+        }
+      );
+    </script>
+    </body>
 </html>

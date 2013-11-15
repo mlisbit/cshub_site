@@ -24,3 +24,27 @@
 	width: 100%;
 	margin-top: 10px;
 }
+
+.main-icon .expand {
+	display: none;
+}
+
+.main-icon .expand a {
+	color: #0B615E;
+	font-size: 20px;
+	text-decoration: none;
+}
+
+.main-icon .expand a:hover {
+	text-decoration: none;
+	color: #2E2E2E;
+}
+
+.main-icon img:hover {
+	cursor: pointer;
+}
+
+.main-icon img {
+	padding-right: 1px;
+	padding-bottom: 5px;
+}

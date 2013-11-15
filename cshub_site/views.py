@@ -92,6 +92,12 @@ def register_user(request):
 def register_success(request):
 	return render_to_response('register_success.html')
 
+def faq_view(request):
+	return render_to_response('faq.html', {}, context_instance=RequestContext(request))
+
+def about_site(request):
+	return render_to_response('about-site.html', {}, context_instance=RequestContext(request))
+
 def view_contact(request):
 	args = {}
 	args.update(csrf(request))
@@ -109,7 +115,8 @@ def view_contact(request):
 			title = contact_form.cleaned_data['title']
 			text = contact_form.cleaned_data['text']
 
-			send_mail(title, text, email, ['to@example.com'], fail_silently=True)
+			send_mail(title, text, email, ['mlisbit@gmail.com'], fail_silently=True)
+			return HttpResponseRedirect('/')
 	else:
 		contact_form = ContactForm()
 
