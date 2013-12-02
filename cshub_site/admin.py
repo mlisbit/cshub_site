@@ -27,6 +27,7 @@ admin.site.register(User, UserProfile)
 class PositionsAdmin(admin.ModelAdmin):
 	filter_horizontal = ('club_position', )
 
+
 #custom app db registrations
 #=======================================
 admin.site.register(UserProfile, PositionsAdmin)

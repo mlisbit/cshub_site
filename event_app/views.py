@@ -37,15 +37,12 @@ def going_to(request, event_id):
 		f = GoingForm(request.POST)
 		if f.is_valid():
 			#check if the user is already in the db of people going.
-			isGoing = False
 
-			for i in Going.objects.all():
-				if request.user.username == i.username:
-					Going.objects.all().filter(username=i.username).delete()
-					isGoing = True
-					print "boo"
-
-			if not isGoing:
+			test = ': '+event_id+','
+			if test in str(Going.objects.all().filter(username=request.user.username).values()):
+				print "the bitch was found"
+				Going.objects.get(event_id=event_id, username=request.user.username).delete()
+			else:
 				c = f.save(commit=False)
 				c.pub_date = timezone.now()
 				c.username = request.user.username

@@ -44,7 +44,6 @@ def view_members(request):
 	args.update(csrf(request))
 
 	args['positions'] = Positions.objects.all()
-	args['admin'] = User.objects.get(username='admin').profile.club_position.all()
 	args['members'] = User.objects.all()
 	return render_to_response('members.html', args, context_instance=RequestContext(request))
 

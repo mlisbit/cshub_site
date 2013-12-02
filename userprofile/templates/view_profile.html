@@ -38,16 +38,16 @@
 		<div class="social-icons">
 			<h5>Social</h5>
 			{% if member.profile.github_link %}
-				<a href="#" class="webicon github large">github</a>
+				<a href="{{ member.profile.github_link }}" class="webicon github large">github</a>
 			{% endif %}
 			{% if member.profile.linkedin_link %}
-				<a href="#" class="webicon linkedin large">linkedin</a>
+				<a href="{{ member.profile.linkedin_link }}" class="webicon linkedin large">linkedin</a>
 			{% endif %}
 			{% if member.profile.twitter_link %}
-				<a href="#" class="webicon twitter large">twitter</a>
+				<a href="{{ member.profile.twitter_link }}" class="webicon twitter large">twitter</a>
 			{% endif %}
 			{% if member.profile.facebook_link %}
-				<a href="#" class="webicon facebook large">facebook</a>
+				<a href="{{ member.profile.facebook_link }}" class="webicon facebook large">facebook</a>
 			{% endif %}
 			<br><br>
 			<h5>Badges</h5>

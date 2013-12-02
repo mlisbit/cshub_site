@@ -39,20 +39,27 @@
 .thumbnail.right-caption > img {
     float: left;
     margin-right: 9px;
-    display: inline-block;
+  
 }
 
 .thumbnail.right-caption {
     float: left;
 }
 
-.thumbnail.right-caption > .caption {
+.thumbnail.right-caption > .badge-zone {
     padding: 4px;
     display: inline-block;
 }
 
+.member-caption h4 {
+	padding-left: 120px;
+}
+.member-caption .badge-zone {
+	padding-left: 120px;
+}
+
 .member-thumb {
-	min-width: 300px;
+	overflow: hidden;
 	border: solid 2px #FAFAFA;
 	padding-bottom: -20px;
 	background: #F2F2F2;
@@ -129,4 +136,8 @@ span.clear { clear: left; display: block; }
 	position: relative;
 	display: block; 
 	margin: 0 auto;
+}
+
+.errorlist {
+	color: red;
 }

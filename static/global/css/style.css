@@ -96,3 +96,19 @@ footer {
     
     
 }
+
+
+@media (max-width: 768px) {
+   .navbar-collapse {
+      max-height: auto;
+      overflow-y: auto;
+   }
+}
+.right.carousel-control, .left.carousel-control {
+    opacity: 0;
+    filter:alpha(opacity=0); /* IE support */
+}
+
+.carousel-indicators {
+    display: none;
+}

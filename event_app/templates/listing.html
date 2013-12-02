@@ -36,7 +36,9 @@
 		</div>
 		<div class="col-sm-8 col-md-8"> 
 			<h2>Description: </h2>
-			<p class="mainevent_description">{{event.description}} </p>
+			{% autoescape off %}
+			<div class="mainevent_description">{{event.description}} </div>
+			{% endautoescape %}
 			<h2>When: </h2>
 			<p class="mainevent_description">{{event.when}} </p>
 			<h2>Where: </h2>

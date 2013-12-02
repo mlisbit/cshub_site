@@ -35,6 +35,7 @@
 			<form class="pure-form pure-form-stacked registration-form" action="/accounts/register/" method="POST">{% csrf_token %}
 				<fieldset>
 					{% for field in form %}
+						<p style="color: red;">{{ field.errors }}</p>
 						{{ field.label }}
 						{{ field }}
 					{% endfor %}

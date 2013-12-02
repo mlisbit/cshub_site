@@ -16,6 +16,7 @@
       
       {%block resources%}{%endblock%} 
       <link href="{% static "global/css/style.css" %}" rel="stylesheet" type="text/css">
+      
 
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
@@ -57,17 +58,19 @@
                   <li class="dropdown">
                   {% if not user.is_authenticated %}
                     
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+                      <a class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                        <div class="form-group" style="padding: 10px;">
+                        <div class="form-group" style="padding: 10px; ">
                           {% if form.errors %}
                             <p class="error">Sorry, that's not a valid username or password</p>
                           {% endif %}
                           <form action="/accounts/auth/" method="POST">
+                            <fieldset>
                             {% csrf_token %}
                             <input type="text" name="username" value="" id="username" class="form-control" placeholder="username" autocomplete="off">
                             <input type="password" name="password" value="" id="password" class="form-control" style="margin-top: 5px" placeholder="password" autocomplete="off">
                             <button type="submit" class="btn pull-right btn-success" style="width:100%; margin-top: 5px; margin-bottom: 10px;" value="login">Login</button>
+                          </fieldset>
                           </form>
                         </div>
                         <li class="divider"></li>
@@ -89,7 +92,6 @@
                   {% else %}
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static "user_uploads/user_imgs/default.png" %}" alt="user image" width="40" class="pull-left" style="margin-top:-9px; margin-right: 10px; overflow: hidden; height: 40px; ">{{user}}
                       <b class="caret"></b>
-                      {{user}}
                     </a>
                   {% endif %}   
                     <ul class="dropdown-menu">
@@ -143,7 +145,7 @@
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
-
+    <script src="{% static "global/js/global.js" %}"></script>
     <script>
       $('.main-icon').click(function() {
           $(this).find('.expand').slideToggle("fast");

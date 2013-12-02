@@ -19,7 +19,9 @@
       		<div class="caption">
         			<h3>{{x.name}}</h3>
         			<p><span class="badge badge-inverse">{{ x.going_set.all|get_count }}</span> people are going to this event</p>
-        			<p>{{x.description|truncatewords:"20"}}</p>
+              {% autoescape off %}
+        			{{x.description|truncatewords:"20"}}
+              {% endautoescape %}
               <center><p>{{ x.when }}</p></center>
         				<a href="/events/get/{{ x.id }}/" class="btn btn-info" style="width: 100%">Check it out</a> 
       		</div>

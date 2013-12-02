@@ -3,7 +3,8 @@ import json
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-main_path = '/home/bite/projects/cshub-site/cshub_site/'
+secrets = json.load(file("/var/www/cshub_site/cshub_site/secrets.json"))
+main_path = secrets['MAIN_PATH']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -11,34 +12,32 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-#email settings!
-#running test smtp server python -m smtpd -n -c DebuggingServer localhost:1025
+#email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-if DEBUG:
-    EMAIL_HOST = 'localhost'
-    EMAIL_PORT = 1025
-    EMAIL_HOST_USER = ''
-    EMAIL_HOST_PASSWORD = ''
-    EMAIL_USE_TLS = False
-    DEFAULT_FROM_EMAIL = 'testing@example.com'
 
+
+EMAIL_HOST = secrets['EMAIL_HOST']
+EMAIL_PORT = secrets['EMAIL_PORT']
+EMAIL_HOST_USER = secrets['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = secrets['EMAIL_HOST_PASSWORD']
+EMAIL_USE_TLS = ("True" in secrets['EMAIL_USE_TLS'])
 
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': main_path+'cshub_site/storage.db',                      # Or path to database file if using sqlite3.
+        'ENGINE': secrets['DB_ENGINE'], # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': secrets['DB_NAME'],                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'USER': secrets['DB_USER'],
+        'PASSWORD': secrets['DB_PASSWORD'],
+        'HOST': secrets['DB_HOST'],                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': secrets['DB_PORT'],                      # Set to empty string for default.
     }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -99,7 +98,6 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-secrets = json.load(file("secrets.json"))
 SECRET_KEY = secrets['SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.

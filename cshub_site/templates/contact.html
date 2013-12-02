@@ -61,6 +61,7 @@
 			<center><h1>We love mail!</h1></center>
 			<form action="/contact/" class="pure-form pure-form-stacked contact-form" method="POST">{% csrf_token %}
 				{% for field in contact_form %}
+					{{ field.errors }}
 					{{ field.label }}
 					{{ field }}
 				{% endfor %}

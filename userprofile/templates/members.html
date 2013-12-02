@@ -10,17 +10,17 @@
 <br>
 	<div class="container">
 		{% for i in members %}
-		<div class="thumbnail right-caption col-md-6 member-thumb" style="min-width: 400px;">
+		<div class="thumbnail right-caption col-xs-12 col-sm-6 col-md-4 col-lg-4 member-thumb" >
 			<div class="crop">
 				{% if i.profile.user_avatar %}
 					<img src="../../static/{{ i.profile.user_avatar }}" height="160px">
 				{% else %}
-					<img src="{% static "user_uploads/user_imgs/default.png" %}" width="190px">
+					<img src="{% static "user_uploads/user_imgs/default.png" %}" width="190px" style="margin-left: -35px; margin-top: -15px;">
 				{% endif %}
 			</div>
   			<div class="caption member-caption">
   				{% if i.first_name %}
-  					<h4 style="font-size: 25px;">{{ i.first_name }} {{ i.last_name }}</h4>
+  					<h4 style="font-size: 23px;">{{ i.first_name }} {{ i.last_name }}</h4>
   				{% else %}
 					<h4 style="font-size: 25px;" >Fake Name</h4>
   				{% endif %}

@@ -79,6 +79,7 @@ def register_user(request):
 		#registration success
 		if form.is_valid():
 			form.save()
+			send_mail('NEW USER SIGNUP', form.cleaned_data['username'], 'newuser@example.com', ['mlisbit@gmail.com'], fail_silently=False)
 			return HttpResponseRedirect('/accounts/register_success')
 	else:
 		form = MyRegistrationForm()
@@ -105,7 +106,6 @@ def view_contact(request):
 	email = ""
 	title = ""
 	text = ""
-
 	if request.method == "POST":
 		contact_form = ContactForm(request.POST)
 
@@ -115,7 +115,7 @@ def view_contact(request):
 			title = contact_form.cleaned_data['title']
 			text = contact_form.cleaned_data['text']
 
-			send_mail(title, text, email, ['mlisbit@gmail.com'], fail_silently=True)
+			send_mail(title, text, email, ['mlisbit@gmail.com'], fail_silently=False)
 			return HttpResponseRedirect('/')
 	else:
 		contact_form = ContactForm()
