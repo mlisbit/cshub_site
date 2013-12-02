@@ -39,6 +39,7 @@ Upcoming site for the York University Computing Students Hub. Social-networking-
 * set up django 1.5.1
 * install easyinstall script
 * install virtual_env
-* setup a django project, with virtal env, drag and drop the project into it
+* setup a django project, with virtal env, drag and drop the project into it 
 
+//just checking something, ignore this line
   
