@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from time import time
+from datetime import datetime
+import django.utils.timezone
 
 def get_upload_file_name(instance, filename):
 	return "user_uploads/event_imgs/%s_%s" % (str(time()).replace('.','_'), filename)
@@ -17,6 +19,13 @@ class Event(models.Model):
 	
 	def __unicode__(self):
 		return self.name
+	@property
+	def is_over(self):
+		#if false show the event
+		if (datetime.now() < self.when.replace(tzinfo=None)):
+			return False
+		else:
+			return True
 
 class Comment(models.Model):
 	username = models.CharField(max_length=200)
