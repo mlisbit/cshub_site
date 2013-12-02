@@ -11,6 +11,7 @@
 {% block content %}
 	<br>
 	{% if not user.is_authenticated %}
+	<div class="container">
 	<div class="col-md-12">
     <div class="alert alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -20,6 +21,7 @@
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <strong>Warning:</strong> You must be logged in to confirm your attendance!
     </div>
+  	</div>
   	</div>
 	{% endif %}
 
@@ -82,7 +84,11 @@
 				{% for c in event.going_set.all %}
 					<div class="media">
 	  				<div class="thumbnail pull-left">
+	  					{% if c.username|get_profile_pic %}
 	    				<img class="media-object" style="width: 50px; height: 50px;"src="/static/{{ c.username|get_profile_pic }}" alt="userprofile_image">
+	    				{% else %}
+	    				<img class="media-object" style="width: 50px; height: 50px;" src="{% static "user_uploads/user_imgs/default.png" %}" alt="userprofile_image">
+	    				{% endif %}
 	  				</div>
 	  				<div class="media-body">
 	    			<h4 class="media-heading">{{ c }}</h4>
