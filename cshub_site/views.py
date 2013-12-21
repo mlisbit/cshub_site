@@ -115,7 +115,7 @@ def view_contact(request):
 			title = contact_form.cleaned_data['title']
 			text = contact_form.cleaned_data['text']
 
-			send_mail(title, text, email, ['mlisbit@gmail.com'], fail_silently=False)
+			send_mail(title, text + "\nemail: " + email, email, ['mlisbit@gmail.com'], fail_silently=False)
 			return HttpResponseRedirect('/')
 	else:
 		contact_form = ContactForm()
