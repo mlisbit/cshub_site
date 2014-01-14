@@ -15,7 +15,7 @@
 </div>
 <br>
 		<div class="container">
-			{% for x in Events %} 
+			{% for x in event_list %} 
         {% if x.is_over %}
   			<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
     		<div class="thumbnail">
@@ -35,7 +35,7 @@
   			</div>
         {% endif %}
   		{% endfor %}
-      {% if not Events %}
+      {% if not event_list %}
         <p>There are no new events</p>
       {% endif %}
 		</div> <!-- container -->

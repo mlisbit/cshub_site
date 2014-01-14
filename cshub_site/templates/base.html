@@ -23,9 +23,6 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
       <![endif]-->
-      <style>
-        
-      </style>
     </head>
 
     <body>
@@ -136,21 +133,10 @@
           <a href="http://www.github.com/mlisbit/cshub_site"><div class="github-footer"></div></a>
           <a href="http://www.twitter.com/thecshub"><div class="twitter-footer"></div></a>
           <a href="http://www.facebook.com/thecshub"><div class="facebook-footer"></div></a>
-          
         </div>
           
-      </div> <!-- conatiner -->
+      </div> <!-- container -->
     </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="//code.jquery.com/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
-    <script src="{% static "global/js/global.js" %}"></script>
-    <script>
-      $('.main-icon').click(function() {
-          $(this).find('.expand').slideToggle("fast");
-        }
-      );
-    </script>
+    {%block endscripts%}{%endblock%} 
     </body>
 </html>

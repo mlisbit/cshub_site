@@ -16,12 +16,12 @@ from django.utils import timezone
 
 def listings(request):
 	args = {}
-	args['Events'] = Event.objects.all()
+	args['event_list'] = Event.objects.all()
 	return render_to_response('listings.html', args , context_instance=RequestContext(request))
 
-def passed_listings(request):
+def past_listings(request):
 	args = {}
-	args['Events'] = Event.objects.all()
+	args['event_list'] = Event.objects.all()
 	return render_to_response('past_listings.html', args , context_instance=RequestContext(request))
 
 def listing(request, event_id=1):

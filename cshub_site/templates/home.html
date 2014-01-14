@@ -121,3 +121,17 @@
 
 
 {% endblock %}
+
+{% block endscripts %}
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="//code.jquery.com/jquery.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
+  <script src="{% static "global/js/global.js" %}"></script>
+  <script>
+    $('.main-icon').click(function() {
+        $(this).find('.expand').slideToggle("fast");
+      }
+    );
+  </script>
+{% endblock %}

@@ -13,13 +13,9 @@
 	{% if not user.is_authenticated %}
 	<div class="container">
 	<div class="col-md-12">
-    <div class="alert alert-danger">
+    <div class="alert alert-warn">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <strong>Warning:</strong> You must be logged in to comment!
-    </div>
-    <div class="alert alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <strong>Warning:</strong> You must be logged in to confirm your attendance!
+      <strong>Warning:</strong> You must be logged in to comment or to confirm your attendance.
     </div>
   	</div>
   	</div>
@@ -112,4 +108,10 @@
    	</div>
 	</div>
 	<br>
+{% endblock %}
+
+{% block endscripts %}
+	<!-- required for closing warnings -->
+  	<script src="//code.jquery.com/jquery.js"></script>
+   <script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
 {% endblock %}
