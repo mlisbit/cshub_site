@@ -1,6 +1,8 @@
 /secrets.json
 /storage.db
-user_avatars/
+*.pyc
 /instructions
 /libpeerconnection.log
 /additions_to_make
+/static/useruploads/event_imgs/*
+/static/useruploads/user_imgs/*

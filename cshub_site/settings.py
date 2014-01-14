@@ -1,9 +1,11 @@
 import json
+import os.path
 # Django settings for cshub_site project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-secrets = json.load(file("/var/www/cshub_site/secrets.json"))
+
+secrets = json.load(file(os.path.dirname(os.path.realpath(__file__ ))+"/../secrets.json"))
 main_path = secrets['MAIN_PATH']
 
 ADMINS = (
