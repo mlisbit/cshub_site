@@ -52,11 +52,15 @@
 		{% if event.comment_set.all %}
 			{% for c in event.comment_set.all %}
 			<div class="media">
-  				<div class="thumbnail pull-left">
+				<div class="thumbnail pull-left">
+				{% if c.username|get_profile_pic %}
     				<img class="media-object" style="width: 50px; height: 50px;"src="/static/{{ c.username|get_profile_pic }}" alt="userprofile_image">
+    			{% else %}
+    				<img class="media-object" style="width: 50px; height: 50px;" src="{% static "user_uploads/user_imgs/default.png" %}" alt="userprofile_image">
+	    		{% endif %}
   				</div>
   				<div class="media-body">
-    				<h4 class="media-heading">{{ c.username }}</h4>
+    				<h4 class="media-heading"><a href="/accounts/user/{{ c.username }}" style="color: #070719;"><b>{{ c.username }}</b></a></h4>
     				{{ c.body }}
   				</div>
 			</div>
@@ -87,7 +91,7 @@
 	    				{% endif %}
 	  				</div>
 	  				<div class="media-body">
-	    			<h4 class="media-heading">{{ c }}</h4>
+	    			<h4 class="media-heading"><a href="/accounts/user/{{ c.username }}" style="color: #070719;"><b>{{ c.username }}</b></a></h4>
 	    			{{ c.body }}
 	  				</div>
 					</div>
@@ -97,7 +101,7 @@
 	   	{% endif %}
 			<!-- i am going button! -->
 			{% if user.is_authenticated %}
-	   	<form action="/events/going_to/{{event.id}}/" method="POST">{% csrf_token %}
+	   		<form action="/events/going_to/{{event.id}}/" method="POST">{% csrf_token %}
 	   		{% if not request.user.username|get_user_entry in event.going_set.all|to_string %}
 					<input class="btn btn-info" type="submit" name="submit" value="I am going!" style="margin-top: 5px;"> 
 				{% else %}
@@ -108,10 +112,10 @@
    	</div>
 	</div>
 	<br>
+	<script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
 {% endblock %}
 
 {% block endscripts %}
 	<!-- required for closing warnings -->
-  	<script src="//code.jquery.com/jquery.js"></script>
-   <script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
+   
 {% endblock %}

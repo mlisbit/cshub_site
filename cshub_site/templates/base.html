@@ -55,19 +55,19 @@
                   <li class="dropdown">
                   {% if not user.is_authenticated %}
                     
-                      <a class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+                      <a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer;">Sign in <b class="caret"></b></a>
                       <ul class="dropdown-menu">
                         <div class="form-group" style="padding: 10px; ">
                           {% if form.errors %}
                             <p class="error">Sorry, that's not a valid username or password</p>
                           {% endif %}
                           <form action="/accounts/auth/" method="POST">
-                            <fieldset>
+                            <!-- <fieldset> -->
                             {% csrf_token %}
                             <input type="text" name="username" value="" id="username" class="form-control" placeholder="username" autocomplete="off">
                             <input type="password" name="password" value="" id="password" class="form-control" style="margin-top: 5px" placeholder="password" autocomplete="off">
                             <button type="submit" class="btn pull-right btn-success" style="width:100%; margin-top: 5px; margin-bottom: 10px;" value="login">Login</button>
-                          </fieldset>
+                          <!-- </fieldset> -->
                           </form>
                         </div>
                         <li class="divider"></li>
@@ -137,6 +137,8 @@
           
       </div> <!-- container -->
     </div>
+    <script src="//code.jquery.com/jquery.js"></script>
+     <script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
     {%block endscripts%}{%endblock%} 
     </body>
 </html>
