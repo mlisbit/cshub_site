@@ -15,10 +15,10 @@ class Notification(models.Model):
 	color = models.CharField(max_length=200, choices=COLOR_CHOICES, default=1)
 
 class OfficeHours(models.Model):
-	monday = models.CharField(max_length=200)
-	tuesday = models.CharField(max_length=200)
-	wednesday = models.CharField(max_length=200)
-	thursday = models.CharField(max_length=200)
-	friday = models.CharField(max_length=200)
-	saturday = models.CharField(max_length=200)
-	sunday = models.CharField(max_length=200)
+	monday = models.CharField(max_length=200, blank=True, null=True)
+	tuesday = models.CharField(max_length=200, blank=True, null=True)
+	wednesday = models.CharField(max_length=200, blank=True, null=True)
+	thursday = models.CharField(max_length=200, blank=True, null=True)
+	friday = models.CharField(max_length=200, blank=True, null=True)
+	saturday = models.CharField(max_length=200, blank=True, null=True)
+	sunday = models.CharField(max_length=200, blank=True, null=True)

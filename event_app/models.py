@@ -15,7 +15,7 @@ class Event(models.Model):
 	when = models.DateTimeField('Date Of', blank=True, null=True)
 	date_posted = models.DateTimeField('Date Posted', blank=True, null=True)
 	
-	event_img = models.FileField(upload_to=get_upload_file_name)
+	event_img = models.FileField(upload_to=get_upload_file_name, blank=True, null=True)
 	
 	def __unicode__(self):
 		return self.name

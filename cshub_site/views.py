@@ -15,6 +15,8 @@ from models import OfficeHours, Notification
 
 from django.core.mail import send_mail
 
+from django.conf import settings
+
 #password reset
 from django.contrib.auth.views import password_reset
 
@@ -115,7 +117,7 @@ def view_contact(request):
 			title = contact_form.cleaned_data['title']
 			text = contact_form.cleaned_data['text']
 
-			send_mail(title, text + "\nemail: " + email, email, ['mlisbit@gmail.com'], fail_silently=False)
+			send_mail(title, text + "\nemail: " + email, email, settings.EMAIL_TO, fail_silently=False)
 			return HttpResponseRedirect('/')
 	else:
 		contact_form = ContactForm()

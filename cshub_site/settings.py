@@ -24,6 +24,8 @@ EMAIL_HOST_USER = secrets['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = secrets['EMAIL_HOST_PASSWORD']
 EMAIL_USE_TLS = ("True" in secrets['EMAIL_USE_TLS'])
 
+#who to email notifications to.
+EMAIL_TO = secrets['EMAIL_TO']
 
 DATABASES = {
     'default': {
@@ -187,3 +189,4 @@ TEMPLATE_CONTEXT_PROCESSORS = {
     "django.contrib.auth.context_processors.auth",
     'django.core.context_processors.request',
 }
+
