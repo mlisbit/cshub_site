@@ -2,11 +2,16 @@ import json
 import os.path
 # Django settings for cshub_site project.
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 secrets = json.load(file(os.path.dirname(os.path.realpath(__file__ ))+"/../../secrets.json"))
 main_path = secrets['MAIN_PATH']
+
+if (secrets['DEBUG'] == "TRUE"):
+    DEBUG = True
+else:
+    DEBUG = False
+
+TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -16,7 +21,6 @@ MANAGERS = ADMINS
 
 #email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 
 EMAIL_HOST = secrets['EMAIL_HOST']
 EMAIL_PORT = secrets['EMAIL_PORT']
