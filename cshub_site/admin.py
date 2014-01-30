@@ -1,29 +1,12 @@
 from django.contrib import admin
-from cshub_site.models import Notification, OfficeHours
+from cshub_site.models import Notification, OfficeHours, BannerImages
 
 from event_app.models import Event, Comment, Going
 from django.contrib.auth.models import User
 
 from userprofile.models import UserProfile, Positions
 
-'''
-from django.contrib.auth.admin import UserAdmin
-# Define an inline admin descriptor for Employee model
-# which acts a bit like a singleton
-class UserProfileInline(admin.ModelAdmin):
-    model = UserProfile
-    can_delete = False
-    verbose_name_plural = 'userprofile'
-
-# Define a new User admin
-class UserProfile(UserAdmin):
-    inlines = (UserProfileInline, )
-
-#re-register user admin
-admin.site.unregister(User)
-admin.site.register(User, UserProfile)
-'''
-
+#describes how to display the widget within admin interface
 class PositionsAdmin(admin.ModelAdmin):
 	filter_horizontal = ('club_position', )
 
@@ -37,4 +20,5 @@ admin.site.register(Going)
 admin.site.register(OfficeHours)
 admin.site.register(Positions)
 admin.site.register(Notification)
+admin.site.register(BannerImages)
 

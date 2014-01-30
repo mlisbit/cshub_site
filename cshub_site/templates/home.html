@@ -16,16 +16,25 @@
   </ol>
   <!-- Carousel items -->
   <div class="carousel-inner">
-    <div class="active item">
-    	<img src="{% static "imgs/cshubdesign.png" %}" style="width: 100%;">
+    {% for image in images %}
+      {% if forloop.first %}     
+        <div class="active item">
+      {% else %}
+        <div class="item">
+      {% endif %}
+        <img src="/static/{{ image.banner_image }}" style="width: 100%;">
+      </div>
+    {% endfor %}
+    <!--
+    <div class="item">
+    	<img src="/static/{{x.event_img}}" style="width: 100%;">
     </div>
     <div class="item">
-    	<img src="{% static "imgs/cshubdesign.png" %}" style="width: 100%;">
+    	<img src="/static/{{x.event_img}}" style="width: 100%;">
     </div>
-    <div class="item">
-    	<img src="{% static "imgs/cshubdesign.png" %}" style="width: 100%;">
-    </div>
+    -->
   </div>
+
   <!-- Carousel nav -->
   <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="background-image: none;">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next" style="background-image: none;">&rsaquo;</a>
@@ -125,10 +134,4 @@
 {% block endscripts %}
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="{% static "global/js/global.js" %}"></script>
-  <script>
-    $('.main-icon').click(function() {
-        $(this).find('.expand').slideToggle("fast");
-      }
-    );
-  </script>
 {% endblock %}
