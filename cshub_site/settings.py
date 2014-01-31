@@ -6,11 +6,7 @@ import os.path
 secrets = json.load(file(os.path.dirname(os.path.realpath(__file__ ))+"/../../secrets.json"))
 main_path = secrets['MAIN_PATH']
 
-if (secrets['DEBUG'] == "TRUE"):
-    DEBUG = True
-else:
-    DEBUG = False
-
+DEBUG = (secrets['DEBUG'] == "TRUE")
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -45,7 +41,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -116,6 +112,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
