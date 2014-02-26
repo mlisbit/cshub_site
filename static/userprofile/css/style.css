@@ -123,6 +123,10 @@ span.clear { clear: left; display: block; }
 	margin-top: 10px;
 }
 
+.registration-form input[type="email"]{
+	width: 100%;
+	margin-top: 10px;
+}
 .crop {
 	width:120px;
     min-height:50px;

@@ -47,61 +47,24 @@ footer {
     color: #ccc; 
 }
 
-.github-footer {
-    float: left;
-    width: 120px;
-    height: 120px;
-    background: url("../../icons/footer/github-footer.png");
-    background-repeat:no-repeat;
-    background-size: 120px;
-}
-.twitter-footer {
-    float: left;
-    width: 100px;
-    margin-top: 17px;
-    height: 100px;
-    background: url("../../icons/footer/twitter-footer.png");
-    background-repeat:no-repeat;
-    background-size: 100px;
-}
-.facebook-footer {
-    float: left;
-    width: 100px;
-    height: 100px;
-    background: url("../../icons/footer/facebook-footer.png");
-    background-repeat:no-repeat;
-    background-size: 60px;
-    margin-top: 16px;
-}
-.github-footer:hover {
-
-    background: url("../../icons/footer/github-footer-select.png");
-    background-repeat:no-repeat;
-    background-size: 120px;
-    cursor: pointer;   
-}
-.twitter-footer:hover {
-    background: url("../../icons/footer/twitter-footer-select.png");
-    background-repeat:no-repeat;
-    background-size: 100px;
-    cursor: pointer;   
-}
-.facebook-footer:hover {
-    background: url("../../icons/footer/facebook-footer-select.png");
-    background-repeat:no-repeat;
-    background-size: 60px;
-    cursor: pointer;    
-    
-    
-}
-
-
 @media (max-width: 768px) {
    .navbar-collapse {
       max-height: auto;
       overflow-y: auto;
    }
 }
+
+.footer-icons {
+    margin-top: 10px;
+    font-size: 100px;
+    color: #BDBDBD;
+    text-decoration: none;
+}
+
+.footer-icons:hover {
+    color: #A4A4A4;   
+}
+
 .right.carousel-control, .left.carousel-control {
     opacity: 0;
     filter:alpha(opacity=0); /* IE support */
