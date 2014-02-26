@@ -3,7 +3,7 @@
 {% load tags %}
 
 {% block resources %}
-  <link href="{% static "main_app/css/style.css" %}" rel="stylesheet" type="text/css">
+  <link href="{% static "global/css/global-base.css" %}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block content %}
@@ -39,7 +39,7 @@
 <div class="container">
   <div class="col-md-4">
     <div class="main-icon">
-    <center><img src="{% static "icons/circle-icons/contacts.png" %}" alt=""></center>
+    <center><i class="home-icons fa fa-globe"></i></center>
     <div class="expand">
       <br>
       <center><a href="/accounts/register"><p>register</p></a></center>
@@ -56,7 +56,7 @@
   </div>
   <div class="col-md-4">
     <div class="main-icon">
-      <center><img src="{% static "icons/circle-icons/megaphone.png" %}" alt="get social"></center>
+      <center><i class="home-icons fa fa-comments-o"></i></center>
       <div class="expand">
         <br>
         <center><a href="http://www.facebook.com/thecshub"><p>facebook</p></a></center>
@@ -73,7 +73,7 @@
   </div>
   <div class="col-md-4">
     <div class="main-icon">
-    <center><img src="{% static "icons/circle-icons/dev.png" %}" alt=""></center>
+    <center><i class="home-icons fa fa-code-fork"></i></center>
     <div class="expand">
       <br>
       <center><a href="http://www.github.com/mlisbit/cshub_site"><p>github</p></a></center>

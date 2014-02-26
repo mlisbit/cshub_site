@@ -7,5 +7,4 @@ urlpatterns = patterns('',
 
 	url(r'^add_comment/(?P<event_id>\d+)/$', 'event_app.views.add_comment'), #adding a comment
 	url(r'^going_to/(?P<event_id>\d+)/$', 'event_app.views.going_to'),
-
 )

@@ -10,7 +10,7 @@ from django.template import RequestContext
 # Create your views here.
 
 @login_required 
-def user_profile(request):
+def edit_profile(request):
 	if request.method == "POST":
 		form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
@@ -37,7 +37,7 @@ def user_profile(request):
 	args['thumbnail'] = request.user.profile.user_avatar
 	args['form'] = form
 
-	return render_to_response('profile.html', args, context_instance=RequestContext(request))
+	return render_to_response('edit_profile.html', args, context_instance=RequestContext(request))
 
 def view_members(request):
 	args = {}
@@ -47,7 +47,7 @@ def view_members(request):
 	args['members'] = User.objects.all()
 	return render_to_response('members.html', args, context_instance=RequestContext(request))
 
-def view_member(request, username='mlisbit'):
+def view_profile(request, username='mlisbit'):
 	args = {}
 	args.update(csrf(request))
 

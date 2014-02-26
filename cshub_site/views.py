@@ -137,6 +137,3 @@ def view_contact(request):
 	#args['form'] = form;
 	return render_to_response('contact.html', args, context_instance=RequestContext(request))
 
-def contact(request):
-	pass
-

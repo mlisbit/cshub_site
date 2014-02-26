@@ -3,10 +3,7 @@
 {% load profile_tags %}
 
 {% block resources %}
-	<!-- <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
-	<link href="{% static "pure/forms/css/forms.css" %}" rel="stylesheet" type="text/css"> -->
-	<link href="{% static "userprofile/css/style.css" %}" rel="stylesheet" type="text/css">
-	<link href="{% static "icons/webicons_mod.css" %}" rel="stylesheet" type="text/css">
+	<link href="{% static "global/css/user-profile.css" %}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block content %}
@@ -38,16 +35,16 @@
 		<div class="social-icons">
 			<h5>Social</h5>
 			{% if member.profile.github_link %}
-				<a href="{{ member.profile.github_link }}" class="webicon github large">github</a>
+				<a href="{{ member.profile.github_link }}"><i class="fa fa-github-alt userprofile-icons"></i></a>
 			{% endif %}
 			{% if member.profile.linkedin_link %}
-				<a href="{{ member.profile.linkedin_link }}" class="webicon linkedin large">linkedin</a>
+				<a href="{{ member.profile.linkedin_link }}"><i class="fa fa-linkedin userprofile-icons"></i></a>
 			{% endif %}
 			{% if member.profile.twitter_link %}
-				<a href="{{ member.profile.twitter_link }}" class="webicon twitter large">twitter</a>
+				<a href="{{ member.profile.twitter_link }}"><i class="fa fa-twitter userprofile-icons"></i></a>
 			{% endif %}
 			{% if member.profile.facebook_link %}
-				<a href="{{ member.profile.facebook_link }}" class="webicon facebook large">facebook</a>
+				<a href="{{ member.profile.facebook_link }}"><i class="fa fa-facebook userprofile-icons"></i></a>
 			{% endif %}
 			<br><br>
 			<h5>Badges</h5>
