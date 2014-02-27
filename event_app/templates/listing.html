@@ -28,8 +28,28 @@
 			<div>
 				<img src="/static/{{event.event_img}}" alt="..." width="100%">
 			</div>
-			<p><span class="badge badge-inverse pull-right">{{ event.going_set.all|get_count }}</span> Going: </p>
-			<p><span class="badge badge-warning pull-right">{{ event.comment_set.all|get_count }}</span> Comments:</p>
+			<p><span class="badge badge-yellow pull-right"><a href="#going">{{ event.going_set.all|get_count }}</a></span> Going: </p>
+			<p><span class="badge badge-blue pull-right"><a href="#comments">{{ event.comment_set.all|get_count }}</a></span> Comments:</p>
+			{% if user.is_authenticated %}
+				<form action="/events/going_to/{{event.id}}/" method="POST">{% csrf_token %}
+				{% if not request.user.username|get_user_entry in event.going_set.all|to_string %}
+					<input class="btn btn-info" type="submit" name="submit" value="I am going!" style="margin-top: 5px; width: 100%"> 
+				{% else %}
+					<input class="btn btn-danger" type="submit" name="submit" value="I changed my mind" style="margin-top: 5px; width: 100%"> 
+				{% endif %}
+				</form>
+			{% endif %}
+
+			<!-- post comment button -->
+			{% if user.is_authenticated %}
+			<form action="/events/add_comment/{{event.id}}/" method="POST" class="pure-form" style="margin-top: 5px;">{% csrf_token %}
+				<input class="btn btn-info" type="submit" name="submit" value="Post Comment" style="width: 100%; margin-bottom: 5px;"> 
+				{% for field in form %}
+					{{ field }}
+				{% endfor %}
+				
+			</form>
+	{% endif %}
 		</div>
 		<div class="col-sm-8 col-md-8"> 
 			<h2>Description: </h2>
@@ -40,78 +60,50 @@
 			<p class="mainevent_description">{{event.when}} </p>
 			<h2>Where: </h2>
 			<p class="mainevent_description">{{event.location}} </p>
-		</div>
-	</div>
 
-	<!-- comments list -->
-	
-	<div class="container">
-		<div class="col-md-8">
-		<center><h3>Comments</h3></center>
-		{% if event.comment_set.all %}
+			<!-- GOING FEILD -->
+			{% if event.going_set.all %}
+			<h2 id="going" >Going:</h2>
+			{% for c in event.going_set.all %}
+			<div class="media">
+			<div class="thumbnail pull-left">
+				{% if c.username|get_profile_pic %}
+			<img class="media-object" style="width: 50px; height: 50px;"src="/static/{{ c.username|get_profile_pic }}" alt="userprofile_image">
+			{% else %}
+			<img class="media-object" style="width: 50px; height: 50px;" src="{% static "user_uploads/user_imgs/default.png" %}" alt="userprofile_image">
+			{% endif %}
+			</div>
+			<div class="media-body">
+			<h4 class="media-heading"><a href="/accounts/user/{{ c.username }}" style="color: #070719;"><b>{{ c.username }}</b></a></h4>
+			{{ c.body }}
+			</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+
+			<!-- COMMENT FIELD -->
+			{% if event.comment_set.all %}
+			<h2 id="comments">Comments:</h2>
 			{% for c in event.comment_set.all %}
 			<div class="media">
-				<div class="thumbnail pull-left">
-				{% if c.username|get_profile_pic %}
-    				<img class="media-object" style="width: 50px; height: 50px;"src="/static/{{ c.username|get_profile_pic }}" alt="userprofile_image">
-    			{% else %}
-    				<img class="media-object" style="width: 50px; height: 50px;" src="{% static "user_uploads/user_imgs/default.png" %}" alt="userprofile_image">
-	    		{% endif %}
-  				</div>
-  				<div class="media-body">
-    				<h4 class="media-heading"><a href="/accounts/user/{{ c.username }}" style="color: #070719;"><b>{{ c.username }}</b></a></h4>
-    				{{ c.body }}
-  				</div>
-			</div>
-   		{% endfor %}
-   	{% else %}
-   		<p> Currently no comments D: </p>
-   	{% endif %}
-   	<!-- form field -->
-   	{% if user.is_authenticated %}
-			<form action="/events/add_comment/{{event.id}}/" method="POST" class="pure-form" style="margin-top: 10px;">{% csrf_token %}
-				{% for field in form %}
-					{{ field }}
-				{% endfor %}
-				<input class="btn btn-info" type="submit" name="submit" value="Post Comment"> 
-			</form>
-		{% endif %}
-   	</div> <!-- column 1 -->
-   	<div class="col-md-4">
-   		<center><h3>Going</h3></center>
-   		{% if event.going_set.all %}
-				{% for c in event.going_set.all %}
-					<div class="media">
-	  				<div class="thumbnail pull-left">
-	  					{% if c.username|get_profile_pic %}
-	    				<img class="media-object" style="width: 50px; height: 50px;"src="/static/{{ c.username|get_profile_pic }}" alt="userprofile_image">
-	    				{% else %}
-	    				<img class="media-object" style="width: 50px; height: 50px;" src="{% static "user_uploads/user_imgs/default.png" %}" alt="userprofile_image">
-	    				{% endif %}
-	  				</div>
-	  				<div class="media-body">
-	    			<h4 class="media-heading"><a href="/accounts/user/{{ c.username }}" style="color: #070719;"><b>{{ c.username }}</b></a></h4>
-	    			{{ c.body }}
-	  				</div>
-					</div>
-	   			{% endfor %}
-	   	{% else %}
-				<p> Currently no ones confirmed their attendance </p>
-	   	{% endif %}
-			<!-- i am going button! -->
-			{% if user.is_authenticated %}
-	   		<form action="/events/going_to/{{event.id}}/" method="POST">{% csrf_token %}
-	   		{% if not request.user.username|get_user_entry in event.going_set.all|to_string %}
-					<input class="btn btn-info" type="submit" name="submit" value="I am going!" style="margin-top: 5px;"> 
-				{% else %}
-					<input class="btn btn-danger" type="submit" name="submit" value="I changed my mind" style="margin-top: 5px;"> 
-				{% endif %}
-			</form>
+			<div class="thumbnail pull-left">
+			{% if c.username|get_profile_pic %}
+			<img class="media-object" style="width: 50px; height: 50px;"src="/static/{{ c.username|get_profile_pic }}" alt="userprofile_image">
+			{% else %}
+			<img class="media-object" style="width: 50px; height: 50px;" src="{% static "user_uploads/user_imgs/default.png" %}" alt="userprofile_image">
 			{% endif %}
-   	</div>
-	</div>
+			</div>
+			<div class="media-body">
+			<h4 class="media-heading"><a href="/accounts/user/{{ c.username }}" style="color: #070719;"><b>{{ c.username }}</b></a></h4>
+			{{ c.body }}
+			</div>
+			</div>
+			{% endfor %}
+			{% endif %}
+
+		</div> <!-- Right container -->>
+	</div> <!-- MAIN CONTAINER -->
 	<br>
-	<script src="{% static "bootflat-master/js/bootstrap.min.js" %}"></script>
 {% endblock %}
 
 {% block endscripts %}

@@ -7,58 +7,62 @@
 {% endblock %}
 
 {% block content %}
-<br>
-<div class="container" style="background: #FAFAFA; border-radius: 5px;">
-	<div class="col-md-12">
-		<div class="profile-main-pane">
-		<div class="left" >
-			{% if member.profile.user_avatar %}
-				<img src="/../../static/{{ member.profile.user_avatar }}" class="img-rounded" height="150px">
-			{% else %}
-				<img src="{% static "user_uploads/user_imgs/default.png" %}" class="img-rounded" width="120px" height="120px">
-			{% endif %}
-		</div>
-		<div class="right">
-			<h2>{{ member.first_name }} {{ member.last_name }}</h2>
-			<h3>{{ member }} </h3> 
-			<h4>{{ member.profile.major }}</h4>
-			
-		</div>
-		<span class="clear"></span>
-		</div>
-	</div>
-</div>
-<br>
-
 <div class="container">
-	<div class="col-md-4 ">
+	<div class="col-md-3 col-sm-4" style="margin-top: 10px;">
+	<div class="social-icons">
+	{% if member.profile.user_avatar %}
+		<center><img src="/../../static/{{ member.profile.user_avatar }}" class="img-rounded" width="100%" style="max-width: 300px;"></center>
+	{% else %}
+		<center><img src="{% static "user_uploads/user_imgs/default.png" %}" class="img-rounded" width="120px" height="120px"></center>
+	{% endif %}
+
+	<h2>{{ member.first_name }} {{ member.last_name }}</h2>
+	<h4 style="margin-top: -5px;">{{ member }} </h4> 
+
+	{% if member.username|has_social_account or member.username|has_badges %}
+		<div class="">
+			{% if member.username|has_social_account %}
+			
+			
+				{% if member.profile.github_link %}
+					<a href="{{ member.profile.github_link }}"><i class="fa fa-github-alt userprofile-icons"></i></a>
+				{% endif %}
+				{% if member.profile.linkedin_link %}
+					<a href="{{ member.profile.linkedin_link }}"><i class="fa fa-linkedin userprofile-icons"></i></a>
+				{% endif %}
+				{% if member.profile.twitter_link %}
+					<a href="{{ member.profile.twitter_link }}"><i class="fa fa-twitter userprofile-icons"></i></a>
+				{% endif %}
+				{% if member.profile.facebook_link %}
+					<a href="{{ member.profile.facebook_link }}"><i class="fa fa-facebook userprofile-icons"></i></a>
+				{% endif %}
+				<br>
+			
+			{% endif %}
+			<br>
+			{% if member.username|has_badges %}
+				{% for badge in member|get_positions|clean_positions %}
+					<span class="badge badge-warning" style="margin-right: 2px; margin-bottom: 2px;">{{ badge }}</span>
+		    	{% endfor %}	
+		    {% endif %}
+		</div>
+	
+	{% endif %}
+	</div>
+</div> <!-- container -->
+	<div class="col-md-9 col-sm-8" style="margin-top: 10px;">
 		<div class="social-icons">
-			<h5>Social</h5>
-			{% if member.profile.github_link %}
-				<a href="{{ member.profile.github_link }}"><i class="fa fa-github-alt userprofile-icons"></i></a>
-			{% endif %}
-			{% if member.profile.linkedin_link %}
-				<a href="{{ member.profile.linkedin_link }}"><i class="fa fa-linkedin userprofile-icons"></i></a>
-			{% endif %}
-			{% if member.profile.twitter_link %}
-				<a href="{{ member.profile.twitter_link }}"><i class="fa fa-twitter userprofile-icons"></i></a>
-			{% endif %}
-			{% if member.profile.facebook_link %}
-				<a href="{{ member.profile.facebook_link }}"><i class="fa fa-facebook userprofile-icons"></i></a>
-			{% endif %}
-			<br><br>
-			<h5>Badges</h5>
-			{% for badge in member|get_positions|clean_positions %}
-				<span class="badge badge-warning" style="margin-right: 2px; margin-bottom: 2px;">{{ badge }}</span>
-	    	{% endfor %}
+			<h3>Major</h3>
+			{{ member.profile.major }}
 		</div>
 	</div>
-	<div class="col-md-8 ">
+	<div class="col-md-9 col-sm-8" style="margin-top: 10px;">
 		<div class="social-icons">
 			<h3>About</h3>
 			{{ member.profile.user_description }}
 		</div>
 	</div>
+	
 </div>
 	
 {% endblock %}
