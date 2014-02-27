@@ -141,7 +141,17 @@ footer {
     text-decoration: none;
 }
 
-.alert-warn {
-    background-color:#b94a48;
+.alert {
     color: #F2F2F2;
+    border-radius: 0;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    width: 100%;
+    margin-right: 100px;
+    margin-left: 0px;
 }
+
+.alert-warn{background-color:#FF8000;}
+.alert-danger{background-color:#b94a48;}
+.alert-info{background-color:#04B486;}
+.alert-success{background-color:#688A08;}
