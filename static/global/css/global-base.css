@@ -1,0 +1,147 @@
+html, body {
+    height: 100%;
+    background: #FAFAFA;
+}
+footer {
+    padding: 17px 0 18px 0;
+    width: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -63px;
+}
+
+.push {
+    height: 63px;
+}
+
+.bottombar {
+    width: 100%;
+    background-color: #2E2E2E;
+    color: #d4d4d4;
+}
+
+.bottombar h6{
+    font-size: 18px;
+    padding: 0px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.additional-links {
+    list-style: none;
+    margin-bottom: 10px;
+
+}
+.additional-links li,ul{
+    list-style-type: none;
+    list-style-position:inside;
+    margin:0;
+    padding:0; 
+}
+
+.additional-links a{
+    color: #ccc; 
+}
+
+@media (max-width: 768px) {
+   .navbar-collapse {
+      max-height: auto;
+      overflow-y: auto;
+   }
+}
+
+.footer-icons {
+    margin-top: 10px;
+    font-size: 100px;
+    color: #A4A4A4; 
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer-icons:hover {  
+    color: #BDBDBD;
+}
+
+.right.carousel-control, .left.carousel-control {
+    opacity: 0;
+    filter:alpha(opacity=0); /* IE support */
+}
+
+.carousel-indicators {
+    display: none;
+}
+
+.home-icons {
+    font-size: 130px;
+    color: #424242;
+    cursor: pointer;
+}
+
+#map-canvas {
+    margin-top: 10px;
+    border-top: solid 2px #ccc;
+}
+
+.contact-form input[type='text'] {
+    width: 100%;
+    font-size: 15px;
+}
+
+.contact-form textarea{
+    width: 100%;
+    max-width: 100%;
+    font-size: 15px;
+}
+
+.contact-form button{
+    margin-top: 10px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.school-logo {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.main-icon .expand {
+    display: none;
+}
+
+.main-icon .expand a {
+    color: #0B615E;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.main-icon .expand a:hover {
+    text-decoration: none;
+    color: #2E2E2E;
+}
+
+.main-icon img:hover {
+    cursor: pointer;
+}
+
+.main-icon img {
+    padding-right: 1px;
+    padding-bottom: 5px;
+}
+
+.badge-red{background-color:#b94a48;}
+.badge-yellow{background-color:#088A85;}
+.badge-blue{background-color:#088A85;}
+.badge-warning{background-color:#088A85;}
+.badge a {
+    color: white;
+    text-decoration: none;
+}
+
+.alert-warn {
+    background-color:#b94a48;
+    color: #F2F2F2;
+}
