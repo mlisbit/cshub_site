@@ -12,8 +12,6 @@
 </style>
 {% endblock %}
 
-
-
 {% block content %}
 <br>
 <div class="container">
@@ -26,9 +24,13 @@
         {% if not x.is_over %}
   			<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 iso-item">
     		<div class="thumbnail">
+          {% if x.event_img %}
           <div style="background: #ccc; overflow: hidden;">
             <center><img src="/static/{{x.event_img}}" alt="..." style="min-height:50px; height:200px; overflow: hidden;"></center>
           </div>
+          {% else %}
+            <div class="anti-space" style="margin-top: -15px;"></div>
+          {% endif %}
       		<div class="caption">
         			<h3>{{x.name}}</h3>
         			<p><span class="badge badge-yellow">{{ x.going_set.all|get_count }}</span> people are going to this event</p>

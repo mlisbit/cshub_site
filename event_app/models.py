@@ -5,7 +5,7 @@ from datetime import datetime
 import django.utils.timezone
 
 #signals stuff:
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.core.mail import EmailMultiAlternatives 
 
@@ -47,18 +47,14 @@ class Going(models.Model):
 		return self.username
 
 #send an email on creation of event. 
-@receiver(post_save, sender=Event)
+@receiver(pre_save, sender=Event)
 def send_email_on_event_creation(sender, **kwargs):
-	event_id 	= ''
-	event_name 	= ''
-	try:
-		event_id = Event.objects.get(name=kwargs.get('instance')).id
-		event_name = Event.objects.get(name=kwargs.get('instance')).name
-	except:
-		print 'Error, most likely due to duplicate Event name'
-
-	emails = list(User.objects.values_list('email', flat=True))
-	html_content="<b>York University Computing Students Hub</b><br>"+ event_name +": <a href='http://www.cshub.ca/events/get/"+str(event_id)+"'>Check it out</a>"
-	msg = EmailMultiAlternatives("New Event Posted on CSHUB", '', '', [emails])
-	msg.attach_alternative(html_content, "text/html")
-	msg.send()
+	#checks if this is a new instantiation of a class.
+	if not kwargs["instance"].id:
+		event_id = len(Event.objects.all())+1
+		event_name = kwargs["instance"].name
+		emails = list(User.objects.values_list('email', flat=True))
+		html_content="<b>York University Computing Students Hub</b><br>"+ event_name +": <a href='http://www.cshub.ca/events/get/"+str(event_id)+"'>Check it out</a>"
+		msg = EmailMultiAlternatives("New Event Posted on CSHUB", '', '', emails)
+		msg.attach_alternative(html_content, "text/html")
+		msg.send()
