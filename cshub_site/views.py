@@ -4,8 +4,7 @@ from django.template.loader import get_template
 from django.shortcuts import render_to_response 
 from django.views.generic.base import TemplateView
 #from article.models import Article 
-from django.http import HttpResponse 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.template import RequestContext
@@ -21,6 +20,8 @@ from django.conf import settings
 from django.contrib.auth.views import password_reset
 
 from django.contrib.auth.models import User
+
+import json
 
 def home(request):
 	args= {}
@@ -121,7 +122,19 @@ def view_contact(request):
 			text = contact_form.cleaned_data['text']
 
 			send_mail(title, text + "\nemail: " + email, email, settings.EMAIL_TO, fail_silently=False)
-			return HttpResponseRedirect('/')
+		
+			if request.is_ajax():
+				return HttpResponse('OK')
+			#return HttpResponseRedirect('/')
+		else:
+			if request.is_ajax():
+				errors_dict = {}
+				
+				for error in contact_form.errors:
+					e = contact_form.errors[error]
+					errors_dict[error] = unicode(e)
+
+				return HttpResponseBadRequest(json.dumps(errors_dict))
 	else:
 		contact_form = ContactForm()
 

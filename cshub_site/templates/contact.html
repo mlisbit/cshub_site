@@ -17,15 +17,11 @@
 			<p>Feel free to drop by with any questions you may have; these hours are updated weekly so you can count on us being there.</p>
 		</div> <!-- hours of operation -->
 		<div class="col-md-4">
-			<center><h1>We love mail!</h1></center>
+			<center><h1>We love mail</h1></center>
 			<form action="/contact/" class="pure-form pure-form-stacked contact-form" method="POST">{% csrf_token %}
-				{% for field in contact_form %}
-					{{ field.errors }}
-					{{ field.label }}
-					{{ field }}
-				{% endfor %}
-    			
-	    		<button type="submit" class="btn btn-info">Submit</button>
+				{{ form.non_field_errors }}
+				{{ contact_form.as_p }}
+	    		<!--<button type="submit" class="btn btn-info">Submit</button>-->
 			</form>
 		</div>
 		<div class="col-md-4">
@@ -37,7 +33,6 @@
 	</div>
 	<br>
 	<div id="map-canvas"></div>
-    
 {% endblock %}
 
 {% block resources %}
@@ -75,5 +70,66 @@
 		google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
 {% endblock %}
+
+{%block endscripts%}
+	<script type="text/javascript">
+		var frm = $('.contact-form');
+		frm.append('<button type="submit" id="anti-bot-check" class="btn btn-info">Submit</button>')
+		
+		var type=frm.attr('method');
+		var url=frm.attr('action');
+
+		function success_it_up() {
+			frm.prepend('<div id="email-cover" style="display:none; position: absolute; background: '+$('html').css('background')+'; height: 100%; width: 100%;"></div>')
+			$("#email-cover").fadeIn("slow", function() {
+				$(this).append("<center><h4 style='margin-left: -25px; font-size: 20px;'>Thanks :)</h4></center>");
+				frm.css("overflow", "hidden");
+				frm.animate({height: 80}, 200)
+			})
+		};
+       
+		$('#anti-bot-check').click(function() {
+			function clear_form() {
+	                var id = '#id_email';
+	                $(id).parent('p').children('span').remove();
+	                id = '#id_text';
+	                $(id).parent('p').children('span').remove();
+	                id = '#id_title';
+	                $(id).parent('p').children('span').remove();
+			};
+
+
+
+			frm.unbind('submit').submit(function() {
+				$('#anti-bot-check').button('loading')
+				$.ajax({
+					type: frm.attr('method'),
+					url: frm.attr('action'),
+					data: frm.serialize(),
+					success: function (resp) {
+						$(frm).find("input[type=text], textarea").val("");
+						clear_form();
+						success_it_up();
+						$('#anti-bot-check').button('reset')
+					},
+					error: function(resp) {
+						var errors = JSON.parse(resp.responseText);
+						clear_form();
+						for (error in errors) {
+	                        var id = '#id_' + error;
+	                        $(id).parent('p').prepend("<span class='pull-right' style='color: red;'>"+(errors[error])+"</span>");
+	                    }
+	                    $('#anti-bot-check').button('reset')
+					}
+				});	
+
+				return false
+			});
+		}) 
+			
+    </script>
+
+{% endblock %} 
