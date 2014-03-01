@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load tags %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -66,7 +67,9 @@
                   {% if user.profile.user_avatar %}
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <div style="float: left; margin-top:-9px; margin-right: 10px; overflow: hidden; height: 40px; ">
+                        
                         <img src="{% static user.profile.user_avatar %}" alt="user image" width="40" class="pull-left">
+
                       </div>
                       {{user}}
                       <b class="caret"></b>
@@ -123,8 +126,10 @@
           
       </div> <!-- container -->
     </div>
-    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//code.jquery.com/jquery.js"></script> 
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    
     {%block endscripts%}{%endblock%} 
     </body>
 </html>

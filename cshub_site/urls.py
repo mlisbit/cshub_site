@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -9,7 +10,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     url(r'^$', 'cshub_site.views.home'), 
-    
+   
     url(r'^contact/$', 'cshub_site.views.view_contact'), 
     url(r'^faq/$', 'cshub_site.views.faq_view'), 
     url(r'^about-site/$', 'cshub_site.views.about_site'), 
