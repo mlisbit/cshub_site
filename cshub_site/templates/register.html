@@ -10,7 +10,7 @@
 
 {% block content %}
 	<div class="container">
-		<div class="col-md-8">
+		<div class="col-md-8"> 
 			<h1>What does CSHUB give me?</h1>
 			<ul>
 				<li>We host seminars, hackathons, general meetings, and tutorials</li>
@@ -34,16 +34,74 @@
 			<h1>Registration</h1>
 			<form class="pure-form pure-form-stacked registration-form" action="/accounts/register/" method="POST">{% csrf_token %}
 				<fieldset>
+					
 					{% for field in form %}
-						<p style="color: red;">{{ field.errors }}</p>
-						{{ field.label }}
-						{{ field }}
+					<p><label style="margin-bottom: -10px;" id="{{ field.id_for_label }}">{{ field.label_tag }}</label></p>
+					{{ field }}
 					{% endfor %}
-					<input class="btn btn-info"type="submit" value="Register">
+					<!-- <input class="btn btn-info"type="submit" value="Register"> -->
 				</fieldset>
 			</form>
 		</div>
 	</div>
 	
 	
+{% endblock %} 
+
+{%block endscripts%}
+	<script type="text/javascript">
+		var frm = $('.registration-form');
+		frm.append('<button type="submit" id="anti-bot-check" class="btn btn-info" style="width: 100%; margin-bottom: 10px;">Submit</button>')
+
+       	function clear_form() {
+			var id_list = [
+				'#id_username',
+				'#id_password1',
+				'#id_password2',
+				'#id_email',
+				'#id_first_name',
+				'#id_last_name'
+			];
+			$.each(id_list, function(index, value) {
+                $(value).parent('p').children('span').remove();
+                $('input'+value).css({"borderColor":"auto"});
+            });
+            $('#form_error').remove();
+		};
+
+		$('#anti-bot-check').click(function() {
+			
+
+			frm.unbind('submit').submit(function() {
+				$('#anti-bot-check').button('loading')
+				$.ajax({
+					type: frm.attr('method'),
+					url: frm.attr('action'),
+					data: frm.serialize(),
+					success: function (resp) {
+						$(frm).find("input[type=text], textarea").val("");
+						clear_form();
+						$('#anti-bot-check').button('reset');
+						location.href = "/accounts/register_success";
+
+					},
+					error: function(resp) {
+						var errors = JSON.parse(resp.responseText);
+						clear_form();
+						for (error in errors) {
+	                        var id = '#id_' + error;
+	                        $('input'+id).css({"borderColor":"red"});
+	                        $(id).parent('p').prepend("<span class='pull-right' style='color: red;'>"+(errors[error])+"</span>");
+	                    }
+	                    $("#anti-bot-check").before("<center><div id='form_error' style='color: red;'>Please correct the errors above.</div></center>")
+	                    $('#anti-bot-check').button('reset')
+					}
+				});	
+
+				return false
+			});
+		}) 
+			
+    </script>
+
 {% endblock %} 

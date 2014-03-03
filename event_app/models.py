@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from time import time
 from datetime import datetime
 import django.utils.timezone
+from django.conf import settings
 
 #signals stuff:
 from django.db.models.signals import post_save, pre_save
@@ -53,8 +54,12 @@ def send_email_on_event_creation(sender, **kwargs):
 	if not kwargs["instance"].id:
 		event_id = len(Event.objects.all())+1
 		event_name = kwargs["instance"].name
-		emails = list(User.objects.values_list('email', flat=True))
+		if settings.DEBUG == True:
+			emails = settings.EMAIL_TO
+		else:
+			emails = list(User.objects.values_list('email', flat=True))
 		html_content="<b>York University Computing Students Hub</b><br>"+ event_name +": <a href='http://www.cshub.ca/events/get/"+str(event_id)+"'>Check it out</a>"
+		
 		msg = EmailMultiAlternatives("New Event Posted on CSHUB", '', '', emails)
 		msg.attach_alternative(html_content, "text/html")
 		msg.send()
