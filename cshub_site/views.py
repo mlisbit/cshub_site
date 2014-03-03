@@ -11,6 +11,7 @@ from django.template import RequestContext
 #registration imports
 from forms import MyRegistrationForm, ContactForm
 from models import OfficeHours, Notification, BannerImages
+from django.views.decorators.cache import cache_page
 
 from django.core.mail import send_mail
 
@@ -75,6 +76,7 @@ def faq_view(request):
 def about_site(request):
 	return render_to_response('about-site.html', {}, context_instance=RequestContext(request))
 
+@cache_page(60 * 5)
 def view_contact(request):
 	args = {}
 	args.update(csrf(request))
@@ -121,6 +123,7 @@ def view_contact(request):
 
 	return render_to_response('contact.html', args, context_instance=RequestContext(request))
 
+@cache_page(60 * 5)
 def register_user(request):
 	if request.method == 'POST':
 		registration_form = MyRegistrationForm(request.POST)

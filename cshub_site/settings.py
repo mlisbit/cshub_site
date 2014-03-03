@@ -1,7 +1,5 @@
 import json
 import os.path
-# Django settings for cshub_site project.
-
 
 secrets = json.load(file(os.path.dirname(os.path.realpath(__file__ ))+"/../../secrets.json"))
 main_path = secrets['MAIN_PATH']
@@ -29,13 +27,12 @@ EMAIL_TO = secrets['EMAIL_TO']
 
 DATABASES = {
     'default': {
-        'ENGINE': secrets['DB_ENGINE'], # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': secrets['DB_NAME'],                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
+        'ENGINE': secrets['DB_ENGINE'], 
+        'NAME': secrets['DB_NAME'],                      
         'USER': secrets['DB_USER'],
         'PASSWORD': secrets['DB_PASSWORD'],
-        'HOST': secrets['DB_HOST'],                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': secrets['DB_PORT'],                      # Set to empty string for default.
+        'HOST': secrets['DB_HOST'],                      
+        'PORT': secrets['DB_PORT'],                      
     }
 }
 
@@ -71,10 +68,10 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+
 SECRET_KEY = secrets['SECRET_KEY']
 
-# List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
@@ -83,9 +80,7 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     #'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    
     'django.middleware.common.CommonMiddleware',
-    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -95,8 +90,9 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+
 if DEBUG == False:
-    MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) + MIDDLEWARE_CLASSES + ('django.middleware.cache.FetchFromCacheMiddleware',)
+    MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) + MIDDLEWARE_CLASSES
 
 ROOT_URLCONF = 'cshub_site.urls'
 WSGI_APPLICATION = 'cshub_site.wsgi.application'
@@ -122,11 +118,6 @@ INSTALLED_APPS = (
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -166,6 +157,5 @@ CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
         'LOCATION': '/var/run/redis/redis.sock',
-        'TIMEOUT': 5,
     },
 }

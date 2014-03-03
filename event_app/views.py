@@ -14,16 +14,29 @@ from event_app.models import Comment, Going
 from django.core.context_processors import csrf 
 from django.utils import timezone 
 from datetime import datetime
+from django.core.cache import cache
+import time
 
 
 def listings(request):
 	args = {}
-	args['event_list'] = Event.objects.all().exclude(when__lte=datetime.now()).order_by('when')
+
+	events = cache.get('EVENT_LISTING_KEY')
+	if not events:
+		events = Event.objects.all().exclude(when__lte=datetime.now()).order_by('when')
+		cache.set('EVENT_LISTING_KEY', events, 5)
+
+	args['event_list'] = events
 	return render_to_response('listings.html', args , context_instance=RequestContext(request))
 
 def past_listings(request):
 	args = {}
-	args['event_list'] = Event.objects.all().exclude(when__gte=datetime.now()).order_by('when')[::-1]
+	events = cache.get('EVENT_LISTING_KEY')
+	if not events:
+		events = args['event_list'] = Event.objects.all().exclude(when__gte=datetime.now()).order_by('when')[::-1]
+		cache.set('EVENT_LISTING_KEY', events, 30)
+	
+	args['event_list'] = events
 	return render_to_response('past_listings.html', args , context_instance=RequestContext(request))
 
 def listing(request, event_id=1):
