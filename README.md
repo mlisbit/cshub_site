@@ -10,7 +10,7 @@ York University's official Computer Science Club website! A social hub for stude
 * [fontawesome](http://fortawesome.github.io/Font-Awesome/) : for beautiful, scalable icons
 * [Redis](http://redis.io/) : as a session engine and cache backend
 * [South]() : schema and data migrations
-* JQuery, AJAX, Google maps API, and whatever backend you like. 
+* JQuery, AJAX, Google maps API, and whatever database backend you like. 
 
 
 ### Features
