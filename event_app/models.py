@@ -17,7 +17,7 @@ class Event(models.Model):
 	name = models.CharField(max_length=200)
 	description = models.TextField()
 	location = models.CharField(max_length=200)
-	when = models.DateTimeField('Date Of', blank=True, null=True)
+	when = models.DateTimeField('Date Of')
 	date_posted = models.DateTimeField('Date Posted', blank=True, null=True)
 	
 	event_img = models.FileField(upload_to=get_upload_file_name, blank=True, null=True)

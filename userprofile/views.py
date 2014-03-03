@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from models import Positions
 from django.template import RequestContext
+from itertools import chain
 
 # Create your views here.
 
@@ -43,8 +44,12 @@ def view_members(request):
 	args = {}
 	args.update(csrf(request))
 
-	args['positions'] = Positions.objects.all()
-	args['members'] = User.objects.all()
+	#preserve orignal sign up order, while sorting by whether user has image or not.
+	profiles_with_img = User.objects.all().exclude(userprofile__user_avatar='')
+	profiles_wo_img = User.objects.all().filter(userprofile__user_avatar='')
+	args['members'] = list(chain(profiles_with_img, profiles_wo_img))
+	#sargs['members'] = User.objects.all().order_by('userprofile__user_avatar')[::-1]
+
 	return render_to_response('members.html', args, context_instance=RequestContext(request))
 
 def view_profile(request, username='mlisbit'):

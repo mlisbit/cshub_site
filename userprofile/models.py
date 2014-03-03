@@ -41,8 +41,8 @@ class UserProfile(models.Model):
 	school = models.CharField(max_length=200, blank=True, null=True)
 	student_number = models.CharField(max_length=200, blank=True, null=True)
 	public_email = models.CharField(max_length=200, blank=True, null=True)
-	publish = models.BooleanField()
-	suscribe = models.BooleanField()
+	publish = models.NullBooleanField(blank=True)
+	suscribe = models.NullBooleanField(blank=True)
 
 	#joined_clubs = models.ManyToManyField(Clubs, blank=True, null=True)
 	club_position = models.ManyToManyField(Positions, blank=True, null=True)

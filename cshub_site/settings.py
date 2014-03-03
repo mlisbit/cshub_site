@@ -197,5 +197,6 @@ CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
         'LOCATION': '/var/run/redis/redis.sock',
+        'TIMEOUT': 5,
     },
 }

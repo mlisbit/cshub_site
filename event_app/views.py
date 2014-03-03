@@ -13,15 +13,17 @@ from forms import CommentForm, GoingForm
 from event_app.models import Comment, Going
 from django.core.context_processors import csrf 
 from django.utils import timezone 
+from datetime import datetime
+
 
 def listings(request):
 	args = {}
-	args['event_list'] = Event.objects.all()
+	args['event_list'] = Event.objects.all().exclude(when__lte=datetime.now()).order_by('when')
 	return render_to_response('listings.html', args , context_instance=RequestContext(request))
 
 def past_listings(request):
 	args = {}
-	args['event_list'] = Event.objects.all()
+	args['event_list'] = Event.objects.all().exclude(when__gte=datetime.now()).order_by('when')[::-1]
 	return render_to_response('past_listings.html', args , context_instance=RequestContext(request))
 
 def listing(request, event_id=1):
@@ -65,29 +67,6 @@ def going_to(request, event_id):
 	args['event'] = e
 
 	return render_to_response('listing.html', args, context_instance=RequestContext(request))
-
-'''
-oh so very bad hack
-def going_to_event(request, event_id=1):
-	if event_id:
-		a = Event.objects.get(id=event_id)
-		#u = User.objects.get(username=request.user.username) 
-
-		modified_username = '_'+request.user.username+'_'
-		if modified_username in a.attending:		
-			a.going -= 1 
-			a.attending = a.attending.replace(modified_username, '')
-			a.save()
-			return HttpResponseRedirect('/events/')
-		else:
-			a.going += 1 
-			a.attending += modified_username
-			a.save()
-	return HttpResponseRedirect('/events/')
-
-def maybe_to_event(request):
-	pass
-'''
 
 def add_comment(request, event_id):
 	e = Event.objects.get(id=event_id)
