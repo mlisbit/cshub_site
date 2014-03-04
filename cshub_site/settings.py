@@ -93,6 +93,12 @@ MIDDLEWARE_CLASSES = (
 
 if DEBUG == False:
     MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) + MIDDLEWARE_CLASSES
+    CACHES = {
+        'default': {
+            'BACKEND': 'redis_cache.RedisCache',
+            'LOCATION': '/var/run/redis/redis.sock',
+        },
+    }
 
 ROOT_URLCONF = 'cshub_site.urls'
 WSGI_APPLICATION = 'cshub_site.wsgi.application'
@@ -153,9 +159,3 @@ TEMPLATE_CONTEXT_PROCESSORS = {
 SESSION_ENGINE = 'redis_sessions.session'
 SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = '/var/run/redis/redis.sock'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': '/var/run/redis/redis.sock',
-    },
-}

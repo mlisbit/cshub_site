@@ -31,10 +31,10 @@ def listings(request):
 
 def past_listings(request):
 	args = {}
-	events = cache.get('EVENT_LISTING_KEY')
+	events = cache.get('PAST_EVENT_LISTING_KEY')
 	if not events:
 		events = args['event_list'] = Event.objects.all().exclude(when__gte=datetime.now()).order_by('when')[::-1]
-		cache.set('EVENT_LISTING_KEY', events, 30)
+		cache.set('PAST_EVENT_LISTING_KEY', events, 30)
 	
 	args['event_list'] = events
 	return render_to_response('past_listings.html', args , context_instance=RequestContext(request))
