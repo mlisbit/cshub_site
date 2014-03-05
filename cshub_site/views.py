@@ -11,6 +11,7 @@ from django.template import RequestContext
 #registration imports
 from forms import MyRegistrationForm, ContactForm
 from models import OfficeHours, Notification, BannerImages
+from userprofile.models import UserProfile
 from django.views.decorators.cache import cache_page
 
 from django.core.mail import send_mail
@@ -23,6 +24,7 @@ import json
 
 #encode to json
 from django.core import serializers
+from itertools import chain
 
 def home(request):
 	args= {}
@@ -36,7 +38,8 @@ def home(request):
 #graph members and social accounts with sigma
 def graph(request):
 	args= {}
-	args['json_time'] = serializers.serialize("json", Notification.objects.all())
+	#serializes all desired fields :)
+	args['json_time'] = serializers.serialize("json", UserProfile.objects.all(), fields=('user', 'twitter_link', 'github_link', 'facebook_link', 'linkedin_link'), relations={'user':{'fields':('username','first_name', 'last_name')}})
 	return render_to_response('graph.html', args, context_instance=RequestContext(request))
 
 def login(request):

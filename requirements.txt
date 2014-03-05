@@ -4,4 +4,5 @@ argparse==1.2.1
 django-redis-cache==0.11.1
 django-redis-sessions==0.4.0
 redis==2.9.1
+wadofstuff-django-serializers==1.1.0
 wsgiref==0.1.2

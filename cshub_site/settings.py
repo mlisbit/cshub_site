@@ -159,3 +159,6 @@ TEMPLATE_CONTEXT_PROCESSORS = {
 SESSION_ENGINE = 'redis_sessions.session'
 SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = '/var/run/redis/redis.sock'
 
+SERIALIZATION_MODULES = {
+    'json': 'wadofstuff.django.serializers.json'
+}

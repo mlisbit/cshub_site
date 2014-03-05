@@ -20,6 +20,15 @@
 </div>
 <script>
 
+var received_data = {% autoescape off %}{{ json_time }}{% endautoescape %};
+console.log(received_data);
+
+var social_nodes = {},
+  main_graph = {
+    nodes: [],
+    edges: []
+  }
+
 var data = {
   "nodes": [
     {
@@ -68,11 +77,13 @@ s = new sigma({
   graph: data,
   container: 'graph-container',
   settings: {
-    animationsTime: 1000
+    animationsTime: 1000,
+    enableCamera: false
   }
 });
 
 
+/*
 setInterval(function() {
   var prefix = ['main_','circular_'][step = +!step];
   console.log(g);
@@ -86,6 +97,7 @@ setInterval(function() {
     }
   );
 }, 2000); 
+*/
 </script>
 
 {% endblock %}
