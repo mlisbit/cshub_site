@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     url(r'^$', 'cshub_site.views.home'), 
-   
+    url(r'^graph/$', 'cshub_site.views.graph'), 
     url(r'^contact/$', 'cshub_site.views.view_contact'), 
     url(r'^faq/$', 'cshub_site.views.faq_view'), 
     url(r'^about-site/$', 'cshub_site.views.about_site'), 

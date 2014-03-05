@@ -16,12 +16,13 @@ from django.views.decorators.cache import cache_page
 from django.core.mail import send_mail
 
 from django.conf import settings
-#from django.core.cache import get_cache
-#from django.views.decorators.cache import cache_page
 
 from django.contrib.auth.models import User
 
 import json
+
+#encode to json
+from django.core import serializers
 
 def home(request):
 	args= {}
@@ -31,7 +32,13 @@ def home(request):
 	args['notifications'] = Notification.objects.all()
 	args.update(csrf(request))
 	return render_to_response('home.html', args, context_instance=RequestContext(request))
-	
+
+#graph members and social accounts with sigma
+def graph(request):
+	args= {}
+	args['json_time'] = serializers.serialize("json", Notification.objects.all())
+	return render_to_response('graph.html', args, context_instance=RequestContext(request))
+
 def login(request):
 	args= {}
 	args.update(csrf(request))
