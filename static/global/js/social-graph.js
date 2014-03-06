@@ -4,8 +4,6 @@ var temp_edge = {}
 var step = 0
 var lines = 5
 
-
-
 function social_number(username) {
   var number = 1;
   $.each(received_data, function(i, value) {
@@ -27,7 +25,7 @@ function add_users(data) {
       x: Math.cos(Math.PI * 2 * i / data.length - Math.PI / 2),
       y: Math.sin(Math.PI * 2 * i / data.length - Math.PI / 2),
       color: '#ccc',
-      size: (social_number(value.fields.user.fields.username)/5)
+      size: (social_number(value.fields.user.fields.username)/6)
     }
     var keys = ['x', 'y'];
     keys.forEach(function(val) {
@@ -153,11 +151,11 @@ s = new sigma({
   settings: {
     animationsTime: 1000,
     enableCamera: false,
-    mouseEnabled: false,
-    labelThreshold: 1000,
+    mouseEnabled: true,
+    enableHovering: true,
+    defaultLabelColor: '#A4A4A4'
   }
 });
-
 
 setInterval(function() {
   var prefix = ['pos_1_', 'pos_2_'][step = +!step];
@@ -168,4 +166,4 @@ setInterval(function() {
       y: prefix+'y'
     }
   );
-}, 2000);
+}, 2500);
