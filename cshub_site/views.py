@@ -32,6 +32,7 @@ def home(request):
 	args['images'] = BannerImages.objects.all()[:3]
 	args['total_users'] = User.objects.all().__len__
 	args['notifications'] = Notification.objects.all()
+	args['json_time'] = serializers.serialize("json", UserProfile.objects.all(), fields=('user', 'twitter_link', 'github_link', 'facebook_link', 'linkedin_link'), relations={'user':{'fields':('username','first_name', 'last_name')}})
 	args.update(csrf(request))
 	return render_to_response('home.html', args, context_instance=RequestContext(request))
 

@@ -4,9 +4,11 @@
 
 {% block resources %}
   <link href="{% static "global/css/global-base.css" %}" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block content %}
+{% if images %}
 <div class="container"> 
 <div id="myCarousel" class="carousel slide">
   <!-- Carousel items -->
@@ -20,14 +22,6 @@
         <img src="/static/{{ image.banner_image }}" style="width: 100%;">
   </div>
     {% endfor %}
-    <!--
-    <div class="item">
-    	<img src="/static/{{x.event_img}}" style="width: 100%;">
-    </div>
-    <div class="item">
-    	<img src="/static/{{x.event_img}}" style="width: 100%;">
-    </div>
-    -->
   </div>
 
   <!-- Carousel nav -->
@@ -42,6 +36,39 @@
 </div>
   
 </div> <!-- container -->
+{% else %}
+  <div id="container">
+  <style>
+    #graph-container {
+      margin-top: 10px;
+      width: 100%;
+      height: 400px;
+    }
+    #cshub-logo {
+      left: 50%; 
+      top: 250px;
+      margin-top: -70px; 
+      margin-left: -120px;
+      z-index: 100; 
+      position: absolute; 
+      font-size: 100px;
+      font-family: 'Poiret One', cursive;
+    }
+    #cshub-logo-sub {
+      font-size: 15px;
+      top: 255px;
+      position: absolute;
+      left: 50%;
+      margin-top: 40px;
+      z-index: 101; 
+    }
+  </style>
+    <div id="graph-container">
+      <center><div id="cshub-logo">cshub</div></center>
+      </center><div id="cshub-logo-sub">@YorkUniversity</div></center>
+    </div>
+</div>
+{% endif %}
 
 <br>
 <div class="container">
@@ -121,5 +148,11 @@
 {% endblock %}
 
 {% block endscripts %}
+  <script src="{% static "sigma/sigma.min.js" %}"></script>
+  <script src="{% static "sigma/plugins/sigma.plugins.animate.min.js" %}"></script>
+  <script type="text/javascript">
+  var received_data = {% autoescape off %}{{ json_time }}{% endautoescape %};
+  </script>
+  <script src="{% static "global/js/social-graph.js" %}" type="text/javascript"></script>
   <script src="{% static "global/js/global.js" %}"></script>
 {% endblock %}
