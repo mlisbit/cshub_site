@@ -23,9 +23,13 @@
 	</div>
 	<div class="container">
 		<div class="col-sm-4 col-md-4 event-side-pane">
+			
+			{% if event.event_img %}
 			<div>
-				<img src="/static/{{event.event_img}}" alt="..." width="100%">
+			<img src="/static/{{event.event_img}}" alt="..." width="100%">
 			</div>
+			{% endif %}
+			
 			<p><span class="badge badge-yellow pull-right"><a href="#going">{{ event.going_set.all|get_count }}</a></span> Going: </p>
 			<p><span class="badge badge-blue pull-right"><a href="#comments">{{ event.comment_set.all|get_count }}</a></span> Comments:</p>
 			{% if user.is_authenticated %}
