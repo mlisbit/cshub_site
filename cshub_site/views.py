@@ -20,6 +20,7 @@ from django.conf import settings
 
 from django.contrib.auth.models import User
 from django.core.cache import cache
+from django.core.mail import EmailMultiAlternatives 
 
 import json
 import random
@@ -174,11 +175,9 @@ def reset_password_view(request):
 		args['super'] = True
 
 	if request.method == "POST":
-
 		#this if intentionally meant to fail for testing right now
-		if not request.user.is_superuser and request.user.is_staff:
-			return HttpResponse('No, no reset for you!')
-
+		if request.user.is_superuser or request.user.is_staff:
+			return HttpResponse('No, no reset for you! you are staff.')
 		else:
 			email = request.POST['email_reset']
 			if email_exists(email):
@@ -189,24 +188,41 @@ def reset_password_view(request):
 				else: 
 					reset_token = random.randint(1,999999999999999)
 					cache.set(email, str(reset_token) , 9999)
-					return HttpResponse(str('Email sent ' + str(reset_token)))
+					html_content="<b>York University Computing Students Hub</b><br><a href='http://www.cshub.ca/resetpass/"+str(email)+"/"+str(reset_token)+"'>Click here to reset your password</a>"
+					msg = EmailMultiAlternatives("[cshub] password change request.", '', '', [email])
+					msg.attach_alternative(html_content, "text/html")
+					msg.send()
+					return HttpResponse(str('Email sent'))
 			else: 
 				return HttpResponse('Invalid Email')
 			
 	else:
-		return render_to_response('reset_password.html', args, context_instance=RequestContext(request))
+		return render_to_response('reset_password_view.html', args, context_instance=RequestContext(request))
 
 def email_exists(e):
 	try:
-		User.objects.get(email=e)
+		u = User.objects.get(email=e)
 	except:
+		return False
+	if u.is_superuser or u.is_staff:
 		return False
 	return True
 
 def reset_password_edit(request, email_reset_email, email_reset_id):
+	#if the token matches the email, allow reset. 
 	if cache.get(email_reset_email) == email_reset_id:
 		args = {}
 		args['email'] = email_reset_email
-		render_to_response('new_password.html', args, context_instance=RequestContext(request))
+		args['token'] = email_reset_id
+		if request.POST:
+			if request.POST['new_pass'] == request.POST['confirm_new_pass']:
+				u = User.objects.get(email=email_reset_email)
+				u.set_password(request.POST['new_pass'])
+				u.save()
+				return HttpResponse('Password Successfully reset')
+			else:
+				return HttpResponse('Password\'s didn\'t match :( ')
+		else:
+			return render_to_response('reset_password_edit.html', args, context_instance=RequestContext(request))
 	else:
-		return HttpResponse("invalid request")
+		return HttpResponse("Invalid arguements. If you continue to have problems, please send another password reset request.")
