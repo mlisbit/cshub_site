@@ -19,8 +19,10 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 from django.contrib.auth.models import User
+from django.core.cache import cache
 
 import json
+import random
 
 #encode to json
 from django.core import serializers
@@ -165,3 +167,46 @@ def register_user(request):
 	args['form'] = registration_form;
 
 	return render_to_response('register.html', args, context_instance=RequestContext(request))
+
+def reset_password_view(request):
+	args = {}
+	if request.user.is_superuser or request.user.is_staff:
+		args['super'] = True
+
+	if request.method == "POST":
+
+		#this if intentionally meant to fail for testing right now
+		if not request.user.is_superuser and request.user.is_staff:
+			return HttpResponse('No, no reset for you!')
+
+		else:
+			email = request.POST['email_reset']
+			if email_exists(email):
+				print "send that email."
+				if cache.get(email):
+					print cache.get(email)
+					return HttpResponse('You have already requested an email change, please check your email.')
+				else: 
+					reset_token = random.randint(1,999999999999999)
+					cache.set(email, str(reset_token) , 9999)
+					return HttpResponse(str('Email sent ' + str(reset_token)))
+			else: 
+				return HttpResponse('Invalid Email')
+			
+	else:
+		return render_to_response('reset_password.html', args, context_instance=RequestContext(request))
+
+def email_exists(e):
+	try:
+		User.objects.get(email=e)
+	except:
+		return False
+	return True
+
+def reset_password_edit(request, email_reset_email, email_reset_id):
+	if cache.get(email_reset_email) == email_reset_id:
+		args = {}
+		args['email'] = email_reset_email
+		render_to_response('new_password.html', args, context_instance=RequestContext(request))
+	else:
+		return HttpResponse("invalid request")

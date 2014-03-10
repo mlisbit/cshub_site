@@ -10,6 +10,11 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     url(r'^$', 'cshub_site.views.home'), 
+
+    #reset pass
+    url(r'^resetpass/$', 'cshub_site.views.reset_password_view'),
+    url(r'^resetpass/(?P<email_reset_email>[\w\-\@\.]+)/(?P<email_reset_id>\d+)$', 'cshub_site.views.reset_password_edit'),
+
     url(r'^graph/$', 'cshub_site.views.graph'), 
     url(r'^contact/$', 'cshub_site.views.view_contact'), 
     url(r'^faq/$', 'cshub_site.views.faq_view'), 
@@ -24,6 +29,7 @@ urlpatterns = patterns('',
     #user registration urls
     url(r'^accounts/register/$', 'cshub_site.views.register_user'), 
     url(r'^accounts/register_success/$', 'cshub_site.views.register_success'), 
+
     
 )
 
