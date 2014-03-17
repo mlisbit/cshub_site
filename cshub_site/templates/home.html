@@ -8,8 +8,20 @@
 {% endblock %}
 
 {% block content %}
+{% if notifications %}
+<div class="container notification-container">
+  {% for notify in notifications %}
+      <div class="alert alert-{{notify.color}}" style="margin-top: 3px; margin-bottom: 3px;">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>{{ notify.title }}</strong> {{ notify.description }}
+      </div>
+{% endfor %}
+</div>
+{% endif %}
+
+
 {% if images %}
-<div class="container"> 
+<div class="container carousel-container"> 
 <div id="myCarousel" class="carousel slide">
   <!-- Carousel items -->
   <div class="carousel-inner">
@@ -27,12 +39,6 @@
   <!-- Carousel nav -->
   <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="background-image: none;">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next" style="background-image: none;">&rsaquo;</a>
-  {% for notify in notifications %}
-      <div class="alert alert-{{notify.color}}" style="margin-top: 3px;">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>{{ notify.title }}</strong> {{ notify.description }}
-      </div>
-  {% endfor %}
 </div>
   
 </div> <!-- container -->

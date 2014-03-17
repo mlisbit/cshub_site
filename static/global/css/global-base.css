@@ -155,3 +155,14 @@ footer {
 .alert-danger{background-color:#b94a48;}
 .alert-info{background-color:#04B486;}
 .alert-success{background-color:#688A08;}
+
+@media (max-width: 680px) {
+    .container.notification-container{
+        width: 100%;
+        padding: 0;
+    }
+    .container.carousel-container{
+        width: 100%;
+        padding: 0;
+    }
+}
