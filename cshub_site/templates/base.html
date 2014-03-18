@@ -15,11 +15,11 @@
 
       {% if debug %}
         <title>CSHUB+dev</title>
-        <link rel="stylesheet/less" type="text/css" media="all" href="{% static "global/less/app.less" %}" />
+        <link rel="stylesheet/less" type="text/css" media="all" href="{% static "global/less/app.less"%}" />
         <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
       {% else %}
         {% compress css %}
-          <link rel="stylesheet/less" type="text/css" media="all" href="{% static "global/less/app.less" %}" />
+          <link rel="stylesheet" type="text/less" media="all" href="{%static 'global/less/app.less'%}"/>
         {% endcompress %}
         <title>CSHUB</title>
       {% endif %}

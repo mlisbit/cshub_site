@@ -166,10 +166,11 @@ SERIALIZATION_MODULES = {
     'json': 'wadofstuff.django.serializers.json'
 }
 
+COMPRESS_ROOT = main_path+'cshub_site/static/global'
+COMPRESS_OUTPUT_DIR = 'lesscss_cache'
+
 COMPRESS_PRECOMPILERS = (
-   ('text/less', 'lessc {infile} {outfile}'),
+   ('text/less', 'lessc -x {infile} {outfile}'),
 )
 
-INTERNAL_IPS = ('127.0.0.1',)
-
-COMPRESS_ENABLED = True
+#COMPRESS_ENABLED = True
