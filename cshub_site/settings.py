@@ -66,6 +66,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
@@ -120,6 +121,7 @@ INSTALLED_APPS = (
     'event_app',
     'userprofile',
     'south',
+    'compressor',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -152,8 +154,9 @@ LOGGING = {
 AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
 
 TEMPLATE_CONTEXT_PROCESSORS = {
-    "django.contrib.auth.context_processors.auth",
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.request',
+    'cshub_site.context_processors.debug',
 }
 
 SESSION_ENGINE = 'redis_sessions.session'
@@ -162,3 +165,11 @@ SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = '/var/run/redis/redis.sock'
 SERIALIZATION_MODULES = {
     'json': 'wadofstuff.django.serializers.json'
 }
+
+COMPRESS_PRECOMPILERS = (
+   ('text/less', 'lessc {infile} {outfile}'),
+)
+
+INTERNAL_IPS = ('127.0.0.1',)
+
+COMPRESS_ENABLED = True

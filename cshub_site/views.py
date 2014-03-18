@@ -32,6 +32,7 @@ from itertools import chain
 def home(request):
 	args= {}
 	args['users'] = User.objects.all()
+	#args['debug'] = settings.DEBUG
 	args['images'] = BannerImages.objects.all()[:3]
 	args['total_users'] = User.objects.all().__len__
 	args['notifications'] = Notification.objects.all()
