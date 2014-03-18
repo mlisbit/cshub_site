@@ -166,8 +166,8 @@ SERIALIZATION_MODULES = {
     'json': 'wadofstuff.django.serializers.json'
 }
 
-COMPRESS_ROOT = main_path+'cshub_site/static/global'
-COMPRESS_OUTPUT_DIR = 'lesscss_cache'
+COMPRESS_ROOT = main_path+'cshub_site/static'
+COMPRESS_OUTPUT_DIR = '/global/lesscss_cache'
 
 COMPRESS_PRECOMPILERS = (
    ('text/less', 'lessc -x {infile} {outfile}'),
