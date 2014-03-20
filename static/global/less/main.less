@@ -1,6 +1,6 @@
 html, body {
     height: 100%;
-    background: #FAFAFA;
+    background: @html-background-color;
 }
 footer {
     padding: 17px 0 18px 0;
@@ -20,8 +20,8 @@ footer {
 
 .bottombar {
     width: 100%;
-    background-color: #2E2E2E;
-    color: #d4d4d4;
+    background-color: @footer-background-color;
+    color: @footer-font-color;
 }
 
 .bottombar h6{
@@ -44,7 +44,7 @@ footer {
 }
 
 .additional-links a{
-    color: #ccc; 
+    color: @link-color; 
 }
 
 @media (max-width: 768px) {
@@ -57,13 +57,13 @@ footer {
 .footer-icons {
     margin-top: 10px;
     font-size: 100px;
-    color: #A4A4A4; 
+    color: @footer-icon-color; 
     text-decoration: none;
     cursor: pointer;
 }
 
 .footer-icons:hover {  
-    color: #BDBDBD;
+    color: @footer-icon-hover-color;
 }
 
 .right.carousel-control, .left.carousel-control {
@@ -77,7 +77,7 @@ footer {
 
 .home-icons {
     font-size: 105px;
-    color: #424242;
+    color: @main-font-color;
     cursor: pointer;
 }
 
@@ -120,7 +120,7 @@ footer {
 
 .main-icon .expand a:hover {
     text-decoration: none;
-    color: #2E2E2E;
+    color: @main-font-color-hover;
 }
 
 .main-icon img:hover {
@@ -132,17 +132,18 @@ footer {
     padding-bottom: 5px;
 }
 
-.badge-red{background-color:#b94a48;}
-.badge-yellow{background-color:#088A85;}
-.badge-blue{background-color:#088A85;}
-.badge-warning{background-color:#088A85;}
+.badge-red{background-color: @badge-red-color;}
+.badge-yellow{background-color: @badge-yellow-color;}
+.badge-blue{background-color: @badge-blue-color;}
+.badge-warning{background-color: @badge-orange-color;}
+
 .badge a {
     color: white;
     text-decoration: none;
 }
 
 .alert {
-    color: #F2F2F2;
+    color: @alert-text-color;
     border-radius: 0;
     padding-top: 7px;
     padding-bottom: 7px;
@@ -151,10 +152,10 @@ footer {
     margin-left: 0px;
 }
 
-.alert-warn{background-color:#FF8000;}
-.alert-danger{background-color:#b94a48;}
-.alert-info{background-color:#04B486;}
-.alert-success{background-color:#688A08;}
+.alert-warn{background-color:@warning-orange-background-color;}
+.alert-danger{background-color:@warning-red-background-color;}
+.alert-info{background-color:@warning-blue-background-color;}
+.alert-success{background-color:@warning-green-background-color;}
 
 @media (max-width: 680px) {
     .container.notification-container{

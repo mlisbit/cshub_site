@@ -4,6 +4,7 @@
 /instructions
 /libpeerconnection.log
 /additions_to_make
-/static/useruploads/event_imgs/*
-/static/useruploads/user_imgs/*
+/static/user_uploads/event_imgs/*
+/static/user_uploads/user_imgs/*
+/static/user_uploads/banner_imgs/*
 /static/global/lesscss_cache
