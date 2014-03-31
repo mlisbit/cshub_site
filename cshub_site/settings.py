@@ -129,23 +129,24 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
+    'formatters': {
+        'verbose': {
+            'format' : "%(message)s ::: [%(levelname)s] [%(name)s:%(lineno)s] [%(asctime)s]",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
     },
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
+        'user_log': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': secrets['LOG_DIR']+'/user_actions.log',
+            'formatter': 'verbose',
+        },
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
+        'user_actions': {
+            'handlers': ['user_log'],
+            'level': 'DEBUG',
         },
     }
 }

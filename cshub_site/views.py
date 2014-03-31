@@ -29,6 +29,9 @@ import random
 from django.core import serializers
 from itertools import chain
 
+#logging
+import logging
+user_logger = logging.getLogger("user_actions")
 
 
 def home(request):
@@ -59,8 +62,10 @@ def login(request):
 
 	if user is not None:
 		auth.login(request, user)
+		user_logger.debug('USER LOGIN: '+username)
 		return HttpResponseRedirect('/accounts/loggedin/')
 	else:
+		user_logger.debug('INVALID LOGIN: '+username)
 		return HttpResponseRedirect('/accounts/invalid/')
 
 def auth_view(request):
@@ -70,8 +75,10 @@ def auth_view(request):
 
 	if user is not None:
 		auth.login(request, user)
+		user_logger.debug('USER LOGIN: '+username)
 		return HttpResponseRedirect('/accounts/loggedin/')
 	else:
+		user_logger.debug('INVALID LOGIN: '+username)
 		return HttpResponseRedirect('/accounts/invalid/')
 
 def loggedin(request):
@@ -81,6 +88,7 @@ def invalid_login(request):
 	return render_to_response('invalid_login.html', {}, context_instance=RequestContext(request))
 
 def logout(request):
+	user_logger.debug('USER LOGOUT: '+request.user.username)
 	auth.logout(request)
 	return render_to_response('logout.html', {}, context_instance=RequestContext(request))
 
@@ -153,6 +161,7 @@ def register_user(request):
 				send_mail('NEW USER SIGNUP', registration_form.cleaned_data['username'], 'newuser@example.com', ['mlisbit@gmail.com'], fail_silently=False)
 				user = auth.authenticate(username=registration_form.cleaned_data.get('username'), password=registration_form.cleaned_data.get('password2'))
 				auth.login(request, user)
+				user_logger.info('NEW USER: '+request.user.username)
 				return HttpResponse('OK')
 			else:
 				return HttpResponseRedirect('/accounts/register_success')

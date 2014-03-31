@@ -18,6 +18,9 @@ from django.core.cache import cache
 import time
 
 
+import logging
+user_logger = logging.getLogger("user_actions")
+
 def listings(request):
 	args = {}
 
@@ -60,9 +63,10 @@ def going_to(request, event_id):
 
 			test = ': '+event_id+','
 			if test in str(Going.objects.all().filter(username=request.user.username).values()):
-				print "the bitch was found"
+				user_logger.debug('NOT GOING: '+request.user.username+' to '+event_id)
 				Going.objects.get(event_id=event_id, username=request.user.username).delete()
 			else:
+				user_logger.debug('IS GOING: '+request.user.username+' to '+event_id)
 				c = f.save(commit=False)
 				c.pub_date = timezone.now()
 				c.username = request.user.username
@@ -88,6 +92,7 @@ def add_comment(request, event_id):
 		f = CommentForm(request.POST)
 
 		if f.is_valid():
+			user_logger.debug('COMMENTED: '+request.user.username+' to '+event_id)
 			c = f.save(commit=False)
 			c.pub_date = timezone.now()
 			c.username = request.user.username
