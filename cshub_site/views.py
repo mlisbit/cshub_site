@@ -110,11 +110,10 @@ def view_contact(request):
 			title = contact_form.cleaned_data['title']
 			text = contact_form.cleaned_data['text']
 
-			send_mail(title, text + "\nemail: " + email, email, settings.EMAIL_TO, fail_silently=False)
-		
 			if request.is_ajax():
+				#I know, this will only allow emails to be sent if form sent with AJAX. That's what I want. 
+				send_mail(title, text + "\nemail: " + email, email, settings.EMAIL_TO, fail_silently=False)
 				return HttpResponse('OK')
-
 
 		else:
 			if request.is_ajax():
@@ -147,10 +146,13 @@ def register_user(request):
 		#non-successful profile update
 		#registration success
 		if registration_form.is_valid():
-			registration_form.save()
-			send_mail('NEW USER SIGNUP', registration_form.cleaned_data['username'], 'newuser@example.com', ['mlisbit@gmail.com'], fail_silently=False)
+			
 
 			if request.is_ajax():
+				registration_form.save()
+				send_mail('NEW USER SIGNUP', registration_form.cleaned_data['username'], 'newuser@example.com', ['mlisbit@gmail.com'], fail_silently=False)
+				user = auth.authenticate(username=registration_form.cleaned_data.get('username'), password=registration_form.cleaned_data.get('password2'))
+				auth.login(request, user)
 				return HttpResponse('OK')
 			else:
 				return HttpResponseRedirect('/accounts/register_success')

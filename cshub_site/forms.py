@@ -12,14 +12,16 @@ class MyRegistrationForm(UserCreationForm):
 
 	email = forms.CharField(help_text=None)
 	username = forms.CharField(help_text=None)
-	password2 = forms.CharField(help_text=None)
+	#password2 = forms.CharField(help_text=None)
 
+	
 	def clean_email(self):
 		from django.core.validators import validate_email
 		try:
 			validate_email(self.cleaned_data.get('email'))
 		except:
 			raise forms.ValidationError("Invalid email.") 
+		return self.cleaned_data.get('email')
 
 	def clean_username(self):
 	    username = self.cleaned_data["username"]
@@ -34,24 +36,25 @@ class MyRegistrationForm(UserCreationForm):
 	        self.error_messages['duplicate_username'],
 	        code='duplicate_username',
 	    )
+	    return username
 	
 	def clean_last_name(self):
 		first_name = self.cleaned_data.get("first_name")
 		last_name = self.cleaned_data.get("last_name")
-
 		if first_name == last_name:
 			raise forms.ValidationError("Must differ from first.") 
-
+		return last_name
+		
 	def save(self, commit=True):
-	    user = super(UserCreationForm, self).save(commit=False)
-	    user.set_password(self.cleaned_data["password1"])
-	    user.email = self.cleaned_data['email']
-	    user.first_name = self.cleaned_data['first_name']
-	    user.last_name = self.cleaned_data['last_name']
+		user = super(MyRegistrationForm, self).save(commit=False)
+		user.email = self.cleaned_data['email']
+		user.first_name = self.cleaned_data['first_name']
+		user.last_name = self.cleaned_data['last_name']
 
-	    if commit:
-	        user.save()
-	    return user
+		if (commit == True):
+			user.save()
+
+		return user
 
 class ContactForm(forms.Form):
 	title = forms.CharField(max_length=20)
