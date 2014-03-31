@@ -29,6 +29,8 @@ import random
 from django.core import serializers
 from itertools import chain
 
+
+
 def home(request):
 	args= {}
 	args['users'] = User.objects.all()
@@ -91,7 +93,7 @@ def faq_view(request):
 def about_site(request):
 	return render_to_response('about-site.html', {}, context_instance=RequestContext(request))
 
-@cache_page(60 * 5)
+#@cache_page(60 * 5)
 def view_contact(request):
 	args = {}
 	args.update(csrf(request))
@@ -138,7 +140,7 @@ def view_contact(request):
 
 	return render_to_response('contact.html', args, context_instance=RequestContext(request))
 
-@cache_page(60 * 5)
+#@cache_page(60 * 5)
 def register_user(request):
 	if request.method == 'POST':
 		registration_form = MyRegistrationForm(request.POST)
@@ -227,3 +229,8 @@ def reset_password_edit(request, email_reset_email, email_reset_id):
 			return render_to_response('reset_password_edit.html', args, context_instance=RequestContext(request))
 	else:
 		return HttpResponse("Invalid arguements. If you continue to have problems, please send another password reset request.")
+
+#only cache when not debugging
+if not settings.DEBUG:
+	view_contact = cache_page(60 * 5)(view_contact)
+	register_user = cache_page(60 * 5)(register_user)
