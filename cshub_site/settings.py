@@ -1,7 +1,11 @@
 import json
 import os.path
 
-secrets = json.load(file(os.path.dirname(os.path.realpath(__file__ ))+"/../../secrets.json"))
+try:
+    secrets = json.load(file(os.path.dirname(os.path.realpath(__file__ ))+"/../../secrets.json"))
+except:
+    secrets = json.load(file(os.path.dirname(os.path.realpath(__file__ ))+"/../secrets.json"))
+    
 main_path = secrets['MAIN_PATH']
 
 DEBUG = (secrets['DEBUG'] == "TRUE")
