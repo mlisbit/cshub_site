@@ -10,8 +10,8 @@
 <br>
 	<div class="container">
 		<ul class="nav nav-tabs ">
-		  <li class="pull-right active"><a href="/accounts/list/2015">2014-2015</a></li>
-		  <li class="pull-right"><a href="/accounts/list/2014">2013-2014</a></li>
+		  <li class="pull-right" id="year-2015"><a href="/accounts/list/2015">2014-2015</a></li>
+		  <li class="pull-right" id="year-2014"><a href="/accounts/list/2014">2013-2014</a></li>
 		</ul>
 		{% for i in members %}
 		<div class="thumbnail right-caption col-xs-12 col-sm-6 col-md-4 col-lg-4 member-thumb" >
@@ -41,4 +41,16 @@
 		{% endfor %}
 
 	</div>
+{% endblock %}
+
+{%block endscripts%}
+	<script type="text/javascript">
+		//console.log()
+		var current_view_year = document.URL.split("/")[document.URL.split("/").length - 2]
+		if(current_view_year === 'list') {
+			$('#year-2015').addClass("active")
+		} else {
+			$('#year-'+current_view_year).addClass("active")
+		}
+	</script>
 {% endblock %}
