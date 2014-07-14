@@ -12,7 +12,7 @@
   {% for notify in notifications %}
       <div class="alert alert-{{notify.color}}" style="margin-top: 3px; margin-bottom: 3px;">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>{{ notify.title }}</strong> {{ notify.description }}
+        <strong>{{ notify.title }}</strong>  {% autoescape off %}{{ notify.description }} {% endautoescape %}
       </div>
 {% endfor %}
 </div>
