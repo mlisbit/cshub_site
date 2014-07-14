@@ -60,6 +60,7 @@ def login(request):
 	password = request.POST.get('password', '')
 	user = auth.authenticate(username=username, password=password)
 
+
 	if user is not None:
 		auth.login(request, user)
 		user_logger.debug('USER LOGIN: '+username)
@@ -72,6 +73,11 @@ def auth_view(request):
 	username = request.POST.get('username', '')
 	password = request.POST.get('password', '')
 	user = auth.authenticate(username=username, password=password)
+
+	#update their current term on login!
+	p = User.objects.get(username=username).profile
+	p.last_year_active = settings.CURRENT_TERM_YEAR
+	p.save()    
 
 	if user is not None:
 		auth.login(request, user)

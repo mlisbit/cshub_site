@@ -8,6 +8,8 @@ echo installing python-setuptools
 apt-get install -y python-setuptools >> setup.log
 echo installing virtualenv
 sudo pip install virtualenv >> setup.log
+echo installing redis-server
+sudo pip install redis-server >> setup.log
 
 echo ==============================
 echo     creating virtual env
@@ -24,7 +26,7 @@ cd cshub_site_dev/cshub_site
 pip install https://wadofstuff.googlecode.com/files/wadofstuff-django-serializers-1.1.0.tar.gz
 pip install -r requirements.txt
 
-mv secrets_example.json secrets.json
+cp secrets_example.json secrets.json
 mv secrets.json ../
 mkdir ../logs
 

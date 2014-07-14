@@ -36,6 +36,7 @@ class UserProfile(models.Model):
 	twitter_link = models.CharField(max_length=200, blank=True, null=True)
 	linkedin_link = models.CharField(max_length=200, blank=True, null=True)
 	github_link = models.CharField(max_length=200, blank=True, null=True)
+	website_link = models.CharField(max_length=200, blank=True, null=True)
 	facebook_link = models.CharField(max_length=200, blank=True, null=True)
 
 	school = models.CharField(max_length=200, blank=True, null=True)
@@ -44,6 +45,7 @@ class UserProfile(models.Model):
 	publish = models.NullBooleanField(blank=True, default=False)
 	suscribe = models.NullBooleanField(blank=True, default=False)
 
+	last_year_active = models.IntegerField(blank=True, default=2014)
 	#joined_clubs = models.ManyToManyField(Clubs, blank=True, null=True)
 	club_position = models.ManyToManyField(Positions, blank=True, null=True)
 

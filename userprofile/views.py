@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from models import Positions
 from django.template import RequestContext
 from itertools import chain
+from django.conf import settings
 
 # Create your views here.
 
@@ -40,14 +41,15 @@ def edit_profile(request):
 
 	return render_to_response('edit_profile.html', args, context_instance=RequestContext(request))
 
-def view_members(request):
+def view_members(request, year_id=settings.CURRENT_TERM_YEAR):
 	args = {}
 	args.update(csrf(request))
 
 	#preserve orignal sign up order, while sorting by whether user has image or not.
-	profiles_with_img = User.objects.all().exclude(userprofile__user_avatar='')
-	profiles_wo_img = User.objects.all().filter(userprofile__user_avatar='')
+	profiles_with_img = User.objects.all().exclude(userprofile__user_avatar='').filter(userprofile__last_year_active=year_id)
+	profiles_wo_img = User.objects.all().filter(userprofile__user_avatar='').filter(userprofile__last_year_active=year_id)
 	args['members'] = list(chain(profiles_with_img, profiles_wo_img))
+	
 	#sargs['members'] = User.objects.all().order_by('userprofile__user_avatar')[::-1]
 
 	return render_to_response('members.html', args, context_instance=RequestContext(request))

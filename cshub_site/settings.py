@@ -15,6 +15,7 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+CURRENT_TERM_YEAR = 2015
 MANAGERS = ADMINS
 
 #email settings
