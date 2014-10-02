@@ -9,7 +9,7 @@ apt-get install -y python-setuptools >> setup.log
 echo installing virtualenv
 sudo pip install virtualenv >> setup.log
 echo installing redis-server
-sudo pip install redis-server >> setup.log
+sudo apt-get install redis-server >> setup.log
 
 echo ==============================
 echo     creating virtual env

@@ -72,7 +72,10 @@ def login(request):
 def auth_view(request):
 	username = request.POST.get('username', '')
 	password = request.POST.get('password', '')
-	user = auth.authenticate(username=username, password=password)
+	try:
+		user = auth.authenticate(username=username, password=password)
+	except:
+		return HttpResponseRedirect('/accounts/invalid/')
 
 	#update their current term on login!
 	p = User.objects.get(username=username).profile
