@@ -67,6 +67,7 @@ class ContactForm(forms.Form):
 			validate_email(self.cleaned_data.get('email'))
 		except:
 			raise forms.ValidationError("Invalid email.") 
+		return self.cleaned_data.get('email')
 
 	def clean_text(self):
 		cd = self.cleaned_data
@@ -76,3 +77,4 @@ class ContactForm(forms.Form):
 		for x in banned_words:
 			if x in text:
 				raise forms.ValidationError("Some of these words are banned.") 
+		return text

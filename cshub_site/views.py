@@ -107,17 +107,10 @@ def faq_view(request):
 def about_site(request):
 	return render_to_response('about-site.html', {}, context_instance=RequestContext(request))
 
-#@cache_page(60 * 5)
-def view_contact(request):
-	args = {}
-	args.update(csrf(request))
-	success = False
-	email = ""
-	title = ""
-	text = ""
+
+def post_contact(request):
 	if request.method == "POST":
 		contact_form = ContactForm(request.POST)
-
 		if contact_form.is_valid():
 			success = True
 			email = contact_form.cleaned_data['email']
@@ -138,8 +131,16 @@ def view_contact(request):
 					errors_dict[error] = unicode(e)
 
 				return HttpResponseBadRequest(json.dumps(errors_dict))
-	else:
-		contact_form = ContactForm()
+#@cache_page(60 * 5)
+def view_contact(request):
+	args = {}
+	args.update(csrf(request))
+	success = False
+	email = ""
+	title = ""
+	text = ""
+
+	contact_form = ContactForm()
 
 	try:
 		args['office_hours'] = OfficeHours.objects.get(id=1);
@@ -201,9 +202,7 @@ def reset_password_view(request):
 		else:
 			email = request.POST['email_reset']
 			if email_exists(email):
-				print "send that email."
 				if cache.get(email):
-					print cache.get(email)
 					return HttpResponse('You have already requested an email change, please check your email.')
 				else: 
 					reset_token = random.randint(1,999999999999999)

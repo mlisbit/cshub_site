@@ -17,6 +17,7 @@ urlpatterns = patterns('',
 
     url(r'^graph/$', 'cshub_site.views.graph'), 
     url(r'^contact/$', 'cshub_site.views.view_contact'), 
+    url(r'^contact/sendmail$', 'cshub_site.views.post_contact'), 
     url(r'^faq/$', 'cshub_site.views.faq_view'), 
     url(r'^about-site/$', 'cshub_site.views.about_site'), 
     #user authentication

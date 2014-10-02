@@ -18,7 +18,7 @@
 		</div> <!-- hours of operation -->
 		<div class="col-md-4">
 			<center><h1>We love mail</h1></center>
-			<form action="/contact/" class="pure-form pure-form-stacked contact-form" method="POST">{% csrf_token %}
+			<form action="/contact/sendmail" class="pure-form pure-form-stacked contact-form" method="POST">{% csrf_token %}
 				{{ form.non_field_errors }}
 				{{ contact_form.as_p }}
 	    		<!--<button type="submit" class="btn btn-info">Submit</button>-->
@@ -118,6 +118,7 @@
 					},
 					error: function(resp) {
 						var errors = JSON.parse(resp.responseText);
+						//console.log(errors)
 						clear_form();
 						for (error in errors) {
 	                        var id = '#id_' + error;
