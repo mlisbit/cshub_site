@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from time import time
+from django.conf import settings
 # Create your models here.
 # models.BooleanField() is a checkbox 
 
@@ -45,7 +46,8 @@ class UserProfile(models.Model):
 	publish = models.NullBooleanField(blank=True, default=False)
 	suscribe = models.NullBooleanField(blank=True, default=False)
 
-	last_year_active = models.IntegerField(blank=True, default=2014)
+	#first_year_active = models.IntegerField(blank=True, default=2014)
+	last_year_active = models.IntegerField(blank=True, default=settings.CURRENT_TERM_YEAR)
 	#joined_clubs = models.ManyToManyField(Clubs, blank=True, null=True)
 	club_position = models.ManyToManyField(Positions, blank=True, null=True)
 

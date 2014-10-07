@@ -1,5 +1,6 @@
 import json
 import os.path
+from datetime import datetime
 
 try:
     secrets = json.load(file(os.path.dirname(os.path.realpath(__file__ ))+"/../../secrets.json"))
@@ -29,6 +30,10 @@ EMAIL_USE_TLS = ("True" in secrets['EMAIL_USE_TLS'])
 
 #who to email notifications to.
 EMAIL_TO = secrets['EMAIL_TO']
+
+LAST_SIGNUP_DATE_FOR_TERM = {
+    2015: datetime(2014, 5, 1)
+}
 
 DATABASES = {
     'default': {
