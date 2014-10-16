@@ -10,12 +10,12 @@
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
       
-      {%block resources%}{%endblock%} 
       <!-- <link href="{% static "global/css/global-base.css" %}" rel="stylesheet" type="text/css"> -->
+      {%block resources%}{%endblock%} 
 
       {% if debug %}
         <title>CSHUB+dev</title>
-        <link rel="stylesheet/less" type="text/css" media="all" href="{% static "global/less/app.less"%}" />
+        <link rel="stylesheet/less" type="text/css" media="all" href="{% static 'global/less/app.less'%}" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
       {% else %}
         {% compress css %}
@@ -23,6 +23,9 @@
         {% endcompress %}
         <title>CSHUB</title>
       {% endif %}
+
+
+
     </head>
 
     <body>

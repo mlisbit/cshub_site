@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load profile_tags %}
+
+{% block resources %}
+	<style type="text/css">
+		html, body {
+			background: #e5e5e5 !important;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container user-profile-main">
+	<div class="col-xxs-12 col-xs-6 col-sm-6 col-md-4">
+		<div class="section-panel small-split">
+			{% if member.profile.user_avatar %}
+				<center><img src="/../../static/{{ member.profile.user_avatar }}" width="100%" style="max-width: 300px;"></center>
+			{% else %}
+				<img src="{% static "user_uploads/user_imgs/default.png" %}" width="100%" height="100%" alt="default-user-image">
+			{% endif %}
+
+			<h2>{{ member.first_name }} {{ member.last_name }}</h2>
+			<h4 style="margin-top: -5px;">{{ member }} </h4> 
+		</div> <!-- container -->
+	</div>
+
+	<div class="col-xxs-12 col-xs-6 col-sm-6 col-md-4">
+
+	
+		<div class="section-panel small-split top-border-green">
+			<h3 class="section-heading">
+				Major
+			</h3>
+			<div class="section-content">
+				{% if member.profile.major %}	
+					{{ member.profile.major }}
+				{% else %}
+					<p class="no-info-in-section">The user hasn't filled out the field</p>
+				{% endif %}
+			</div>
+		</div>
+	
+
+
+	{% if member.username|has_social_account %}
+	<div class="section-panel small-split top-border-orange">
+		<h3 class="section-heading">
+			Social
+		</h3>
+		<div class="social-button-link-container">
+			{% if member.username|has_social_account %}
+			<center>
+				<ul class="user-social-links">
+					{% if member.profile.github_link %}
+						<li>
+							<a href="{{ member.profile.github_link }}"><i class="fa fa-github-alt"></i>
+								<p>github</p>
+							</a>
+						</li>
+					{% endif %}
+					{% if member.profile.linkedin_link %}
+						<li>
+							<a href="{{ member.profile.linkedin_link }}"><i class="fa fa-linkedin"></i>
+								<p>linkedin</p>
+							</a>
+						</li>
+					{% endif %}
+					{% if member.profile.twitter_link %}
+						<li>
+							<a href="{{ member.profile.twitter_link }}"><i class="fa fa-twitter"></i>
+								<p>twitter</p>
+							</a>
+						</li>
+					{% endif %}
+					{% if member.profile.facebook_link %}
+						<li>
+							<a href="{{ member.profile.facebook_link }}"><i class="fa fa-facebook"></i>
+								<p>facebook</p>
+							</a>
+						</li>
+					{% endif %}
+				</ul>
+			</center>
+				<br>
+			
+			{% endif %}
+			<br>
+		</div>
+	</div> <!-- section panel -->
+	{% endif %}
+
+	{% if member.username|has_badges  %}
+		<div class="section-panel small-split top-border-blue">
+			<h3 class="section-heading">
+				Badges
+			</h3>
+			<div class="section-content">
+				{% if member.username|has_badges %}
+					{% for badge in member|get_positions|clean_positions %}
+						<span class="position-badge color-green">{{ badge }}</span>
+			    	{% endfor %}	
+			    {% endif %}
+			</div>
+		</div>
+	{% endif %}
+	
+	</div> <!-- col-xxs-12-->
+
+
+
+
+	<div class="col-xs-12 col-md-4">
+		<div class="section-panel small-split top-border-red">
+			<h3 class="section-heading">
+				About
+			</h3>
+			{% if member.profile.user_description %}
+				{{ member.profile.user_description }}
+			{% else %}
+				<p class="no-info-in-section">The user hasn't filled out the field</p>
+			{% endif %}
+		</div>
+	</div>
+</div> <!-- container -->
+	
+	
+
+	
+</div>
+	
+{% endblock %}
