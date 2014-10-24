@@ -171,7 +171,12 @@ TEMPLATE_CONTEXT_PROCESSORS = {
 }
 
 SESSION_ENGINE = 'redis_sessions.session'
-SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = '/var/run/redis/redis.sock'
+if secrets["REDIS_SOCKET"] and os.path.exists(secrets["REDIS_SOCKET"]):
+    SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = secrets["REDIS_SOCKET"]
+else:
+    SESSION_REDIS_HOST = secrets["REDIS_HOST"]
+    SESSION_REDIS_PORT = secrets["REDIS_PORT"]
+
 
 SERIALIZATION_MODULES = {
     'json': 'wadofstuff.django.serializers.json'
