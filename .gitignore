@@ -12,3 +12,6 @@
 /event_app/migrations/*
 /cshub_site/migrations/*
 /setup.log
+/node_modules
+/logs/*
+/dev_db/*
