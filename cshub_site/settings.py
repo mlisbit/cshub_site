@@ -149,7 +149,7 @@ LOGGING = {
         'user_log': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': secrets['LOG_DIR']+'/user_actions.log',
+            'filename': secrets['LOG_DIR']+'user_actions.log',
             'formatter': 'verbose',
         },
     },
