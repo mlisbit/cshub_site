@@ -55,19 +55,9 @@ def graph(request):
 def login(request):
 	args= {}
 	args.update(csrf(request))
+	args['next'] = request.GET.get('next',None)
 	return render_to_response('login.html', args, context_instance=RequestContext(request))
-	username = request.POST.get('username', '')
-	password = request.POST.get('password', '')
-	user = auth.authenticate(username=username, password=password)
-
-
-	if user is not None:
-		auth.login(request, user)
-		user_logger.debug('USER LOGIN: '+username)
-		return HttpResponseRedirect('/accounts/loggedin/')
-	else:
-		user_logger.debug('INVALID LOGIN: '+username)
-		return HttpResponseRedirect('/accounts/invalid/')
+	
 
 def auth_view(request):
 	username = request.POST.get('username', '')
@@ -77,15 +67,14 @@ def auth_view(request):
 	except:
 		return HttpResponseRedirect('/accounts/invalid/')
 
-	#update their current term on login!
-	p = User.objects.get(username=username).profile
-	p.last_year_active = settings.CURRENT_TERM_YEAR
-	p.save()    
-
 	if user is not None:
+		#update their current term on login!
+		p = user.profile
+		p.last_year_active = settings.CURRENT_TERM_YEAR
+		p.save()    
 		auth.login(request, user)
 		user_logger.debug('USER LOGIN: '+username)
-		return HttpResponseRedirect('/accounts/loggedin/')
+		return HttpResponseRedirect(request.POST.get('next', '/accounts/loggedin/'))
 	else:
 		user_logger.debug('INVALID LOGIN: '+username)
 		return HttpResponseRedirect('/accounts/invalid/')
@@ -168,7 +157,6 @@ def register_user(request):
 
 			if request.is_ajax():
 				registration_form.save()
-				send_mail('NEW USER SIGNUP', registration_form.cleaned_data['username'], 'newuser@example.com', ['mlisbit@gmail.com'], fail_silently=False)
 				user = auth.authenticate(username=registration_form.cleaned_data.get('username'), password=registration_form.cleaned_data.get('password2'))
 				auth.login(request, user)
 				user_logger.info('NEW USER: '+request.user.username)
