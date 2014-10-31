@@ -34,4 +34,75 @@ Create new events and notifications, change home banner images, and view member 
 * clone this repo, into a virtualenv
 * pip install -r requirements.txt
 
-  
+
+### Detailed Instructions
+1. Set up python and pip
+  - Windows : http://arunrocks.com/guide-to-install-python-or-pip-on-windows/
+  - Mac : http://docs.python-guide.org/en/latest/starting/install/osx/#doing-it-right
+  - Linux : http://docs.python-guide.org/en/latest/starting/install/linux/#setuptools-pip
+
+  > At this point you should be able to open a terminal window type `python --version` to get output `Python 2.7.8` and type `pip --version` to get an output like `pip 1.5.6 from /usr/local/Cellar/ ...`
+
+1. Set up virtual env.
+Run the following commands on a terminal
+  - `pip install virtualenv`
+  - Mac/Linux : `pip install virtualenvwrapper`
+  - Windows : `pip install virtualenvwrapper-win`
+
+1. Configure virtualenvwrapper
+  - Mac/Linux : Append the following lines to your shell initialization file. (Usually `~/.bashrc`)
+  ```  
+  # Virtual env wrapper  
+  export WORKON_HOME=$HOME/.virtualenvs  
+  export PROJECT_HOME=$HOME/dev  
+  source /usr/local/bin/virtualenvwrapper.sh  
+  ```
+  > At this point you should be able to type `virtualenv --version` and `virtualenvwrapper` in a shell window and not get any errors. (you might have to re-open terminal windows)
+
+1. Install Redis
+  - Mac : `brew install redis`
+  - Linux : https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis
+  - Windows : https://github.com/ServiceStack/redis-windows#running-microsofts-native-port-of-redis
+
+1. Set up git
+  - Follow the instructions for your platform : http://git-scm.com/downloads
+  - Optionally, you can download a git gui like SourceTree or GitHub for Mac/Windows
+
+  > At this point if you open a new terminal window and type `git --version`, you should see the output `git version 1.9`
+
+1. Set up nodejs and npm
+  - Mac/Linux/Windows: http://blog.nodeknockout.com/post/65463770933/how-to-install-node-js-and-npm
+
+1. Clone the respository.
+
+1. Setting up the environment. 
+Open a shell and enter the following commands.  
+  - `mkvirtualenv cshub` 
+  - `workon cshub`
+  - `cd` in to the root of the cloned repository. 
+  - Mac/Linux : `setvirtualenvproject $VIRTUAL_ENV $(pwd)`
+  - Windows : `setprojectdir .`
+
+1. Install dependencies
+  - `pip install --allow-all-external --allow-unverified wadofstuff-django-serializers -r requirements.txt`
+  - `npm install`
+
+1. Set up configuration
+  - `cd` in to the repository root.
+  - Copy secrets_example.json to secrets.json
+  - `python manage.py syncdb` 
+  - `python manage.py migrate`
+
+### Starting development server
+- Toggle the virtualenv : `workon cshub`
+- Start redis server : `redis-server`
+- `python manage.py runserver`
+
+### Ending development
+- Deactivate virtualenv : `deactivate`
+
+
+If you experience any problems setting up or incorrect instructions please let us know by creating a new github issue. 
+
+
+https://thecshub.ca
