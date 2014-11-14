@@ -15,3 +15,4 @@
 /node_modules
 /logs/*
 /dev_db/*
+/static/user_uploads/*

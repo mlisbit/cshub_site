@@ -16,7 +16,9 @@
 		<input type="text" name="username" value="" id="username"> 
 		<label for="password">Password:</label>
 		<input type="password" name="password" value="" id="password">
-
+		{% if next %}
+			<input type="hidden" name="next" value="{{ next }}">
+		{% endif %}
 		<input type="submit" class="btn btn-info" value="login">
 	</form>
 </div>

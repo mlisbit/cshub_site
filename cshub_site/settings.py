@@ -9,6 +9,9 @@ except:
     
 main_path = secrets['MAIN_PATH']
 
+DISCOURSE_BASE_URL = secrets['DISCOURSE_BASE_URL']
+DISCOURSE_SSO_SECRET = secrets['DISCOURSE_SSO_SECRET']
+
 DEBUG = (secrets['DEBUG'] == "TRUE")
 TEMPLATE_DEBUG = DEBUG
 
