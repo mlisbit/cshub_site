@@ -157,6 +157,8 @@ def register_user(request):
 
 			if request.is_ajax():
 				registration_form.save()
+				if not settings.DEBUG: 
+					send_mail('NEW USER SIGNUP', registration_form.cleaned_data['username'], 'newuser@example.com', ['mlisbit@gmail.com'], fail_silently=False)
 				user = auth.authenticate(username=registration_form.cleaned_data.get('username'), password=registration_form.cleaned_data.get('password2'))
 				auth.login(request, user)
 				user_logger.info('NEW USER: '+request.user.username)
