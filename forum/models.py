@@ -48,8 +48,9 @@ class Thread(models.Model):
 class Post(models.Model):
 	topic = models.ForeignKey(Thread, related_name='posts')
 	posted_by = models.ForeignKey(User)
-	poster_ip = models.IPAddressField()
+	poster_ip = models.IPAddressField(default='')
 	message = models.TextField()
+	#created_on = models.DateTimeField(auto_now_add=True)
 
 
 	def __unicode__(self):

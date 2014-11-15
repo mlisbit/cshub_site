@@ -10,7 +10,7 @@
 				<h3 class="section-heading">
 					{{ forum_name }}
 				</h3>
-				<a class="pull-right" style="font-size: 21px;" href="">Start new thread</a>
+				<a class="pull-right" style="font-size: 21px;" href="" data-toggle="modal" data-target="#newThread">Start new thread</a>
 				<br>
 					{% for thread in threads %}
 						<div class="forum_listing">
@@ -44,8 +44,34 @@
 						</div>
 					{% endfor %}
 			</section>
-
 	</div>
+
+		<!-- Modal -->
+	<div id="newThread" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	                <h4 class="modal-title">Start new thread</h4>
+	            </div>
+	            <div class="modal-body">
+	                <form action="/forum/reply_to_thread" method="POST">{% csrf_token %}
+	                	<p>Title</p>
+	                	<input type="text" name="title" style="width: 100%;"></textarea>
+	                	<p>Message</p>
+	                	<textarea name="message" style="width: 100%;"></textarea>
+	                	<input type="hidden" name="current_url" value="{{ current_url }}">
+	                	<input type="hidden" name="thread_name" value="{{ thread_name }}">
+	                	<button type="submit" style="width: 100%" class="btn btn-success">create</button>
+	                </form>
+	            </div>
+	           
+	                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+	                
+	            
+	        </div><!-- /.modal-content -->
+	    </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 {% endblock %}
 
 {% block resources %}
