@@ -36,7 +36,7 @@
 						<div class="post-left">
 							{% if thread.created_by.profile.user_avatar %}
 								<center>
-								<img src="/static/{{ thread.created_by.profile.user_avatar }}" width="100%">
+								<img src="/static/{{ post.posted_by.profile.user_avatar }}" width="100%">
 								<a href="/accounts/user/{{ post.posted_by }}/">{{ post.posted_by }}</a>
 								</center>
 							{% else %}
