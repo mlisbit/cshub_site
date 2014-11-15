@@ -27,10 +27,10 @@
 								<span>{{ forum.description }}</span>
 							</div>
 							<div class="thread-count">
-								<p>{{ forum.num_threads }} threads</p>
+								<p>{{ forum.get_thread_count }} threads</p>
 							</div>
 							<div class="post-count">
-								<p>{{ forum.num_threads }} posts</p>
+								<p>{{ forum.get_post_count }} posts</p>
 							</div>
 						</div>
 					{% endifequal %}

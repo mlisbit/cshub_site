@@ -8,7 +8,7 @@
 		
 			<section class="col-xxs-12 col-xs-12 col-sm-12 col-md-12 section-panel top-border-green">
 				<h3 class="section-heading">
-					{{ forum_name }}
+					{{ pretty_forum_name }}
 				</h3>
 				<a class="pull-right" style="font-size: 21px;" href="" data-toggle="modal" data-target="#newThread">Start new thread</a>
 				<br>
@@ -39,7 +39,7 @@
 							</div>
 
 							<div class="post-count">
-								<p>{{ thread.num_replies }} replies</p>
+								<p>{{ thread.get_post_count }} replies</p>
 							</div>
 						</div>
 					{% endfor %}
@@ -55,20 +55,16 @@
 	                <h4 class="modal-title">Start new thread</h4>
 	            </div>
 	            <div class="modal-body">
-	                <form action="/forum/reply_to_thread" method="POST">{% csrf_token %}
+	                <form action="/forum/create_thread" method="POST">{% csrf_token %}
 	                	<p>Title</p>
 	                	<input type="text" name="title" style="width: 100%;"></textarea>
 	                	<p>Message</p>
 	                	<textarea name="message" style="width: 100%;"></textarea>
 	                	<input type="hidden" name="current_url" value="{{ current_url }}">
-	                	<input type="hidden" name="thread_name" value="{{ thread_name }}">
+	                	<input type="hidden" name="forum_name" value="{{ forum_name }}">
 	                	<button type="submit" style="width: 100%" class="btn btn-success">create</button>
 	                </form>
 	            </div>
-	           
-	                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-	                
-	            
 	        </div><!-- /.modal-content -->
 	    </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->

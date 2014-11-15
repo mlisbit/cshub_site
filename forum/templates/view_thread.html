@@ -11,9 +11,17 @@
 				</h3>
 				<div class="post">
 					<div class="post-left">
-						<center><img src="/static/{{ thread.created_by.profile.user_avatar }}" class="img-rounded" width="100%">
-							 <a href="/accounts/user/{{ thread.created_by }}/">{{ thread.created_by }}</a>
-						</center>
+						{% if thread.created_by.profile.user_avatar %}
+							<center>
+							<img src="/static/{{ thread.created_by.profile.user_avatar }}" width="100%">
+							<a href="/accounts/user/{{ thread.created_by }}/">{{ thread.created_by }}</a>
+							</center>
+						{% else %}
+							<center>
+							<img src="{% static "user_uploads/user_imgs/default.png" %}" width="100%">
+							<a href="/accounts/user/{{ thread.created_by }}/">{{ thread.created_by }}</a>
+							</center>
+						{% endif %}	
 					</div>
 					<div class="post-right">
 						<div class="heading">
@@ -26,9 +34,17 @@
 				{% for post in posts %}
 					<div class="post">
 						<div class="post-left">
-							<center><img src="/static/{{ thread.created_by.profile.user_avatar }}" class="img-rounded" width="100%">
+							{% if thread.created_by.profile.user_avatar %}
+								<center>
+								<img src="/static/{{ thread.created_by.profile.user_avatar }}" width="100%">
 								<a href="/accounts/user/{{ post.posted_by }}/">{{ post.posted_by }}</a>
-							</center>
+								</center>
+							{% else %}
+								<center>
+								<img src="{% static "user_uploads/user_imgs/default.png" %}" width="100%">
+								<a href="/accounts/user/{{ post.posted_by }}/">{{ post.posted_by }}</a>
+								</center>
+							{% endif %}	
 						</div>
 						<div class="post-right">
 							<div class="heading">
