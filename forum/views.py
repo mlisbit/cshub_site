@@ -26,4 +26,5 @@ def view_thread(request, forum_name, thread_name):
 	args['forum_name'] = forum_name.replace ("_", " ").replace (".qm.", "?")
 	args['thread_name'] = thread_name.replace ("_", " ").replace (".qm.", "?")
 	args['posts'] = Post.objects.filter(topic__name=str(thread_name).replace ("_", " ").replace (".qm.", "?"))
+	args['thread'] = Thread.objects.filter(name=str(thread_name).replace ("_", " ").replace (".qm.", "?"))[0]
 	return render_to_response('view_thread.html', args, context_instance=RequestContext(request))

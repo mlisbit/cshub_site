@@ -5,7 +5,7 @@ def get_upload_file_name(instance, filename):
 	return "user_uploads/user_uploads/%s_%s" % (str(time()).replace('.','_'), filename)
 
 class Catagory(models.Model):
-	name = models.CharField(max_length=200, blank=True, null=True)
+	name = models.CharField(max_length=200, blank=True, null=True, unique=True)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(blank=True, null=True)
 	ordering = models.PositiveIntegerField(default=1)
@@ -15,7 +15,7 @@ class Catagory(models.Model):
 
 class Forum(models.Model):
 	catagory = models.ForeignKey(Catagory)
-	name = models.CharField(max_length=200, blank=True, null=True)
+	name = models.CharField(max_length=200, blank=True, null=True, unique=True)
 	description = models.CharField(max_length=200, blank=True, null=True)
 	ordering = models.PositiveIntegerField(default=1)
 	is_special = models.NullBooleanField(blank=True, default=False)
@@ -30,7 +30,7 @@ class Forum(models.Model):
 
 class Thread(models.Model):
 	forum = models.ForeignKey(Forum)
-	name = models.CharField(max_length=200, blank=True, null=True)
+	name = models.CharField(max_length=200, blank=True, null=True, unique=True)
 	attachment = models.FileField(upload_to=get_upload_file_name, blank=True, null=True)
 	message = models.TextField(blank=True, null=True, default='')
 	is_sticky = models.NullBooleanField(blank=True, default=False)

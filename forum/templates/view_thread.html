@@ -9,9 +9,19 @@
 				<h3 class="section-heading">
 					{{ thread_name }}
 				</h3>
-				<br>
+				<div class="post">
+					<div class="post-left">
+						<img src="/static/{{ thread.created_by|get_avatar }}" class="img-rounded" width="100%">
+					</div>
+					<div class="post-right">
+						<p>{{ thread.message }}</p>
+					</div>
+					
+				</div>
 				{% for post in posts %}
-					<p>{{ post }}</p>
+					<div class="post">
+						<p>{{ post }}</p>
+					</div>
 				{% endfor %}
 			</section>
 	</div>
@@ -27,11 +37,7 @@
 {% endblock %}
 
 {%block endscripts%}
-	<script type="text/javascript">
-	    $(function () {
-	        $("[rel='tooltip']").tooltip();
-	    });
-	</script>
+
 
 
 {% endblock %} 
