@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
 	(r'^events/', include('event_app.urls')),
     (r'^accounts/', include('userprofile.urls')),
+    (r'^forum/', include('forum.urls')),
     url(r'^admin/', include(admin.site.urls)),
     
     url(r'^$', 'cshub_site.views.home'), 

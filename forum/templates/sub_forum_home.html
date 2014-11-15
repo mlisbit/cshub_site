@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load forum_tags %}
+{% load tags %}
+
+{% block content %}
+	<div class="container">
+		
+			<section class="col-xxs-12 col-xs-12 col-sm-12 col-md-12 section-panel top-border-green">
+				<h3 class="section-heading">
+					{{ forum_name }}
+				</h3>
+				<a class="pull-right" style="font-size: 21px;" href="">Start new thread</a>
+				<br>
+					{% for thread in threads %}
+						<div class="forum_listing">
+							<div class="special">
+								{% if thread.is_sticky and not thread.is_closed %}
+									<i class="fa fa-thumb-tack color-green"></i>
+								{% elif thread.is_closed %}
+									<i class="fa fa-close color-red"></i>
+								{% else %}
+									<i class="fa fa-circle-o"></i>
+								{% endif %}
+							</div>	
+							<div class="labels">
+								{% if thread.is_sticky %}
+									<b>(Sticky) </b><a href="/forum/view/{{ forum_name }}/thread/{{ thread.name|trade_spaces }}">{{ thread.name }}</a><br>
+								{% else %}
+									<a href="/forum/view/{{ forum_name }}/thread/{{ thread.name|trade_spaces }}">{{ thread.name }}</a><br>
+								{% endif %}
+								
+								<span>Created by: <a href="/accounts/user/{{ thread.created_by }}/">{{ thread.created_by }}</a></span>
+							</div>
+							<div class="posted-on">
+								<p>posted on: <br>
+									{{ thread.created_on }}
+								</p>
+							</div>
+
+							<div class="post-count">
+								<p>{{ thread.num_replies }} replies</p>
+							</div>
+						</div>
+					{% endfor %}
+			</section>
+
+	</div>
+{% endblock %}
+
+{% block resources %}
+	<style type="text/css">
+		html, body {
+			background: #e5e5e5 !important;
+		}
+	</style>
+
+{% endblock %}
+
+{%block endscripts%}
+	<script type="text/javascript">
+	    $(function () {
+	        $("[rel='tooltip']").tooltip();
+	    });
+	</script>
+
+
+{% endblock %} 

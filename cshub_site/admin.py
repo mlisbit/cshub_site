@@ -2,6 +2,7 @@ from django.contrib import admin
 from cshub_site.models import Notification, OfficeHours, BannerImages
 
 from event_app.models import Event, Comment, Going
+from forum.models import Catagory, Forum, Thread, Post
 from django.contrib.auth.models import User
 
 from userprofile.models import UserProfile, Positions
@@ -21,4 +22,8 @@ admin.site.register(OfficeHours)
 admin.site.register(Positions)
 admin.site.register(Notification)
 admin.site.register(BannerImages)
+admin.site.register(Catagory)
+admin.site.register(Forum)
+admin.site.register(Thread)
+admin.site.register(Post)
 

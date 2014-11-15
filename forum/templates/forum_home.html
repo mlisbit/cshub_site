@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load forum_tags %}
+{% load tags %}
+
+{% block content %}
+	<div class="container">
+		<center><h1>Forum Catagories</h1></center>
+		{% for catagory in catagories %}
+			<section class="col-xxs-12 col-xs-12 col-sm-12 col-md-12 section-panel top-border-green">
+				<h3 class="section-heading">
+					{{ catagory.name }}
+				</h3>
+				<br>
+				{% for forum in forums %}
+					{% ifequal catagory.name forum.catagory.name %}
+						<div class="forum_listing">
+							<div class="special">
+								{% if forum.is_special %}
+									<i class="fa fa-circle color-green"></i>
+								{% else %}
+									<i class="fa fa-circle-o"></i>
+								{% endif %}
+							</div>	
+							<div class="labels">
+								<a href="/forum/view/{{ forum.name|trade_spaces }}">{{ forum.name }}</a><br>
+								<span>{{ forum.description }}</span>
+							</div>
+							<div class="thread-count">
+								<p>{{ forum.num_threads }} threads</p>
+							</div>
+							<div class="post-count">
+								<p>{{ forum.num_threads }} posts</p>
+							</div>
+						</div>
+					{% endifequal %}
+				{% endfor %}
+				
+			</section>
+		{% endfor %}
+	</div>
+{% endblock %}
+
+{% block resources %}
+	<style type="text/css">
+		html, body {
+			background: #e5e5e5 !important;
+		}
+	</style>
+
+{% endblock %}
+
+{%block endscripts%}
+	<script type="text/javascript">
+	    $(function () {
+	        $("[rel='tooltip']").tooltip();
+	    });
+	</script>
+
+
+{% endblock %} 

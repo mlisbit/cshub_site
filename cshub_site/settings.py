@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'userprofile',
     'south',
     'compressor',
+    'forum',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
