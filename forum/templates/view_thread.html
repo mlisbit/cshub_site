@@ -5,6 +5,10 @@
 
 {% block content %}
 	<div class="container thread-container">
+
+			
+
+
 			<section class="col-xxs-12 col-xs-12 col-sm-12 col-md-12 section-panel top-border-red">
 				<h3 class="section-heading">
 					{{ thread_name }}
@@ -61,6 +65,7 @@
 		</div>
 	</div>
 
+
 	
 <!-- Modal -->
 <div id="replyMessage" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
@@ -72,7 +77,7 @@
             </div>
             <div class="modal-body">
                 <form action="/forum/reply_to_thread" method="POST">{% csrf_token %}
-                	<textarea name="message" style="width: 100%;"></textarea>
+                	<textarea name="message" id="reply-textarea" placeholder="Enter text ..." style="width: 100%;"></textarea>
                 	<input type="hidden" name="current_url" value="{{ current_url }}">
                 	<input type="hidden" name="thread_name" value="{{ thread_name }}">
                 	<button type="submit" style="width: 100%" class="btn btn-primary">reply</button>
@@ -86,6 +91,7 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
 {% endblock %}
 
 {% block resources %}
@@ -93,12 +99,21 @@
 		html, body {
 			background: #e5e5e5 !important;
 		}
+		.btn-group {
+			border: solid 1px #dedede;
+		}
+		 #editor {overflow:scroll; max-height:300px}
 	</style>
+	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/jhollingworth/bootstrap-wysihtml5/master/src/bootstrap-wysihtml5.css">
 
 {% endblock %}
 
 {%block endscripts%}
+	<script type="text/javascript" src="https://cdn.rawgit.com/jhollingworth/bootstrap-wysihtml5/master/lib/js/wysihtml5-0.3.0.min.js"></script>
+	<script type="text/javascript" src="https://cdn.rawgit.com/jhollingworth/bootstrap-wysihtml5/master/lib/js/prettify.js"></script>
+	<script type="text/javascript" src="/static/global/js/bootstrap-wysihtml5.js"></script>
 
-
-
+<script type="text/javascript">
+	$('#reply-textarea').wysihtml5();
+</script>
 {% endblock %} 
