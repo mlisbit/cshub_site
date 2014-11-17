@@ -37,8 +37,8 @@
               "<div class='btn-group'>" +
                 "<a class='btn" + size + "' data-wysihtml5-command='insertUnorderedList' title='" + locale.lists.unordered + "' tabindex='-1'><i class='fa fa-list'></i></a>" +
                 "<a class='btn" + size + "' data-wysihtml5-command='insertOrderedList' title='" + locale.lists.ordered + "' tabindex='-1'><i class='fa fa-th-list'></i></a>" +
-                "<a class='btn" + size + "' data-wysihtml5-command='Outdent' title='" + locale.lists.outdent + "' tabindex='-1'><i class='fa fa-indent'></i></a>" +
-                "<a class='btn" + size + "' data-wysihtml5-command='Indent' title='" + locale.lists.indent + "' tabindex='-1'><i class='fa fa-dedent'></i></a>" +
+                "<a class='btn" + size + "' data-wysihtml5-command='Outdent' title='" + locale.lists.outdent + "' tabindex='-1'><i class='fa fa-dedent'></i></a>" +
+                "<a class='btn" + size + "' data-wysihtml5-command='Indent' title='" + locale.lists.indent + "' tabindex='-1'><i class='fa fa-indent'></i></a>" +
               "</div>" +
             "</li>";
         },
@@ -63,19 +63,16 @@
         "image": function(locale, options) {
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li>"+
-            "<div class='bootstrap-wysihtml5-insert-image-modal modal hide fade'>" +
-                "<div class='modal-header'>" +
-                  "<a class='close' data-dismiss='modal'>&times;</a>" +
-                  "<h3>" + locale.image.insert + "</h3>" +
+            "<div class='bootstrap-wysihtml5-insert-image-modal modal in fade'>" +
+                '<div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <h4 class="modal-title">'+locale.image.insert+'</h4> </div><div class="modal-body">' +
+                "<label>image url:  </label>" + 
+                "<input value='http://' class='bootstrap-wysihtml5-insert-image-url input-xlarge'>" +
+                '</div><div class="modal-footer">' +
+                "<a href='#' class='btn' data-dismiss='modal'>" + locale.image.cancel + "</a>" +
+                "<a href='#' class='btn btn-primary' data-dismiss='modal'>" + locale.image.insert + "</a>" +
+
+                '</div></div></div>' +
                 "</div>" +
-                "<div class='modal-body'>" +
-                  "<input value='http://' class='bootstrap-wysihtml5-insert-image-url input-xlarge'>" +
-                "</div>" +
-                "<div class='modal-footer'>" +
-                  "<a href='#' class='btn' data-dismiss='modal'>" + locale.image.cancel + "</a>" +
-                  "<a href='#' class='btn btn-primary' data-dismiss='modal'>" + locale.image.insert + "</a>" +
-                "</div>" +
-              "</div>" +
               "<a class='btn" + size + "' data-wysihtml5-command='insertImage' title='" + locale.image.insert + "' tabindex='-1'><i class='fa fa-picture-o'></i></a>" +
             "</li>";
         },
@@ -446,7 +443,7 @@
                 "pre": 1
             }
         },
-        stylesheets: ["./lib/css/wysiwyg-color.css"], // (path_to_project/lib/css/wysiwyg-color.css)
+        stylesheets: [""], // (path_to_project/lib/css/wysiwyg-color.css)
         locale: "en"
     };
 

@@ -6,7 +6,7 @@
 {% block content %}
 	<div class="container thread-container">
 
-			
+
 
 
 			<section class="col-xxs-12 col-xs-12 col-sm-12 col-md-12 section-panel top-border-red">
@@ -31,7 +31,9 @@
 						<div class="heading">
 							<p>{{ thread.created_on }}</p>
 						</div>	
-						<p class="comment">{{ thread.message }}</p>
+						{% autoescape off %}
+							<p class="comment">{{ thread.message }}</p>
+						{% endautoescape %}
 					</div>
 					
 				</div>
@@ -54,7 +56,9 @@
 							<div class="heading">
 								<p>{{ post.created_on }}</p>
 							</div>	
-							<p class="comment">{{ post.message }}</p>
+							{% autoescape off %}
+								<p class="comment">{{ post.message }}</p>
+							{% endautoescape %}
 						</div>
 						
 					</div>
@@ -77,7 +81,7 @@
             </div>
             <div class="modal-body">
                 <form action="/forum/reply_to_thread" method="POST">{% csrf_token %}
-                	<textarea name="message" id="reply-textarea" placeholder="Enter text ..." style="width: 100%;"></textarea>
+                	<textarea name="message" id="reply-textarea" placeholder="Enter text ..." style="width: 100%; min-height: 200px;"></textarea>
                 	<input type="hidden" name="current_url" value="{{ current_url }}">
                 	<input type="hidden" name="thread_name" value="{{ thread_name }}">
                 	<button type="submit" style="width: 100%" class="btn btn-primary">reply</button>
@@ -102,7 +106,6 @@
 		.btn-group {
 			border: solid 1px #dedede;
 		}
-		 #editor {overflow:scroll; max-height:300px}
 	</style>
 	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/jhollingworth/bootstrap-wysihtml5/master/src/bootstrap-wysihtml5.css">
 
