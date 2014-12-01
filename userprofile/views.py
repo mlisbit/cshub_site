@@ -60,5 +60,5 @@ def view_profile(request, username='mlisbit'):
 
 	args['member'] = User.objects.get(username=username)
 	args['profile'] = User.objects.get(username=username).profile
-
+	
 	return render_to_response('new_view_profile.html', args, context_instance=RequestContext(request))

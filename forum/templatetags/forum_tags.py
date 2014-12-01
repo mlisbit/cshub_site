@@ -4,6 +4,6 @@ from django.contrib.auth.models import User
 register = template.Library()
 
 @register.filter(name='trade_spaces')
-def trade_spaces(my_string):
-   return str(my_string).replace (" ", "_").replace ("?", ".qm.")
+def encode_name(my_string):
+   return str(my_string).replace (" ", ".ws.").replace ("?", ".qm.").replace ("/", ".fs.").replace ("\\", ".bs.")
 
