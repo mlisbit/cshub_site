@@ -13,6 +13,7 @@
 {% block content %}
 <br>
 <div class="container user-profile-main">
+<div class="row">
 	<div class="col-xxs-12 col-xs-6 col-sm-6 col-md-4">
 		<div class="section-panel small-split">
 			{% if member.profile.user_avatar %}
@@ -27,8 +28,6 @@
 	</div>
 
 	<div class="col-xxs-12 col-xs-6 col-sm-6 col-md-4">
-
-	
 		<div class="section-panel small-split top-border-green">
 			<h3 class="section-heading">
 				Major
@@ -42,7 +41,6 @@
 			</div>
 		</div>
 	
-
 
 	{% if member.username|has_social_account %}
 	<div class="section-panel small-split top-border-orange">
@@ -109,9 +107,11 @@
 	</div> <!-- col-xxs-12-->
 
 
+		
 
 
 	<div class="col-xs-12 col-md-4">
+
 		<div class="section-panel small-split top-border-red">
 			<h3 class="section-heading">
 				About
@@ -122,7 +122,40 @@
 				<p class="no-info-in-section">The user hasn't filled out the field</p>
 			{% endif %}
 		</div>
+
+		<div class="section-panel small-split top-border-red">
+			<h3 class="section-heading">
+				Forum Activity
+			</h3>
+			<div class="section-content .profile-forum-container">
+				<div class="profile-forum-col">
+					<center>
+						<h4 class="count">{{user_thread_count}}</h4>
+						{% if user_thread_count == 1 %}
+							<p>Thread</p>
+						{% else %}
+							<p>Threads</p>
+						{% endif %}
+					</center>
+					
+				</div>
+				<div class="profile-forum-col"style="">
+					<center>
+						<h4 class="count">{{user_reply_count}}</h4>
+						{% if user_reply_count == 1 %}
+							<p>Reply</p>
+						{% else %}
+							<p>Replies</p>
+						{% endif %}
+					</center>
+				</div>
+				
+			</div>
+		</div>
 	</div>
+
+</div> <!-- ROW -->
+
 </div> <!-- container -->
 	
 	

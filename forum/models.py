@@ -13,7 +13,6 @@ from django.db.models.signals import post_save, pre_save
 ##	Things that need to get done											##
 ##	- allow subscription to email											##
 ##	- fix the above note													##
-##	- allow post markup language, rather than just plain text (BBCode?)		##
 ##	- attachments on post 													##
 ##	- get catagory ordering to work											##
 ## 																			##

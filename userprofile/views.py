@@ -4,6 +4,7 @@ from django.core.context_processors import csrf
 from forms import UserProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from forum.models import Catagory, Forum, Thread, Post
 from models import Positions
 from django.template import RequestContext
 from itertools import chain
@@ -60,5 +61,7 @@ def view_profile(request, username='mlisbit'):
 
 	args['member'] = User.objects.get(username=username)
 	args['profile'] = User.objects.get(username=username).profile
-	
+	args['user_thread_count'] = len(Thread.objects.filter(created_by=args['member']))
+	args['user_reply_count'] = len(Post.objects.filter(posted_by=args['member']))
+
 	return render_to_response('new_view_profile.html', args, context_instance=RequestContext(request))

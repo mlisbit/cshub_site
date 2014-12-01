@@ -25,9 +25,9 @@
 							</div>	
 							<div class="labels">
 								{% if thread.is_sticky %}
-									<b>(Sticky) </b><a href="/forum/view/{{ forum_name }}/thread/{{ thread.name|trade_spaces }}">{{ thread.name }}</a><br>
+									<b>(Sticky) </b><a href="/forum/view/{{ forum_name }}/thread/{{ thread.name|encode_name }}">{{ thread.name }}</a><br>
 								{% else %}
-									<a href="/forum/view/{{ forum_name }}/thread/{{ thread.name|trade_spaces }}">{{ thread.name }}</a><br>
+									<a href="/forum/view/{{ forum_name }}/thread/{{ thread.name|encode_name }}">{{ thread.name }}</a><br>
 								{% endif %}
 								
 								<span>Created by: <a href="/accounts/user/{{ thread.created_by }}/">{{ thread.created_by }}</a></span>

@@ -23,7 +23,7 @@
 								{% endif %}
 							</div>	
 							<div class="labels">
-								<a href="/forum/view/{{ forum.name|trade_spaces }}">{{ forum.name }}</a><br>
+								<a href="/forum/view/{{ forum.name|encode_name }}">{{ forum.name }}</a><br>
 								<span>{{ forum.description }}</span>
 							</div>
 							<div class="thread-count">
