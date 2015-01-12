@@ -3,7 +3,7 @@
 {% load tags %}
 
 {% block resources %}
-  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+
 {% endblock %}
 
 {% block content %}
@@ -34,7 +34,7 @@
   <div class="container">
   <style>
     #graph-container {
-      margin-top: 10px;
+      margin-top: 25px;
       width: 100%;
       height: 400px;
     }
@@ -55,6 +55,7 @@
       font-size: 15px;
       margin-bottom: 130px;
     }
+
   </style>
     <div id="graph-interact">
         <i style="position: relative; float: right; z-index: 200; margin-top: 20px; color: #ccc; cursor: pointer; font-size: 20px;" class="fa fa-hand-o-up">
@@ -69,6 +70,7 @@
 </div>
 {% endif %}
 
+<br>
 <br>
 <div class="container">
   <div class="col-md-4">
@@ -125,7 +127,7 @@
   <br>
   <div class="col-md-12">
     <center>
-      <h1>Who are we?</h1>
+      <h2>Who are we?</h2>
       <p>We are the Computing Students Hub, a club founded at York University, Toronto. Don't let the name fool you, we have members from all faculties - if you're interested in Technology, and want to meet upw with some cool people who are too? this is the place for you.</p>
       <br>
       <h2>What's there to do in the CSHub?</h2>
@@ -157,7 +159,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.4/packaged/jquery.noty.packaged.min.js"></script>
   <script charset="utf-8">
   {% for notify in notifications %}
-    var n = noty({layout: 'bottomRight', theme: 'relax', type: 'information', text: '<strong>{{ notify.title }}: </strong>{% autoescape off %}{{ notify.description }}{% endautoescape %}'});
+    var n = noty({layout: 'bottomRight', timeout: 9000, theme: 'relax', type: 'information', text: '<strong>{{ notify.title }}: </strong>{% autoescape off %}{{ notify.description }}{% endautoescape %}'});
   {% endfor %}
   </script>
   <script type="text/javascript">
