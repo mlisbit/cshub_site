@@ -7,25 +7,14 @@
 {% endblock %}
 
 {% block content %}
-{% if notifications %}
-<div class="container notification-container">
-  {% for notify in notifications %}
-      <div class="alert alert-{{notify.color}}" style="margin-top: 3px; margin-bottom: 3px;">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>{{ notify.title }}</strong>  {% autoescape off %}{{ notify.description }} {% endautoescape %}
-      </div>
-{% endfor %}
-</div>
-{% endif %}
-
 
 {% if images %}
-<div class="container carousel-container"> 
+<div class="container carousel-container">
 <div id="myCarousel" class="carousel slide">
   <!-- Carousel items -->
   <div class="carousel-inner">
     {% for image in images %}
-      {% if forloop.first %}     
+      {% if forloop.first %}
         <div class="active item">
       {% else %}
         <div class="item">
@@ -39,7 +28,7 @@
   <a class="carousel-control left" href="#myCarousel" data-slide="prev" style="background-image: none;">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next" style="background-image: none;">&rsaquo;</a>
 </div>
-  
+
 </div> <!-- container -->
 {% else %}
   <div class="container">
@@ -52,8 +41,8 @@
     #cshub-logo {
       position: relative;
       z-index: 100;
-      margin-top: -280px; 
-      width: 260px; 
+      margin-top: -280px;
+      width: 260px;
       font-size: 100px;
       font-family: 'Poiret One', cursive;
     }
@@ -71,12 +60,12 @@
         <i style="position: relative; float: right; z-index: 200; margin-top: 20px; color: #ccc; cursor: pointer; font-size: 20px;" class="fa fa-hand-o-up">
           <p style="position: relative; margin-left: 18px; margin-top: -20px; padding: 4px; font-size: 13px;">interact</p>
         </i>
-        
+
     </div>
     <div id="graph-container" ></div>
     <center><div id="cshub-logo">cshub</div></center>
     <center><div id="cshub-logo-sub">@YorkUniversity</div></center>
-    
+
 </div>
 {% endif %}
 
@@ -111,7 +100,7 @@
     <center><h3>get social!</h3></center>
     <p>
       Join events, make new friends, and learn something new. Sign up and join our member only events, or browse some events outside of York University!
-      Browse member profiles and connect with them to make connections that will last a life time. Spread the word on Facebook and Twitter. 
+      Browse member profiles and connect with them to make connections that will last a life time. Spread the word on Facebook and Twitter.
     </p>
     <div class="btn-group-vertical" style="width: 100%">
       </div> <!-- btn-group-vertical -->
@@ -144,9 +133,9 @@
       <br>
       <h2>That's great! is there any way I can get involved?</h2>
         <p>
-            Yeah! Whether you only want to attend the events, or help out in organization, and planning for the club - 
+            Yeah! Whether you only want to attend the events, or help out in organization, and planning for the club -
             there's a spot for you. Your first step is to sign up for an account, this confirms your position in the club, and will allow us to
-            easily reach out and contact you. Next step: contact us. 
+            easily reach out and contact you. Next step: contact us.
         </p>
   </center>
   </div>
@@ -165,10 +154,16 @@
   </script>
   <script src="{% static "global/js/social-graph.js" %}" type="text/javascript"></script>
   <script src="{% static "global/js/global.js" %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.4/packaged/jquery.noty.packaged.min.js"></script>
+  <script charset="utf-8">
+  {% for notify in notifications %}
+    var n = noty({layout: 'bottomRight', theme: 'relax', type: 'information', text: '<strong>{{ notify.title }}: </strong>{% autoescape off %}{{ notify.description }}{% endautoescape %}'});
+  {% endfor %}
+  </script>
   <script type="text/javascript">
-    
+
     $("#graph-container").append('<div id="graph-cover" style="position: relative; width: 100%; height: 400px; z-index:200px;"></div>');
-    
+
     $("#graph-interact i").mouseenter(function() {
         $(this).css({"color": "#848484"})
     })
