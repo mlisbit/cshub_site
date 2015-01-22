@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-	
+
 	{% if not user.is_authenticated %}
 	<div class="container">
 	    <div class="alert alert-warn" style="margin-top: 3px;">
@@ -22,37 +22,43 @@
 	</div>
 	<div class="container">
 		<div class="col-sm-4 col-md-4 event-side-pane">
-			
+
 			{% if event.event_img %}
 			<div>
 			<img src="/static/{{event.event_img}}" alt="..." width="100%">
 			</div>
 			{% endif %}
-			
-			<p><span class="badge badge-yellow pull-right"><a href="#going">{{ event.going_set.all|get_count }}</a></span> Going: </p>
-			<p><span class="badge badge-blue pull-right"><a href="#comments">{{ event.comment_set.all|get_count }}</a></span> Comments:</p>
-			{% if user.is_authenticated %}
-				<form action="/events/going_to/{{event.id}}/" method="POST">{% csrf_token %}
-				{% if not request.user.username|get_user_entry in event.going_set.all|to_string %}
-					<input class="btn btn-info" type="submit" name="submit" value="I am going!" style="margin-top: 5px; width: 100%"> 
+
+			<p><span class="badge badge-yellow pull-right"><a href="#going">{{ event.going_set.all|get_count }}</a></span>
+				{% if not event.is_over %}
+					Going:
 				{% else %}
-					<input class="btn btn-danger" type="submit" name="submit" value="I changed my mind" style="margin-top: 5px; width: 100%"> 
+					Went:
 				{% endif %}
+			</p>
+			<p><span class="badge badge-blue pull-right"><a href="#comments">{{ event.comment_set.all|get_count }}</a></span> Comments:</p>
+			{% if user.is_authenticated and not event.is_over%}
+				<form action="/events/going_to/{{event.id}}/" method="POST">{% csrf_token %}
+					{% if not request.user.username|get_user_entry in event.going_set.all|to_string %}
+						<input class="btn btn-info" type="submit" name="submit" value="I am going!" style="margin-top: 5px; width: 100%">
+					{% else %}
+						<input class="btn btn-danger" type="submit" name="submit" value="I changed my mind" style="margin-top: 5px; width: 100%">
+					{% endif %}
 				</form>
 			{% endif %}
 
 			<!-- post comment button -->
 			{% if user.is_authenticated %}
 			<form action="/events/add_comment/{{event.id}}/" method="POST" class="pure-form" style="margin-top: 5px;">{% csrf_token %}
-				<input class="btn btn-info" type="submit" name="submit" value="Post Comment" style="width: 100%; margin-bottom: 5px;"> 
+				<input class="btn btn-info" type="submit" name="submit" value="Post Comment" style="width: 100%; margin-bottom: 5px;">
 				{% for field in form %}
 					{{ field }}
 				{% endfor %}
-				
+
 			</form>
 	{% endif %}
 		</div>
-		<div class="col-sm-8 col-md-8"> 
+		<div class="col-sm-8 col-md-8">
 			<h2>Description: </h2>
 			{% autoescape off %}
 			<div class="mainevent_description">{{event.description}} </div>
@@ -109,5 +115,5 @@
 
 {% block endscripts %}
 
-   
+
 {% endblock %}

@@ -6,60 +6,62 @@
 
 <style type="text/css">
 .col-lg-3 .col-md-3 .col-sm-4 .col-xs-12{
-    margin-right: -1px;
+  margin-right: -1px;
 }
 </style>
 {% endblock %}
 
-
-
 {% block content %}
 <br>
 <div class="container">
-<a href="/events/" class="btn btn-default" style="float: right;">Current Events</a> 
+  <a href="/events/passed/" class="btn btn-default" style="float: right;">Past Events</a>
 </div>
 <br>
-    <div class="container">
-      <div class="iso">
-      {% for x in event_list %} 
-        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 iso-item">
-        <div class="thumbnail">
-          <div style="background: #ccc; overflow: hidden;">
-            <center><img src="/static/{{x.event_img}}" alt="..." style="min-height:50px; height:200px; overflow: hidden;"></center>
-          </div>
-          <div class="caption">
-              <h3>{{x.name}}</h3>
-              <p><span class="badge badge-inverse">{{ x.going_set.all|get_count }}</span> people are going to this event</p>
-              {% autoescape off %}
-              {{x.description|truncatewords:"20"}}
-              {% endautoescape %}
-              <center><p>{{ x.when }}</p></center>
-          </div>
+<div class="container">
+  <div class="iso">
+    {% for x in event_list %}
+    <!-- not done -->
+    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 iso-item">
+      <div class="thumbnail">
+        {% if x.event_img %}
+        <div style="background: #ccc; overflow: hidden;">
+          <center><img src="/static/{{x.event_img}}" alt="..." style="min-height:50px; height:200px; overflow: hidden;"></center>
         </div>
+        {% else %}
+        <div class="anti-space" style="margin-top: -15px;"></div>
+        {% endif %}
+        <div class="caption">
+          <h3>{{x.name}}</h3>
+          <p><span class="badge badge-yellow">{{ x.going_set.all|get_count }}</span> people went to this event</p>
+          {% autoescape off %}
+          {{x.description|truncatewords:"20"}}
+          {% endautoescape %}
+          <center><p>{{ x.when }}</p></center>
+          <a href="/events/get/{{ x.id }}/" class="btn btn-danger" style="width: 100%">What did I miss?</a> 
         </div>
-      {% endfor %}
-      {% if not event_list %}
-        <p>There are no new events</p>
-      {% endif %}
-      </div> <!-- row -->
-    </div> <!-- container -->
+      </div>
+    </div>
+    <!-- blah -->
+    {% endfor %}
+    {% if not event_list %}
+    <p>There are no old events</p>
+    {% endif %}
+  </div> <!-- row -->
+</div> <!-- container -->
 {% endblock %}
 
 {% block endscripts %}
-    {% if event_list.count > 3 %}
-    <script src="//code.jquery.com/jquery.js"></script>
-    <script type="text/javascript" src="http://isotope.metafizzy.co/jquery.isotope.min.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-      var container = $('.iso');
-      container.imagesLoaded( function(){
-        container.isotope({
-          itemSelector : '.iso-item',
-        });
+{% if event_list.count > 3 %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/1.5.25/jquery.isotope.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var container = $('.iso');
+    container.imagesLoaded( function(){
+      container.isotope({
+        itemSelector : '.iso-item',
       });
-    }); 
-    </script>
-    {% endif %}
+    });
+  });
+</script>
+{% endif %}
 {% endblock %}
-
-

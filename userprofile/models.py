@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from time import time
 from django.conf import settings
 # Create your models here.
-# models.BooleanField() is a checkbox 
+# models.BooleanField() is a checkbox
 
 def get_upload_file_name(instance, filename):
 	return "user_uploads/user_imgs/%s_%s" % (str(time()).replace('.','_'), filename)
@@ -13,7 +13,7 @@ class Positions(models.Model):
 
 	def __unicode__(self):
 		return self.title
-	class Meta:	
+	class Meta:
 		ordering = ('title',)
 
 class Clubs(models.Model):
@@ -21,13 +21,13 @@ class Clubs(models.Model):
 
 	def __unicode__(self):
 		return self.club_name
-	class Meta:	
+	class Meta:
 		ordering = ('club_name',)
 
 class UserProfile(models.Model):
-	user = models.OneToOneField(User) 
+	user = models.OneToOneField(User)
 	phone_number = models.CharField(max_length=200, blank=True, null=True)
-	
+
 	major = models.CharField(max_length=200, blank=True, null=True)
 	user_description = models.TextField(blank=True, null=True)
 	notes = models.TextField(blank=True, null=True)

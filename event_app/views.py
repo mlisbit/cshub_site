@@ -2,17 +2,17 @@
 from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import get_template
-from django.shortcuts import render_to_response 
+from django.shortcuts import render_to_response
 from django.views.generic.base import TemplateView
 #import the models.
-from models import Event 
+from models import Event
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
 from forms import CommentForm, GoingForm
 from event_app.models import Comment, Going
-from django.core.context_processors import csrf 
-from django.utils import timezone 
+from django.core.context_processors import csrf
+from django.utils import timezone
 from datetime import datetime
 from django.core.cache import cache
 import time
@@ -38,7 +38,7 @@ def past_listings(request):
 	if not events:
 		events = Event.objects.all().exclude(when__gte=datetime.now()).order_by('when')[::-1]
 		cache.set('PAST_EVENT_LISTING_KEY', events, 30)
-	
+
 	args['event_list'] = events
 	return render_to_response('past_listings.html', args , context_instance=RequestContext(request))
 
@@ -54,17 +54,17 @@ def listing(request, event_id=1):
 
 def going_to(request, event_id):
 	e = Event.objects.get(id=event_id)
-	
+
 	if request.method == "POST":
 
 		f = GoingForm(request.POST)
 		if f.is_valid():
 			#check if the user is already in the db of people going.
 
-			test = ': '+event_id+','
-			if test in str(Going.objects.all().filter(username=request.user.username).values()):
+			if Going.objects.all().filter(username=request.user.username).filter(event_id=event_id):
+				print "user should not be fucking going"
 				user_logger.debug('NOT GOING: '+request.user.username+' to '+event_id)
-				Going.objects.get(event_id=event_id, username=request.user.username).delete()
+				Going.objects.all().filter(event_id=event_id, username=request.user.username).delete()
 			else:
 				user_logger.debug('IS GOING: '+request.user.username+' to '+event_id)
 				c = f.save(commit=False)
@@ -113,6 +113,4 @@ def add_comment(request, event_id):
 
 
 def see_going(request):
-	pass 
-
-
+	pass
