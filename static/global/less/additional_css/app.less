@@ -1,0 +1,21 @@
+/*
+  Implementation specific code for cshub.ca
+  uses components from cshub_theme_framework
+*/
+
+html, body {
+  height: 100%;
+  background: @html-background-color;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -63px;
+}
+
+
+@import "nav.less";
+@import "footer.less";
+@import "page_specific/app.less";

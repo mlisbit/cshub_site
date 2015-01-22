@@ -1,0 +1,50 @@
+.main-icon .expand {
+  display: none;
+}
+
+.main-icon .expand a {
+  color: #0B615E;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.main-icon .expand a:hover {
+  text-decoration: none;
+  color: @main-font-color-hover;
+}
+
+.main-icon img:hover {
+  cursor: pointer;
+}
+
+.main-icon img {
+  padding-right: 1px;
+  padding-bottom: 5px;
+}
+
+.right.carousel-control, .left.carousel-control {
+  opacity: 0;
+  filter:alpha(opacity=0); /* IE support */
+}
+
+.carousel-indicators {
+  display: none;
+}
+
+.home-icons {
+  font-size: 105px;
+  color: @main-font-color;
+  cursor: pointer;
+}
+
+
+@media (max-width: 680px) {
+  .container.notification-container{
+    width: 100%;
+    padding: 0;
+  }
+  .container.carousel-container{
+    width: 100%;
+    padding: 0;
+  }
+}
