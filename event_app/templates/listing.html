@@ -71,21 +71,26 @@
 			<!-- GOING FEILD -->
 			{% if event.going_set.all %}
 			<h2 id="going" >Going:</h2>
+			<div class="row">
 			{% for c in event.going_set.all %}
-			<div class="media">
-			<div class="thumbnail pull-left">
-				{% if c.username|get_profile_pic %}
-			<img class="media-object" style="width: 50px; height: 50px;"src="/static/{{ c.username|get_profile_pic }}" alt="userprofile_image">
-			{% else %}
-			<img class="media-object" style="width: 50px; height: 50px;" src="{% static "user_uploads/user_imgs/default.png" %}" alt="userprofile_image">
-			{% endif %}
-			</div>
-			<div class="media-body">
-			<h4 class="media-heading"><a href="/accounts/user/{{ c.username }}" style="color: #070719;"><b>{{ c.username }}</b></a></h4>
-			{{ c.body }}
-			</div>
-			</div>
+
+			<!-- -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; -->
+			<a href="/accounts/user/{{ c.username }}" style="color: #070719; style=overflow: hidden; margin-top: 0px; margin-bottom: 2px; width: 90px; height: 110px; padding-top: 0px; vertical-align: top; display: inline-block; background: white; border: solid 1px #ccc">
+					<div class="thumbnail-pic">
+					{% if c.username|get_profile_pic %}
+						<img class="media-object" style="width: 90px; height: 90px;"src="/static/{{ c.username|get_profile_pic }}" alt="userprofile_image">
+					{% else %}
+						<img class="media-object" style="width: 90px; height: 90px;" src="{% static "user_uploads/user_imgs/default.png" %}" alt="userprofile_image">
+					{% endif %}
+					</div>
+					<div class="media-body">
+						<center>
+							<h4 class="media-heading">{{ c.username }}</h4>
+						</center>
+					</div>
+			</a>
 			{% endfor %}
+			</div>
 			{% endif %}
 
 			<!-- COMMENT FIELD -->
