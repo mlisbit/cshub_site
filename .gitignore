@@ -5,8 +5,8 @@
 /libpeerconnection.log
 /additions_to_make
 /static/user_uploads/event_imgs/*
-#/static/user_uploads/user_imgs/*
-#/static/user_uploads/banner_images/*
+/static/user_uploads/user_imgs/*
+/static/user_uploads/banner_images/*
 /static/global/lesscss_cache
 /userprofile/migrations/*
 /event_app/migrations/*
