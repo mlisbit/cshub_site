@@ -7,6 +7,9 @@
 /static/user_uploads/event_imgs/*
 /static/user_uploads/user_imgs/*
 /static/user_uploads/banner_images/*
+!/static/user_uploads/banner_images/.gitignore
+!/static/user_uploads/user_imgs/.gitignore
+!/static/user_uploads/event_imgs/.gitignore
 /static/global/lesscss_cache
 /userprofile/migrations/*
 /event_app/migrations/*
