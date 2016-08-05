@@ -27,6 +27,8 @@ urlpatterns = patterns('',
     url(r'^accounts/logout/$', 'cshub_site.views.logout'), 
     url(r'^accounts/loggedin/$', 'cshub_site.views.loggedin'), 
     url(r'^accounts/invalid/$', 'cshub_site.views.invalid_login'), 
+    #json authentication
+    url(r'^api/authenticate/$', 'cshub_site.views.api_authentication'), 
 
     #user registration urls
     url(r'^accounts/register/$', 'cshub_site.views.register_user'), 

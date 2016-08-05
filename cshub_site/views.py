@@ -7,6 +7,7 @@ from django.views.generic.base import TemplateView
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
 from django.template import RequestContext
 #registration imports
 from forms import MyRegistrationForm, ContactForm
@@ -248,6 +249,53 @@ def reset_password_edit(request, email_reset_email, email_reset_id):
 			return render_to_response('reset_password_edit.html', args, context_instance=RequestContext(request))
 	else:
 		return HttpResponse("Invalid arguements. If you continue to have problems, please send another password reset request.")
+
+@csrf_exempt
+def api_authentication(request):
+	response_data = {}
+	response_data['result'] = 'Failed'
+	response_data['message'] = 'Internal Error'
+	response_code = 500
+	username = ""
+	try:
+		if request.method != 'POST':
+			response_code = 400
+			raise Exception('Only POST requests allowed to authenticate.')
+		username = request.POST.get('username', '')
+		password = request.POST.get('password', '')
+		api_key  = request.POST.get('api_key', '')
+		from django.conf import settings
+		print settings
+		if not settings.SECRET_KEY:
+			response_code = 400
+			raise Exception("Key is empty")
+		if not settings.SECRET_KEY == api_key:
+			response_code = 400
+			raise Exception("API Key is invalid")
+		user = auth.authenticate(username=username, password=password)
+		if user is not None:
+			#Update current term year (?)
+			p = user.profile
+			p.last_year_active = settings.CURRENT_TERM_YEAR
+			p.save()    
+			#Format the response
+			response_data['result'] = 'Success'
+			#TODO: hackish -- im 110% sure theres a legit way of doing this lel
+			response_data['message'] = json.loads(serializers.serialize("json", [p ,]))[0] 
+
+			response_code = 200
+			#Log it for science
+			user_logger.debug('VALID API LOGIN: '+ username)
+		else:
+			user_logger.debug('INVALID API LOGIN: '+ username)
+			response_data['message'] = 'Authentication failed'
+			response_code = 403
+	except Exception as ex:
+		response_data['result'] = 'Failure'
+		response_data['message'] = ex.args
+		user_logger.debug('AUTH API ERROR: '+ username + ' || ' + str(type(ex)) + ' || ' + str(ex.args))
+
+	return HttpResponse(json.dumps(response_data), content_type="application/json", status=response_code)
 
 #only cache when not debugging
 if not settings.DEBUG:
